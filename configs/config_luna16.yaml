@@ -1,0 +1,37 @@
+# config_luna16.yaml — LUNA16 baseline 訓練組態（供 train_baseline.py 或 Hydra 使用）
+# 對應研發執行手冊 1.2 假陽性削減模組
+
+data:
+  annotations: data/luna16/annotations.csv      # 1,186 正例（真結節）
+  candidates: data/luna16/candidates_V2.csv     # 551,065 候選點（含假陽性）
+  ct_root: data/processed/npz                   # 前處理後 HU 窗正規化 npz
+  patch_size: [96, 96, 96]
+  pos_neg_ratio: 0.333                          # 正:負 = 1:3
+  val_split: 0.1
+  cache_rate: 0.8
+
+train:
+  model: densenet121_3d
+  epochs: 60
+  batch_size: 8
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  scheduler: cosine
+  pos_weight: 3.0                               # CE loss 正樣本權重
+  seed: 42
+
+eval:
+  metric: AUC
+  target_auc: 0.90                              # 達標即轉入偵測任務（nnDetection）
+  froc_eval: true                               # 上傳 Grand Challenge 驗證 CPM
+
+mlops:
+  experiment_tracker: mlflow
+  data_versioning: dvc
+  artifact_dir: runs/baseline
+
+# 10-fold 交叉驗證注意事項：
+# - LUNA16 官方提供 10 個 fold 的 seriesuid 清單（subset0-9），
+#   正式驗證應依官方 fold 切分並回報平均 CPM，本 config 為單折快速 baseline。
+# - 偵測任務（CADe）請改用 nnDetection，以本資料集完成 baseline 後切換：
+#   nnDetection 預設即支援 LUNA16 格式，可直接套用其 luna16 預設組態。

@@ -1,0 +1,35 @@
+# security.yml — 機密掃描 + 相依套件漏洞掃描
+# 重點：防止任何 PAT/API key 再次被 commit 進 repo（本專案已發生過教訓）
+name: Security
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"   # 每週一早上掃一次相依漏洞
+
+jobs:
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Gitleaks 機密掃描（含 git 歷史）
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: pip-audit 相依漏洞掃描
+        run: |
+          pip install pip-audit
+          pip-audit -r requirements.txt || true
+          # 注意：先設 || true 觀察報告，正式上線後移除並設為阻擋

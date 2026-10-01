@@ -1,0 +1,26 @@
+# --- 資料（絕不入庫） ---
+data/raw/
+data/processed/
+*.dcm
+*.nii.gz
+*.npz
+*.mhd
+*.raw
+
+# --- 實驗產物 ---
+runs/
+mlruns/
+__pycache__/
+*.pt
+*.pth
+*.ckpt
+.ipynb_checkpoints/
+
+# --- 環境 ---
+.venv/
+.env
+*.egg-info/
+
+# --- 系統 ---
+.DS_Store
+Thumbs.db

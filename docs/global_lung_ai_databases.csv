@@ -1,0 +1,17 @@
+資料庫,規模,型態/標註,存取方式,授權,適用任務,連結
+LIDC-IDRI,"1,018 CT（約244,527張影像，124GB）","4位放射科醫師兩階段標註；結節≥3mm含像素級分割；惡性度1-5序數評分",TCIA免費下載,CC BY 3.0,CADe/CADx/分割/風險評分,https://wiki.cancerimagingarchive.net/display/Public/LIDC-IDRI
+LUNA16,888 CT / 1,186結節,"LIDC-IDRI子集；層厚≤2.5mm；10折交叉驗證；candidates_V2.csv 55萬候選點供假陽性削減",Grand Challenge開放下載,CC BY 4.0,結節偵測/假陽性削減,https://luna16.grand-challenge.org/
+NLST（TCIA）,"26,254受試者 / 73,118 studies / 約2,100萬張影像 / 11.3TB","LDCT三期篩檢；451例數位化組織病理；臨床資料（CDAS申請）",TCIA/IDC免費（子集）CDAS申請（全臨床）,Data Citation Required,大規模CADx/縱向追蹤/病理,https://www.cancerimagingarchive.net/collection/nlst/
+NLST像素級標註資料集（2025）,605例 / 715病灶（662腫瘤+53結節）,"基於NLST LDCT的像素級病灶標註",Nature Sci Data論文附檔,開放,CADe/分割,https://www.nature.com/articles/s41597-025-05742-x
+Tianchi（阿里巴巴）,約1,000例中國患者CT / 1,230+結節,"3位醫師標註位置與大小；層厚<2mm；mhd格式",天池平台開放,開放,偵測/亞洲族裔域適應,https://tianchi.aliyun.com/competition/entrance/231601/information
+NSCLC-Radiomics（Lung1）,422例NSCLC,"放腫醫師GTV-3D勾勒（RTSTRUCT/SEG）；存活與預後臨床資料",TCIA免費下載,Data Citation Required,放射組學/預後模型,https://www.cancerimagingarchive.net/collection/nsclc-radiomics/
+NSCLC-Radiomics-Genomics（Lung3）,89例NSCLC,"術前CT + 基因表達（GEO GSE58661）",TCIA免費下載,Data Citation Required,影像基因體學,https://www.cancerimagingarchive.net/collection/nsclc-radiomics-genomics/
+ELCAP,50例LDCT,"1.25mm層厚；放射科醫師結節位置",VIA/Cornell網頁,開放,小規模驗證,https://www.via.cornell.edu/databases/lungdb.html
+ANODE09,55例CT,"結節位置標註",網頁下載,開放,偵測驗證,http://anode09.grand-challenge.org/
+SPIE-AAPM-NCI Lungx,約70例,"10位放射科醫師惡性度評分",TCIA,開放,CADx驗證,https://wiki.cancerimagingarchive.net/display/Public/LUNGx
+LNDb,294例葡萄牙篩檢CT,"雙讀者標註；節結分割",Grand Challenge,開放,偵測/分割,https://lndb.grand-challenge.org/
+NELSON（荷比）,約15,000例篩檢,"隨機試驗縱向資料",研究申請制,受限,外部驗證,https://nelsonstudy.org/
+RIDER-LungCT-Seg,約30例,"重複掃描結節分割",TCIA,Data Citation Required,穩定性/放射組學驗證,https://www.cancerimagingarchive.net/collection/rider-lung-ct-seg/
+TCGA-LUAD/LUSC,約500+例（LUAD）,"診斷CT + 全切片病理 + 體學資料",GDC Data Portal,開放,病理AI/影像基因體學,https://portal.gdc.cancer.gov/
+IDC衍生標註,NLST/NSCLC-Radiomics對應,"TotalSegmentator器官分割 + 放射組學特徵",Zenodo（IDC社群）,開放,預處理/特徵提取,https://zenodo.org/communities/imaging-data-commons/
+LDCT+蛋白質體多模態（2025）,篩檢世代,"LDCT（含標註）+ Olink血漿蛋白質體+人口學",medRxiv資料集（申請）,開放（知情同意涵蓋肺癌研究）,多模態風險模型,https://www.medrxiv.org/content/10.64898/2025.12.23.25342921v1

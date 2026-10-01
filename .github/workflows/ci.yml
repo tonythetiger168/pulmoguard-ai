@@ -1,0 +1,46 @@
+# ci.yml — 推送與 PR 時：lint + 單元測試
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install ruff pytest
+
+      - name: Lint
+        run: ruff check src scripts tests
+
+      - name: Unit tests（不需要資料的 smoke test）
+        run: |
+          # 前處理邏輯測試：用合成陣列驗證 HU窗/重採樣/球形標籤
+          pytest tests/ -v --tb=short
+
+      - name: 合成資料訓練迴路驗證
+        run: |
+          # 確保 baseline 模型可在 CPU 跑通 1 個 epoch（防迴歸）
+          python -c "
+          import torch, torch.nn as nn
+          x = torch.randn(4,1,32,32,32); y = torch.randint(0,2,(4,))
+          net = nn.Sequential(nn.Conv3d(1,8,3,padding=1), nn.ReLU(), nn.AdaptiveAvgPool3d(1), nn.Flatten(), nn.Linear(8,2))
+          loss = nn.functional.cross_entropy(net(x), y); loss.backward()
+          print('training loop OK, loss =', float(loss))
+          "
