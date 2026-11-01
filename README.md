@@ -50,17 +50,21 @@ pip install -r requirements.txt
 # 或
 docker build -t lung-ai . && docker run --gpus all -it -v $(pwd):/app lung-ai
 
-# 2. 抓 pilot 資料（50 例，約 6 GB）
-python scripts/download_tcia.py --collection LIDC-IDRI --limit 50
+# 2. 最小試跑資料：LUNA16 subset0（89 例，6.8 GB，CC BY 4.0）
+bash scripts/download_luna16.sh data/luna16 0
 
-# 3. 前處理 + 訓練 baseline
-python -m src.preprocess.pipeline
-python scripts/train_baseline.py --epochs 60
+# 3. 前處理 → 預訓練偵測器 FROC/CPM → 假陽性削減 baseline
+python -m src.preprocess.pipeline --luna_root data/luna16 --out data/processed --subsets 0
+python -m scripts.eval_monai_detector --luna_root data/luna16 --subset 0
+python -m scripts.train_baseline --meta data/processed/meta.csv --npy_dir data/processed/npy
 
-# 4. 正式驗證：nnDetection 10-fold → Grand Challenge CPM
+# 在 RunPod 一鍵跑完（跑完自動關機）：見 docs/RunPod_最小試跑手冊.md
+bash scripts/runpod_pilot.sh
+
+# 4. 正式驗證：先單一 fold，再 nnDetection 10-fold → CPM
 ```
 
-沙盒已驗證：前處理邏輯（HU 窗/重採樣/球形偽標籤）與 3D CNN 訓練迴路（合成資料 test AUC 0.956）。
+CI 以合成資料驗證：重採樣幾何、世界座標→體素換算、病人層級切分、FROC/CPM 計算，以及前處理→訓練→續跑的端到端流程。合成資料上的數字不代表真實效能。
 
 ## 開發路線圖
 
@@ -77,6 +81,7 @@ python scripts/train_baseline.py --epochs 60
 
 - [提案計劃書](docs/AI_LLM_Agent_LDCT_提案計劃書.md) — 策略層（30 個月、預算、團隊）
 - [研發執行手冊](docs/研發執行手冊_資料管線與申請範本.md) — 戰術層（管線規格＋CDAS 範本）
+- [RunPod 最小試跑手冊](docs/RunPod_最小試跑手冊.md) — 約 US$1–3 跑通整條管線
 - [全球資料庫目錄](docs/global_lung_ai_databases.csv) — 17 個訓練資料庫
 
 ## 聲明
@@ -85,4 +90,4 @@ python scripts/train_baseline.py --epochs 60
 
 ## License
 
-TBD（建議：程式 MIT／Apache-2.0，模型權重與資料另議）
+程式碼：Apache-2.0（見 LICENSE）。模型權重與資料依各資料集授權另議。

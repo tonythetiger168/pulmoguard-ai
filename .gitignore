@@ -24,3 +24,7 @@ __pycache__/
 # --- 系統 ---
 .DS_Store
 Thumbs.db
+*.npy
+models/bundles/
+.pytest_cache/
+.ruff_cache/
