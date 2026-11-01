@@ -14,6 +14,15 @@
 | Container disk | 20 GB | |
 | Volume disk（/workspace） | **40 GB** | subset0 解壓約 13 GB + 前處理約 3 GB + bundle/權重；zip 解壓後自動刪除 |
 
+### 自動存回結果（建議）
+
+1. GitHub → Settings → Developer settings → **Fine-grained personal access token**：
+   Repository access 只選 `pulmoguard-ai`，Permissions 只開 **Contents: Read and write**，期限 7 天。
+2. RunPod → Secrets 新增 `GH_TOKEN`，在 pod 的 Environment Variables 設 `GH_TOKEN = {{ RUNPOD_SECRET_GH_TOKEN }}`。
+
+設好後，腳本跑完會把結果推到 `pilot-results` 分支，然後**刪除 pod**（GPU 與磁碟都不再計費）。
+沒設 token 或推送失敗時，只會**停止** pod，結果留在 /workspace，不會遺失。
+
 ## 2. 在 pod 裡執行（Web Terminal 或 SSH）
 
 ```bash
@@ -23,10 +32,12 @@ cd pulmoguard-ai
 bash scripts/runpod_pilot.sh
 ```
 
-腳本跑完（成功或失敗）會**自動停止 pod**，GPU 停止計費；/workspace 的資料與結果保留。
-想跑完保持開機：`KEEP_POD=1 bash scripts/runpod_pilot.sh`。
+腳本跑完（成功或失敗）會先存結果再關 pod：有 `GH_TOKEN` → 推到 GitHub 後刪除 pod；沒有 → 停止 pod、保留 volume。
+想跑完保持開機：`KEEP_POD=1`；推送成功但想保留已下載資料：`KEEP_VOLUME=1`。
 
 ## 3. 看結果
+
+有設 `GH_TOKEN`：直接看 GitHub 的 `pilot-results` 分支 `results/pilot_<時間>/`（froc.json、metrics.json、run.log）。以下是 pod 上的原始位置：
 
 - `/workspace/runs/monai_detector/froc.json` —— 預訓練偵測器在 subset0 的敏感度與 **CPM**（公開文獻約 0.85–0.90）。
   bundle 權重以官方 fold0（val = subset0）訓練，所以 subset0 對它是未見資料。
