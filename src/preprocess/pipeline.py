@@ -190,15 +190,54 @@ def process_luna16(luna_root: str, out_dir: str, subsets: list[int],
     return metas
 
 
+def _container_limits() -> tuple[int, float | None]:
+    """容器實際可用的 CPU 數與記憶體（GB）。nproc／os.cpu_count() 在 RunPod 等容器內常回報整台主機的核心數。"""
+    cpus = len(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") else (os.cpu_count() or 1)
+    try:  # cgroup v2 CPU quota
+        quota, period = open("/sys/fs/cgroup/cpu.max").read().split()
+        if quota != "max":
+            cpus = min(cpus, max(1, int(int(quota) / int(period))))
+    except (OSError, ValueError):
+        pass
+    mem_gb = None
+    for path in ("/sys/fs/cgroup/memory.max", "/sys/fs/cgroup/memory/memory.limit_in_bytes"):
+        try:
+            v = open(path).read().strip()
+            if v != "max" and int(v) < 1 << 50:
+                mem_gb = int(v) / 2**30
+                break
+        except (OSError, ValueError):
+            continue
+    if mem_gb is None and hasattr(os, "sysconf"):
+        try:
+            mem_gb = os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_AVPHYS_PAGES") / 2**30
+        except (OSError, ValueError):
+            pass
+    return cpus, mem_gb
+
+
+GB_PER_WORKER = 4.0   # 單一 CT 讀入＋重採樣＋float32 暫存的保守峰值
+
+
+def default_workers() -> int:
+    """依容器 CPU 與記憶體決定平行數，上限 8，避免 OOM（BrokenProcessPool）"""
+    cpus, mem_gb = _container_limits()
+    by_mem = int(mem_gb // GB_PER_WORKER) if mem_gb else 4
+    return max(1, min(cpus, by_mem, 8))
+
+
 def main() -> None:
     p = argparse.ArgumentParser(description="LUNA16 前處理（mhd → 1mm float16 npy）")
     p.add_argument("--luna_root", default="data/luna16")
     p.add_argument("--out", default="data/processed")
     p.add_argument("--subsets", type=int, nargs="+", default=[0],
                    help="要處理的 subset 編號；先用 0 做最小試跑")
-    p.add_argument("--workers", type=int, default=os.cpu_count() or 4)
+    p.add_argument("--workers", type=int, default=0,
+                   help="平行數；0 = 依容器 CPU／記憶體自動決定（上限 8）")
     a = p.parse_args()
-    metas = process_luna16(a.luna_root, a.out, a.subsets, a.workers)
+    workers = a.workers or default_workers()
+    print(f"workers: {workers}")
+    metas = process_luna16(a.luna_root, a.out, a.subsets, workers)
     print(f"done: {len(metas)} series → {a.out}/meta.csv")
 
 

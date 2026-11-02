@@ -70,3 +70,9 @@ class TestResample:
         arr = sitk.GetArrayFromImage(rs)
         assert arr[z, y, x] > -1000                   # 亮點仍在換算出的位置
         assert np.unravel_index(arr.argmax(), arr.shape) == (z, y, x)
+
+
+def test_default_workers_is_bounded():
+    from src.preprocess.pipeline import default_workers
+    w = default_workers()
+    assert 1 <= w <= 8

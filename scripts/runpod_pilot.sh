@@ -72,7 +72,7 @@ echo "== 1/4 download subset0 =="
 bash scripts/download_luna16.sh "$DATA" 0
 
 echo "== 2/4 preprocess =="
-python -m src.preprocess.pipeline --luna_root "$DATA" --out "$PROC" --subsets 0 --workers "$(nproc)"
+python -m src.preprocess.pipeline --luna_root "$DATA" --out "$PROC" --subsets 0   # workers 依容器記憶體自動決定（nproc 在容器內會回報整台主機核心數）
 
 echo "== 3/4 pretrained MONAI detector on subset0 (held-out fold for these weights) =="
 python -m scripts.eval_monai_detector --luna_root "$DATA" --subset 0 \
@@ -81,7 +81,7 @@ python -m scripts.eval_monai_detector --luna_root "$DATA" --subset 0 \
 echo "== 4/4 FP-reduction baseline =="
 python -m scripts.train_baseline --meta "$PROC/meta.csv" --npy_dir "$PROC/npy" \
   --candidates "$DATA/candidates_V2.csv" --out "$RUNS/baseline" --resume \
-  --num_workers "$(( $(nproc) > 8 ? 8 : $(nproc) ))"
+  --num_workers 4
 
 echo "== results =="
 cat "$RUNS/monai_detector/froc.json" 2>/dev/null || true
