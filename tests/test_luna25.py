@@ -47,7 +47,8 @@ def test_dataset_shapes_and_aug(tmp_path):
 
 
 def test_folds_are_patient_level(tmp_path):
-    df = load_annotations(str(_fake_luna25(tmp_path)))
+    # 48 位病人、12 位惡性：舊版 sklearn（1.7）的分層較粗，6 位惡性分 4 折可能出現沒有惡性的 fold
+    df = load_annotations(str(_fake_luna25(tmp_path, n_patients=48)))
     df = make_folds(df, 4)
     assert df.groupby("group").fold.nunique().max() == 1
     assert all(df[df.fold == k].label.sum() > 0 for k in range(4))
