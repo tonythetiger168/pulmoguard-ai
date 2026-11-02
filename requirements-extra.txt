@@ -1,0 +1,9 @@
+# 選用相依：CADx radiomics、實驗追蹤、LLM/Agent 層
+-r requirements.txt
+PyRadiomics>=3.1        # CADx radiomics 特徵提取
+matplotlib>=3.8
+mlflow>=2.12            # 實驗追蹤
+dvc>=3.0                # 資料版本管理
+# --- LLM/Agent 層（M6 後） ---
+# transformers>=4.40
+# sentence-transformers>=2.7

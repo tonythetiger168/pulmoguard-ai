@@ -8,11 +8,9 @@ download_tcia.py — 在有外網的伺服器上執行：下載 LIDC-IDRI / LUNA
 TCIA 免帳號、無審查；NLST 臨床資料仍須另行申請 CDAS。
 """
 import argparse
-import io
 import os
 import sys
 import time
-import zipfile
 
 import requests
 
