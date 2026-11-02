@@ -13,7 +13,8 @@ data:
 train:
   model: densenet_3d_small                      # DenseNet block_config (4,8,12,10)
   epochs: 30
-  patience: 5                                   # 早停，省 GPU 時數
+  patience: 10                                  # 早停，省 GPU 時數
+  min_epochs: 15                                # 小驗證集雜訊大，至少跑滿
   amp: true                                     # 混合精度
   batch_size: 16
   lr: 1.0e-4

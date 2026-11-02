@@ -128,7 +128,7 @@ def main(cfg):
                     "sched": sched.state_dict(), "scaler": scaler.state_dict(),
                     "epoch": epoch, "best_auc": best_auc, "stale": stale,
                     "history": history}, last)
-        if cfg.patience and stale >= cfg.patience:
+        if cfg.patience and stale >= cfg.patience and epoch + 1 >= cfg.min_epochs:
             print(f"early stop: no val AUC gain for {cfg.patience} epochs")
             break
 
@@ -150,7 +150,9 @@ def parse_args(argv=None):
                    help="多 subset 時使用官方 fold 作驗證；單 subset 試跑時自動依 series 切 20%%")
     p.add_argument("--patch_size", type=int, default=64)
     p.add_argument("--epochs", type=int, default=30)
-    p.add_argument("--patience", type=int, default=5, help="早停；0 = 關閉")
+    p.add_argument("--patience", type=int, default=10, help="早停；0 = 關閉")
+    p.add_argument("--min_epochs", type=int, default=15,
+                   help="至少跑滿的 epoch 數（小驗證集 AUC 雜訊大，太早停會停在偶然的低點）")
     p.add_argument("--batch_size", type=int, default=16)
     p.add_argument("--num_workers", type=int, default=4)
     p.add_argument("--lr", type=float, default=1e-4)
