@@ -17,6 +17,7 @@ DICOM 目錄結構需為 <dicom_root>/<PatientID>/<StudyInstanceUID>/<SeriesInst
 from __future__ import annotations
 
 import argparse
+import configparser
 import json
 import os
 import sys
@@ -30,7 +31,7 @@ import numpy as np
 for _alias, _t in (("int", int), ("float", float), ("bool", bool)):
     if not hasattr(np, _alias):
         setattr(np, _alias, _t)
-import configparser  # noqa: E402  pylidc 用了 Python 3.12 移除的 SafeConfigParser
+# pylidc 用了 Python 3.12 移除的 SafeConfigParser
 if not hasattr(configparser, "SafeConfigParser"):
     configparser.SafeConfigParser = configparser.ConfigParser
 

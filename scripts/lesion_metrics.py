@@ -51,7 +51,7 @@ def main() -> None:
         pi = sitk.ReadImage(str(pf))
         m = case_metrics(sitk.GetArrayFromImage(pi), sitk.GetArrayFromImage(gi),
                          np.array(gi.GetSpacing())[::-1])
-        rows += [dict(l, case=pf.name) for l in m["lesions"]]
+        rows += [dict(les, case=pf.name) for les in m["lesions"]]
         fps.append(m["fp"])
 
     def sens(sel):

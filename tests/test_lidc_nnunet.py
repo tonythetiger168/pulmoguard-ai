@@ -12,7 +12,7 @@ def test_lesion_metrics_hit_miss_fp():
     p[6:10, 5:10, 5:10] = 1
     p[20:22, 1:3, 1:3] = 1       # 假陽性
     m = case_metrics(p, g, np.ones(3))
-    assert [l["detected"] for l in m["lesions"]] == [True, False]
+    assert [les["detected"] for les in m["lesions"]] == [True, False]
     assert m["fp"] == 1
     assert 0.85 < m["lesions"][0]["dice"] < 0.95
 
