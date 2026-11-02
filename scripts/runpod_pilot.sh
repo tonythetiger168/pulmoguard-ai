@@ -24,6 +24,7 @@ save_results() {
   OUT_DIR="results/pilot_$(date +%Y%m%d_%H%M)"
   mkdir -p "$OUT_DIR"
   cp "$RUNS/monai_detector/froc.json" "$RUNS/monai_detector/detections.csv" "$OUT_DIR/" 2>/dev/null || true
+  cp "$RUNS/monai_detector/error.txt" "$OUT_DIR/detector_error.txt" 2>/dev/null || true
   cp "$RUNS/baseline/metrics.json" "$OUT_DIR/" 2>/dev/null || true
   cp "$LOG" "$OUT_DIR/run.log" 2>/dev/null || true
   nvidia-smi --query-gpu=name --format=csv,noheader > "$OUT_DIR/gpu.txt" 2>/dev/null || true
@@ -76,7 +77,7 @@ python -m src.preprocess.pipeline --luna_root "$DATA" --out "$PROC" --subsets 0 
 
 echo "== 3/4 pretrained MONAI detector on subset0 (held-out fold for these weights) =="
 python -m scripts.eval_monai_detector --luna_root "$DATA" --subset 0 \
-  --bundle_dir "$WS/models/bundles" --out "$RUNS/monai_detector" || echo "detector step failed; continuing"
+  --bundle_dir "$WS/models/bundles" --out "$RUNS/monai_detector" || echo "DETECTOR STEP FAILED (see detector_error.txt); continuing with baseline"
 
 echo "== 4/4 FP-reduction baseline =="
 python -m scripts.train_baseline --meta "$PROC/meta.csv" --npy_dir "$PROC/npy" \

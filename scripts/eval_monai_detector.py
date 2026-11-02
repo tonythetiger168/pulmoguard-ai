@@ -11,7 +11,9 @@ bundle 權重以官方 fold0 切分訓練（train = subset1–9，val = subset0�
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -21,6 +23,41 @@ import pandas as pd
 from src.eval.froc import froc
 
 BUNDLE = "lung_nodule_ct_detection"
+# 不走 `monai.bundle download`（會連 raw.githubusercontent.com，部分 RunPod 主機 IPv6 不通）：
+# 設定檔用 git 從 github.com 取，權重從 NVIDIA CDN 取（URL 與 md5 來自 bundle 的 large_files.yml）
+MODEL_ZOO = "https://github.com/Project-MONAI/model-zoo.git"
+WEIGHTS_URL = ("https://developer.download.nvidia.com/assets/Clara/monai/tutorials/"
+               "model_zoo/model_lung_nodule_ct_detection.pt")
+WEIGHTS_MD5 = "b2e732a7c2786e2f8398fa45293b1e73"
+
+
+def fetch_bundle(bundle_root: Path) -> None:
+    """取得 bundle 設定與預訓練權重（可重複執行；已存在則跳過）"""
+    if not (bundle_root / "configs" / "inference.json").exists():
+        tmp = bundle_root.parent / "_model_zoo"
+        if tmp.exists():
+            shutil.rmtree(tmp)
+        run(["git", "clone", "-q", "--depth", "1", "--filter=blob:none", "--sparse", MODEL_ZOO, str(tmp)])
+        run(["git", "-C", str(tmp), "sparse-checkout", "set", f"models/{BUNDLE}"])
+        bundle_root.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(tmp / "models" / BUNDLE), str(bundle_root))
+        shutil.rmtree(tmp)
+    weights = bundle_root / "models" / "model.pt"
+    if weights.exists() and _md5(weights) == WEIGHTS_MD5:
+        return
+    weights.parent.mkdir(parents=True, exist_ok=True)
+    # -4：強制 IPv4；--retry：暫時性網路錯誤自動重試
+    run(["curl", "-4", "-fL", "--retry", "5", "--retry-all-errors", "-o", str(weights), WEIGHTS_URL])
+    if _md5(weights) != WEIGHTS_MD5:
+        raise RuntimeError(f"md5 mismatch for {weights}")
+
+
+def _md5(path: Path) -> str:
+    h = hashlib.md5()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
 
 
 def write_datalist(luna_root: Path, subset: int, path: Path, limit: int = 0) -> list[str]:
@@ -72,9 +109,7 @@ def main() -> None:
     result = out / "detections.json"
 
     if not a.skip_inference:
-        if not (bundle_root / "models" / "model.pt").exists():
-            run([sys.executable, "-m", "monai.bundle", "download", "--name", BUNDLE,
-                 "--bundle_dir", str(bundle_root.parent)])
+        fetch_bundle(bundle_root)
         run([sys.executable, "-m", "monai.bundle", "run",
              "--config_file", "configs/inference.json",
              "--bundle_root", str(bundle_root),
@@ -101,4 +136,10 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:  # 失敗原因寫進結果目錄，試跑結果裡看得到
+        out = Path(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv else Path("runs/monai_detector")
+        out.mkdir(parents=True, exist_ok=True)
+        (out / "error.txt").write_text(f"{type(e).__name__}: {e}\n")
+        raise
