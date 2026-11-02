@@ -1,0 +1,55 @@
+{
+  "task": "LUNA25 nodule malignancy (benign vs malignant), patient-level CV",
+  "model": "MONAI 3D ResNet-18 from scratch, 64^3 patch, 50 mm FOV",
+  "n_nodules": 6163,
+  "n_malignant": 555,
+  "oof_auc": 0.8741329953348498,
+  "oof_auc_95ci": [
+    0.8604743492559382,
+    0.8877563951872173
+  ],
+  "oof_average_precision": 0.42962437344842724,
+  "fold_auc_mean": 0.8803697403844332,
+  "fold_auc_std": 0.010442802191565475,
+  "per_fold": [
+    {
+      "fold": 0,
+      "test_auc": 0.877270318446789,
+      "best_val_auc": 0.8931966653666148,
+      "epochs_run": 15,
+      "minutes": 14.7
+    },
+    {
+      "fold": 1,
+      "test_auc": 0.8797313356136884,
+      "best_val_auc": 0.8930614367431841,
+      "epochs_run": 19,
+      "minutes": 18.2
+    },
+    {
+      "fold": 2,
+      "test_auc": 0.8977706520079402,
+      "best_val_auc": 0.8720992589703587,
+      "epochs_run": 25,
+      "minutes": 24.0
+    },
+    {
+      "fold": 3,
+      "test_auc": 0.8651980857863211,
+      "best_val_auc": 0.8702671916400466,
+      "epochs_run": 19,
+      "minutes": 18.3
+    },
+    {
+      "fold": 4,
+      "test_auc": 0.8818783100674269,
+      "best_val_auc": 0.90576248049922,
+      "epochs_run": 17,
+      "minutes": 16.4
+    }
+  ],
+  "wall_hours": 1.527,
+  "device": "cuda",
+  "gpu": "NVIDIA L4",
+  "licence_note": "LUNA25 labels are CC BY-NC 4.0: research use only, not for commercial product training"
+}
