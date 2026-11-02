@@ -1,0 +1,23 @@
+# 絕不把資料或實驗產物打包進映像（映像會推到 GHCR）
+data/
+runs/
+mlruns/
+models/
+*.dcm
+*.nii
+*.nii.gz
+*.mhd
+*.raw
+*.npy
+*.npz
+*.zip
+*.pt
+*.pth
+*.ckpt
+.git/
+.venv/
+.env
+**/__pycache__/
+.pytest_cache/
+.ruff_cache/
+notebooks/
