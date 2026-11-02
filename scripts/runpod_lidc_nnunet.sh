@@ -115,9 +115,22 @@ progress_loop() {  # 每 3 小時把進度推上 GitHub，cloud session 才看�
   done
 }
 
+dice_watchdog() {  # 第 60 epoch 後若最近 40 個 epoch 的 pseudo Dice 全是 0 → 停止訓練，不再浪費 GPU 時間
+  while sleep 600; do
+    local f; f=$(ls -t "$FOLD_DIR"/training_log_*.txt 2>/dev/null | head -1); [ -n "$f" ] || continue
+    local n; n=$(grep -c "Epoch time" "$f" || true)
+    [ "${n:-0}" -ge 60 ] || continue
+    if ! grep "Pseudo dice" "$f" | tail -40 | grep -qvE "float32\(0\.0\)"; then
+      echo "WATCHDOG: pseudo Dice 0 for the last 40 epochs at epoch $n, stopping training"
+      pkill -f nnUNetv2_train; return
+    fi
+  done
+}
+
 finish() {
   local rc=$?
   [ -n "${PROG_PID:-}" ] && kill "$PROG_PID" 2>/dev/null || true
+  [ -n "${DOG_PID:-}" ] && kill "$DOG_PID" 2>/dev/null || true
   echo "exit code $rc; elapsed: $(( ($(date +%s) - t0) / 60 )) min. log: $LOG"
   upload_weights || true
   local d; d=$(mktemp -d); collect "$d"
@@ -133,6 +146,13 @@ command -v unzip >/dev/null || (apt-get update -qq && apt-get install -y -qq unz
 preflight
 pip install -q -r requirements.txt
 pip install -q "nnunetv2>=2.6,<2.9" "pylidc==0.2.3" "sqlalchemy<2" "pydicom<3" "setuptools<81" idc-index
+# 2026-11-02 第一次全量訓練：映像檔內是 torch 2.8.0 nightly（dev 版）+ torch.compile，
+# 第 17 epoch 起 pseudo Dice 一直是 0、loss 停在 -0.2 → 換正式版 torch、關掉 compile
+if python -c "import torch,sys;sys.exit(0 if 'dev' in torch.__version__ else 1)"; then
+  pip install -q "torch==2.7.1" "torchvision==0.22.1" --index-url https://download.pytorch.org/whl/cu128
+fi
+export nnUNet_compile=${nnUNet_compile:-f}
+python -c "import torch;print('torch', torch.__version__, 'cuda', torch.cuda.is_available())"
 nvidia-smi --query-gpu=name,memory.total --format=csv || true
 df -h "$WS" | tail -1
 
@@ -169,6 +189,7 @@ df -h "$WS" | tail -1
 
 echo "== 4/4 train fold $FOLD ($TRAINER) =="
 progress_loop & PROG_PID=$!
+dice_watchdog & DOG_PID=$!
 CONT=""; [ -f "$FOLD_DIR/checkpoint_latest.pth" ] && CONT="--c"
 nnUNetv2_train 501 3d_fullres "$FOLD" -tr "$TRAINER" $CONT
 
