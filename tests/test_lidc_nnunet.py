@@ -26,3 +26,12 @@ def test_patient_folds_keep_patient_together():
         tr_p = {c["patient_id"] for c in cases if c["case"] in s["train"]}
         assert not val_p & tr_p
     assert sorted(sum((s["val"] for s in splits), [])) == sorted(c["case"] for c in cases)
+
+
+def test_roi_extract_pads_outside_image():
+    from scripts.lidc_crops import crop_box, extract
+    a = np.arange(27).reshape(3, 3, 3)
+    box = crop_box((0, 0, 0), (2, 2, 2))   # 一半在影像外
+    out = extract(a, box, -1)
+    assert out.shape == (2, 2, 2)
+    assert out[0, 0, 0] == -1 and out[1, 1, 1] == a[0, 0, 0]

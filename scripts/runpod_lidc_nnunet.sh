@@ -14,7 +14,10 @@ export PIP_DEFAULT_TIMEOUT=120 PIP_RETRIES=10   # 2026-11-03：PyPI 讀取逾時
 pipi() { for i in 1 2 3; do pip install -q "$@" && return 0; echo "pip install failed (try $i), retrying"; sleep $((30 * i)); done; return 1; }
 WS=${WS:-/workspace}
 DICOM=$WS/data/lidc_dicom
-DS=Dataset501_LIDCNodule
+FULL=Dataset501_LIDCNodule   # 全肺資料集（轉檔輸出）
+# MODE=roi（預設）：以結節為中心的 64 mm ROI 分割（Dataset503）；MODE=full：全肺分割（Dataset501，兩次都學不起來）
+MODE=${MODE:-roi}
+if [ "$MODE" = "roi" ]; then DS=Dataset503_LIDCNoduleROI; DSID=503; else DS=$FULL; DSID=501; fi
 export nnUNet_raw=$WS/nnunet/raw nnUNet_preprocessed=$WS/nnunet/preprocessed nnUNet_results=$WS/nnunet/results
 TRAINER=${EPOCHS_TRAINER:-nnUNetTrainer}
 FOLD=${FOLD:-0}
@@ -66,7 +69,7 @@ preflight() {
 collect() {  # 只收小檔
   local d=$1; mkdir -p "$d"
   cp "$nnUNet_raw/$DS/dataset.json" "$nnUNet_raw/$DS/splits_final.json" "$d/" 2>/dev/null || true
-  cp "$nnUNet_raw/$DS/conversion_log.json" "$d/" 2>/dev/null || true
+  cp "$nnUNet_raw/$FULL/conversion_log.json" "$nnUNet_raw/$DS/rois.json" "$d/" 2>/dev/null || true
   cp "$nnUNet_preprocessed/$DS/nnUNetPlans.json" "$nnUNet_preprocessed/$DS/dataset_fingerprint.json" "$d/" 2>/dev/null || true
   if [ -d "$FOLD_DIR" ]; then
     mkdir -p "$d/fold_$FOLD"
@@ -158,12 +161,16 @@ python -c "import torch;print('torch', torch.__version__, 'cuda', torch.cuda.is_
 nvidia-smi --query-gpu=name,memory.total --format=csv || true
 df -h "$WS" | tail -1
 
-if [ ! -f "$nnUNet_raw/$DS/dataset.json" ]; then
+if [ ! -f "$nnUNet_raw/$FULL/dataset.json" ]; then
   if [ "${SKIP_SMOKE:-0}" != "1" ]; then
     echo "== 0/4 smoke test: 5 scans end to end (download, masks, plan, 1 epoch) before the 125 GB download =="
     SM=Dataset502_LIDCSmoke
     python -m scripts.download_idc --collection lidc_idri --out "$WS/smoke_dicom" --limit 5
     python -W ignore -m scripts.lidc_to_nnunet --dicom_root "$WS/smoke_dicom" --out "$nnUNet_raw/$SM" --workers 2
+    if [ "$MODE" = "roi" ]; then
+      python -m scripts.lidc_crops --src "$nnUNet_raw/$SM" --out "$nnUNet_raw/${SM}ROI" --workers 2
+      rm -rf "$nnUNet_raw/$SM"; mv "$nnUNet_raw/${SM}ROI" "$nnUNet_raw/$SM"
+    fi
     nnUNetv2_plan_and_preprocess -d 502 -c 3d_fullres -np 2 --verify_dataset_integrity
     cp "$nnUNet_raw/$SM/splits_final.json" "$nnUNet_preprocessed/$SM/"
     nnUNetv2_train 502 3d_fullres 0 -tr nnUNetTrainer_1epoch
@@ -178,13 +185,18 @@ if [ ! -f "$nnUNet_raw/$DS/dataset.json" ]; then
   du -sh "$DICOM"
 
   echo "== 2/4 pylidc consensus masks -> nnU-Net dataset =="
-  python -W ignore -m scripts.lidc_to_nnunet --dicom_root "$DICOM" --out "$nnUNet_raw/$DS" --workers "$NP"
+  python -W ignore -m scripts.lidc_to_nnunet --dicom_root "$DICOM" --out "$nnUNet_raw/$FULL" --workers "$NP"
   rm -rf "$DICOM"   # 轉完就刪原始 DICOM（IDC 隨時可重新下載）
+fi
+
+if [ "$MODE" = "roi" ] && [ ! -f "$nnUNet_raw/$DS/dataset.json" ]; then
+  echo "== 2b/4 nodule-centred ROIs =="
+  python -m scripts.lidc_crops --src "$nnUNet_raw/$FULL" --out "$nnUNet_raw/$DS" --workers "$NP"
 fi
 
 echo "== 3/4 nnU-Net plan + preprocess (3d_fullres) =="
 if [ ! -f "$nnUNet_preprocessed/$DS/nnUNetPlans.json" ] || [ ! -d "$nnUNet_preprocessed/$DS/nnUNetPlans_3d_fullres" ]; then
-  nnUNetv2_plan_and_preprocess -d 501 -c 3d_fullres -np "$NP" --verify_dataset_integrity
+  nnUNetv2_plan_and_preprocess -d "$DSID" -c 3d_fullres -np "$NP" --verify_dataset_integrity
 fi
 cp "$nnUNet_raw/$DS/splits_final.json" "$nnUNet_preprocessed/$DS/splits_final.json"   # 病人層級切分
 df -h "$WS" | tail -1
@@ -193,7 +205,7 @@ echo "== 4/4 train fold $FOLD ($TRAINER) =="
 progress_loop & PROG_PID=$!
 dice_watchdog & DOG_PID=$!
 CONT=""; [ -f "$FOLD_DIR/checkpoint_latest.pth" ] && CONT="--c"
-nnUNetv2_train 501 3d_fullres "$FOLD" -tr "$TRAINER" $CONT
+nnUNetv2_train "$DSID" 3d_fullres "$FOLD" -tr "$TRAINER" $CONT
 
 echo "== lesion-level metrics on fold $FOLD validation =="
 python -m scripts.lesion_metrics --pred "$FOLD_DIR/validation" --gt "$nnUNet_raw/$DS/labelsTr" \
