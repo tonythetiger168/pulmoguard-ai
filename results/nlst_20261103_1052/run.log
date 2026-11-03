@@ -1,0 +1,233 @@
+preflight ok: GitHub push works
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: python -m pip install --upgrade pip
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: python -m pip install --upgrade pip
+torch 2.8.0.dev20250319+cu128 cuda True
+cpus=10 nlst_workers=6
+== 1/4 LUNA25 data + NLST cohort ==
+weights luna25_resnet18_fold0_fp16.pt -> /workspace/runs/luna25/fold0/best.pt
+weights luna25_resnet18_fold1_fp16.pt -> /workspace/runs/luna25/fold1/best.pt
+weights luna25_resnet18_fold2_fp16.pt -> /workspace/runs/luna25/fold2/best.pt
+weights luna25_resnet18_fold3_fp16.pt -> /workspace/runs/luna25/fold3/best.pt
+weights luna25_resnet18_fold4_fp16.pt -> /workspace/runs/luna25/fold4/best.pt
+2026-11-03 10:53:31,395 - Fetching index ct_index
+2026-11-03 10:53:32,368 - Fetching index clinical_index
+2026-11-03 10:53:32,897 - Since clinical_index was fetched, also installing corresponding tables.
+2026-11-03 10:53:39,098 - IDC clinical data downloaded successfully to /root/.local/share/IDC/v25/clinical_data
+T0 thin-slice CT with label: {0: 22464, 1: 270} | LUNA25 patients excluded: 2120 listed | cohort: 141 pos + 423 neg = 564 scans, 52.1 GB
+== 2/4 NLST download+convert (background) and LUNA25 5-fold training ==
+LUNA25 done; waiting for NLST preparation
+2026-11-03 11:01:59,138 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-03 11:02:05,141 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_y8fh68lz/b00560
+[564/564] prepared, 0 errors
+== 3/4 detector + malignancy on NLST ==
++ git clone -q --depth 1 --filter=blob:none --sparse https://github.com/Project-MONAI/model-zoo.git /workspace/models/bundles/_model_zoo
++ git -C /workspace/models/bundles/_model_zoo sparse-checkout set models/lung_nodule_ct_detection
++ curl -4 -fL --retry 5 --retry-all-errors -o /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt https://developer.download.nvidia.com/assets/Clara/monai/tutorials/model_zoo/model_lung_nodule_ct_detection.pt
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0 41 79.8M   41 33.1M    0     0  34.8M      0  0:00:02 --:--:--  0:00:02 34.7M100 79.8M  100 79.8M    0     0  57.5M      0  0:00:01  0:00:01 --:--:-- 57.5M
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst/datalist.json --output_dir /workspace/runs/nlst --output_filename detections.json
+2026-11-03 11:02:21,730 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-03 11:02:22,661 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-03 11:02:22,662 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-03 11:02:22,662 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-03 11:02:22,662 - INFO - > whether_raw_luna16: True
+2026-11-03 11:02:22,662 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-03 11:02:22,662 - INFO - > data_list_file_path: '/workspace/runs/nlst/datalist.json'
+2026-11-03 11:02:22,662 - INFO - > output_dir: '/workspace/runs/nlst'
+2026-11-03 11:02:22,662 - INFO - > output_filename: 'detections.json'
+2026-11-03 11:02:22,662 - INFO - ---
+
+
+2026-11-03 11:02:22,662 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-03 11:10:10,212 - ignite.engine.engine.DetectionEvaluator - ERROR - Current run is terminating due to exception: split_with_sizes expects split_sizes to sum exactly to 5687496 (input tensor's size at dimension 0), but got split_sizes=[4981824, 622728, 77841]
+2026-11-03 11:10:10,213 - ERROR - Exception: split_with_sizes expects split_sizes to sum exactly to 5687496 (input tensor's size at dimension 0), but got split_sizes=[4981824, 622728, 77841]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5687496 (input tensor's size at dimension 0), but got split_sizes=[4981824, 622728, 77841]
+2026-11-03 11:10:15,378 - ignite.engine.engine.DetectionEvaluator - ERROR - Engine run is terminating due to exception: split_with_sizes expects split_sizes to sum exactly to 5687496 (input tensor's size at dimension 0), but got split_sizes=[4981824, 622728, 77841]
+2026-11-03 11:10:15,378 - ERROR - Exception: split_with_sizes expects split_sizes to sum exactly to 5687496 (input tensor's size at dimension 0), but got split_sizes=[4981824, 622728, 77841]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5687496 (input tensor's size at dimension 0), but got split_sizes=[4981824, 622728, 77841]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 374, in evaluate
+    return eval(value[len(self.prefix) :], globals_, locals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 151, in run
+    super().run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/workflow.py", line 282, in run
+    super().run(data=self.data_loader, max_epochs=self.state.max_epochs)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1056, in run
+    return self._internal_run()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1099, in _internal_run
+    return next(self._internal_run_generator)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1174, in _internal_run_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5687496 (input tensor's size at dimension 0), but got split_sizes=[4981824, 622728, 77841]
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/__main__.py", line 31, in <module>
+    fire.Fire()
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/scripts.py", line 1012, in run
+    workflow.run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 488, in run
+    return self._run_expr(id=self.run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 532, in _run_expr
+    ret.append(self.parser.get_parsed_content(sub_id, **kwargs))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_parser.py", line 290, in get_parsed_content
+    return self.ref_resolver.get_resolved_content(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 193, in get_resolved_content
+    return self._resolve_one_item(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 175, in _resolve_one_item
+    item.evaluate(globals={f"{self._vars}": self.resolved_content}) if run_eval else item
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 376, in evaluate
+    raise RuntimeError(f"Failed to evaluate {self}") from e
+RuntimeError: Failed to evaluate ConfigExpression: 
+"$__local_refs['evaluator'].run()"
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/repo/scripts/nlst_validate.py", line 158, in <module>
+    main()
+  File "/workspace/repo/scripts/nlst_validate.py", line 120, in main
+    run([sys.executable, "-m", "monai.bundle", "run", "--config_file", "configs/inference.json",
+  File "/workspace/repo/scripts/eval_monai_detector.py", line 76, in run
+    subprocess.run(cmd, cwd=cwd, check=True)
+  File "/usr/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/usr/bin/python', '-m', 'monai.bundle', 'run', '--config_file', 'configs/inference.json', '--bundle_root', '/workspace/models/bundles/lung_nodule_ct_detection', '--whether_raw_luna16', 'True', '--dataset_dir', '/workspace/data/nlst/mhd', '--data_list_file_path', '/workspace/runs/nlst/datalist.json', '--output_dir', '/workspace/runs/nlst', '--output_filename', 'detections.json']' returned non-zero exit status 1.
+exit code 1; elapsed: 17 min. log: /workspace/runs/nlst_20261103_1052.log
