@@ -12,10 +12,19 @@ P1=https://zenodo.org/records/3723295/files
 P2=https://zenodo.org/records/4121926/files
 mkdir -p "$DEST"; cd "$DEST"
 
-get() {  # 可續傳下載；失敗即中止
+get() {  # 可續傳下載；Zenodo 偶爾回 429/5xx 或斷線，重試 6 次（間隔遞增）仍失敗才中止
   if [ -f "$2" ] && [ ! -f "$2.part" ]; then echo "skip $2"; return 0; fi
-  wget -c -q --show-progress -O "$2.part" "$1/$2?download=1"
-  mv "$2.part" "$2"
+  local i rc
+  for i in 1 2 3 4 5 6; do
+    rc=0
+    wget -c -nv --show-progress --tries=3 --waitretry=30 --retry-on-http-error=429,500,502,503,504 \
+      -O "$2.part" "$1/$2?download=1" || rc=$?
+    [ "$rc" = 0 ] && { mv "$2.part" "$2"; return 0; }
+    echo "download $2 failed (wget exit $rc), attempt $i/6; retrying in $((i * 60)) s" >&2
+    sleep $((i * 60))
+  done
+  echo "ERROR: could not download $2" >&2
+  return 1
 }
 
 extract() {  # 有 unzip 用 unzip，沒有就用 Python zipfile（部分映像沒裝 unzip）
