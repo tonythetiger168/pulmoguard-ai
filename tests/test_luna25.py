@@ -68,3 +68,14 @@ def test_train_luna25_end_to_end(tmp_path):
     # 第二次執行會跳過已完成的 fold（spot pod 續跑）
     main(parse_args(["--csv", str(csv), "--blocks", str(tmp_path), "--out", str(out), "--folds", "2",
                      "--epochs", "1", "--batch_size", "4", "--num_workers", "1", "--size_px", "32"]))
+
+
+def test_train_luna25_limit(tmp_path):
+    """--limit 煙霧測試：分層取樣後仍保留 label 欄"""
+    from scripts.train_luna25 import main, parse_args
+    csv = _fake_luna25(tmp_path)
+    out = tmp_path / "run"
+    main(parse_args(["--csv", str(csv), "--blocks", str(tmp_path), "--out", str(out), "--folds", "2",
+                     "--epochs", "1", "--batch_size", "4", "--num_workers", "1", "--size_px", "32",
+                     "--limit", "40"]))
+    assert json.load(open(out / "summary.json"))["n_nodules"] == 38   # 惡性只有 18 顆，全取；良性取 20

@@ -143,8 +143,9 @@ def main(cfg):
         cfg.num_workers = max(1, min(_container_limits()[0], 8))
     df = filter_available(load_annotations(cfg.csv), cfg.blocks)
     if cfg.limit:   # 煙霧測試：分層取前 N 顆
-        df = df.groupby("label", group_keys=False).apply(
-            lambda g: g.sample(min(len(g), max(cfg.limit // 2, 4)), random_state=cfg.seed)).reset_index(drop=True)
+        n = max(cfg.limit // 2, 4)   # 每個類別各取 n 顆（不用 groupby.apply：新版 pandas 會丟掉 label 欄）
+        df = pd.concat([g.sample(min(len(g), n), random_state=cfg.seed) for _, g in df.groupby("label")],
+                       ignore_index=True)
     df = make_folds(df, cfg.folds, cfg.seed)
     df[["AnnotationID", "group", "label", "fold"]].to_csv(os.path.join(cfg.out, "folds.csv"), index=False)
     print(f"{len(df)} nodules ({int(df.label.sum())} malignant) from {df.group.nunique()} patients | "
