@@ -92,6 +92,48 @@ def score_candidates(models, mhd: Path, cands: pd.DataFrame) -> np.ndarray:
     return np.mean(probs, axis=0)
 
 
+CHUNK = 40
+
+
+def _run_bundle(bundle_root: Path, mhd_dir: Path, out: Path, uids: list[str], tag: str) -> list[dict] | None:
+    datalist = out / f"datalist_{tag}.json"
+    res = out / f"det_{tag}.json"
+    datalist.write_text(json.dumps({"validation": [{"image": f"{u}.mhd"} for u in uids]}))
+    try:
+        run([sys.executable, "-m", "monai.bundle", "run", "--config_file", "configs/inference.json",
+             "--bundle_root", str(bundle_root), "--whether_raw_luna16", "True",
+             "--dataset_dir", str(mhd_dir), "--data_list_file_path", str(datalist),
+             "--output_dir", str(out), "--output_filename", res.name], cwd=bundle_root)
+    except Exception as e:  # 某些掃描會讓 RetinaNet 的 anchor 數對不上而整批中止 → 交給呼叫端二分
+        print(f"bundle failed on {len(uids)} scans ({tag}): {type(e).__name__}", flush=True)
+        return None
+    r = json.loads(res.read_text())
+    r = r.get("validation", r.get("test", [])) if isinstance(r, dict) else r
+    datalist.unlink(missing_ok=True)
+    res.unlink(missing_ok=True)
+    return r
+
+
+def detect_all(bundle_root: Path, mhd_dir: Path, out: Path, uids: list[str], failed: list[str]) -> list[dict]:
+    """分批跑偵測器；整批失敗時對半切重跑，直到找出單一失敗的掃描（記到 failed）"""
+    items: list[dict] = []
+    todo = [uids[i: i + CHUNK] for i in range(0, len(uids), CHUNK)]
+    n = 0
+    while todo:
+        chunk = todo.pop(0)
+        r = _run_bundle(bundle_root, mhd_dir, out, chunk, f"{n:04d}")
+        n += 1
+        if r is not None:
+            items += r
+            print(f"detector: {len(items)} scans done, {len(failed)} failed", flush=True)
+        elif len(chunk) == 1:
+            failed.append(chunk[0])
+        else:
+            h = len(chunk) // 2
+            todo[:0] = [chunk[:h], chunk[h:]]
+    return items
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--cohort", required=True)
@@ -112,15 +154,16 @@ def main() -> None:
     cohort = cohort[have].reset_index(drop=True)
 
     det_json = out / "detections.json"
+    failed: list[str] = []
     if not a.skip_detection:
         bundle_root = Path(a.bundle_dir).resolve() / BUNDLE
         fetch_bundle(bundle_root)
-        datalist = out / "datalist.json"
-        datalist.write_text(json.dumps({"validation": [{"image": f"{u}.mhd"} for u in cohort.SeriesInstanceUID]}))
-        run([sys.executable, "-m", "monai.bundle", "run", "--config_file", "configs/inference.json",
-             "--bundle_root", str(bundle_root), "--whether_raw_luna16", "True",
-             "--dataset_dir", str(mhd_dir), "--data_list_file_path", str(datalist),
-             "--output_dir", str(out), "--output_filename", det_json.name], cwd=bundle_root)
+        items = detect_all(bundle_root, mhd_dir, out, list(cohort.SeriesInstanceUID), failed)
+        det_json.write_text(json.dumps({"validation": items}))
+        if failed:
+            print(f"warning: detector failed on {len(failed)} scans; they are dropped", flush=True)
+            (out / "detector_failed.txt").write_text("\n".join(failed) + "\n")
+            cohort = cohort[~cohort.SeriesInstanceUID.isin(failed)].reset_index(drop=True)
     dets = load_detections(det_json)
     dets.to_csv(out / "detections.csv", index=False)
     print(f"{len(dets)} detections on {dets.seriesuid.nunique()} scans", flush=True)
@@ -148,6 +191,7 @@ def main() -> None:
         "malignancy_model": metrics(pt.label, pt.max_malignancy),
         "detector_only": metrics(pt.label, pt.max_det),
         "scans_without_candidates": int((pt.n_candidates == 0).sum()),
+        "detector_failed_scans": len(failed),
         "positives_without_candidates": int(((pt.n_candidates == 0) & (pt.label == 1)).sum()),
     }
     json.dump(summary, open(out / "summary.json", "w"), indent=2)

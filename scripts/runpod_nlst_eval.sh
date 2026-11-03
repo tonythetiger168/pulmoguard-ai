@@ -49,7 +49,7 @@ preflight() {
 save_results() {
   OUT_DIR="results/nlst_$STAMP"
   mkdir -p "$OUT_DIR/luna25"
-  cp "$NRUN"/summary.json "$NRUN"/patient_scores.csv "$NRUN"/candidate_scores.csv "$NRUN"/cohort.csv "$OUT_DIR/" 2>/dev/null || true
+  cp "$NRUN"/summary.json "$NRUN"/patient_scores.csv "$NRUN"/candidate_scores.csv "$NRUN"/cohort.csv "$NRUN"/detector_failed.txt "$OUT_DIR/" 2>/dev/null || true
   gzip -c "$NRUN/detections.csv" > "$OUT_DIR/detections.csv.gz" 2>/dev/null || true
   cp "$MHD/prepare_log.jsonl" "$OUT_DIR/" 2>/dev/null || true
   cp "$RUNS"/summary.json "$RUNS"/oof_predictions.csv "$OUT_DIR/luna25/" 2>/dev/null || true
