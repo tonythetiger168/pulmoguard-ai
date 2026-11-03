@@ -7,7 +7,8 @@
 #   EXTRA="--only_fold 0" bash scripts/runpod_luna25.sh   # 只跑一個 fold，先看趨勢
 #   KEEP_POD=1 bash scripts/runpod_luna25.sh              # 跑完不刪 pod
 # 需要環境變數 GH_TOKEN（fine-grained PAT，本 repo Contents: Read and write）
-# 推回的只有小檔：summary.json、各 fold metrics、OOF 預測、log；不含 CT 與模型權重
+# 推回 pilot-results 的只有小檔（summary、各 fold metrics、OOF 預測、log）；
+# 模型權重（每 fold fp16 約 66 MB）上傳到 GitHub Release luna25-<時間>，失敗則推到 luna25-weights 分支
 set -euo pipefail
 WS=${WS:-/workspace}
 DATA=$WS/data/luna25
@@ -70,9 +71,50 @@ save_results() {
   return 1
 }
 
+save_weights() {
+  # 每個 fold 的 best.pt 轉成 fp16（約 66 MB）上傳到 GitHub Release；失敗就推到 luna25-weights 分支（單檔 < 100 MB）
+  ls "$RUNS"/fold*/best.pt >/dev/null 2>&1 || { echo "no weights to save"; return 0; }
+  [ -n "${GH_TOKEN:-}" ] || { echo "GH_TOKEN not set: weights not saved"; return 1; }
+  local W=$WS/weights; mkdir -p "$W"
+  python - "$RUNS" "$W" <<'PY' || return 1
+import glob, os, sys, torch
+runs, out = sys.argv[1], sys.argv[2]
+for p in sorted(glob.glob(f"{runs}/fold*/best.pt")):
+    k = os.path.basename(os.path.dirname(p))
+    sd = {n: (t.half() if t.is_floating_point() else t) for n, t in torch.load(p, map_location="cpu").items()}
+    torch.save(sd, f"{out}/luna25_resnet18_{k}_fp16.pt")
+    print("exported", k, round(os.path.getsize(f"{out}/luna25_resnet18_{k}_fp16.pt") / 1e6, 1), "MB")
+PY
+  cp "$RUNS/summary.json" "$W/" 2>/dev/null || true
+  local tag="luna25-$STAMP" sha api="https://api.github.com/repos/$REPO" rel id ok=1
+  sha=$(git rev-parse HEAD 2>/dev/null || echo main)
+  local body; body=$(python -c "import json;s=json.load(open('$RUNS/summary.json'));print(json.dumps({'tag_name':'$tag','target_commitish':'$sha','name':'LUNA25 malignancy ResNet-18 ($STAMP)','prerelease':True,'body':f\"5-fold patient-level CV, OOF AUC {s['oof_auc']:.3f} (95% CI {s['oof_auc_95ci'][0]:.3f}-{s['oof_auc_95ci'][1]:.3f}). fp16 state_dicts for monai resnet18(spatial_dims=3, n_input_channels=1, num_classes=1); input 64^3 patch, 50 mm FOV, HU -1000..400 scaled to 0..1. Labels CC BY-NC 4.0: research use only.\"}))" 2>/dev/null) \
+    || body="{\"tag_name\":\"$tag\",\"target_commitish\":\"$sha\",\"prerelease\":true}"
+  rel=$(curl -sS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "$api/releases" -d "$body")
+  id=$(echo "$rel" | python -c "import json,sys;print(json.load(sys.stdin).get('id',''))" 2>/dev/null)
+  if [ -n "$id" ]; then
+    for f in "$W"/*; do
+      curl -sS -f -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Content-Type: application/octet-stream" \
+        --data-binary @"$f" "https://uploads.github.com/repos/$REPO/releases/$id/assets?name=$(basename "$f")" >/dev/null \
+        && echo "uploaded $(basename "$f")" || ok=0
+    done
+    [ "$ok" = 1 ] && { echo "weights uploaded: https://github.com/$REPO/releases/tag/$tag"; return 0; }
+  else
+    echo "release create failed: $(echo "$rel" | head -c 300)"
+  fi
+  echo "falling back to branch luna25-weights"
+  local tmp; tmp=$(mktemp -d)
+  git_auth clone -q --depth 1 "$REMOTE" "$tmp" && git -C "$tmp" checkout -q --orphan luna25-weights && git -C "$tmp" rm -rqf . || return 1
+  mkdir -p "$tmp/$tag" && cp "$W"/* "$tmp/$tag/"
+  git -C "$tmp" add "$tag" && git -C "$tmp" -c user.name=runpod-luna25 -c user.email=runpod-luna25@users.noreply.github.com commit -qm "luna25 weights $tag"
+  (cd "$tmp" && git_auth push -q origin HEAD:luna25-weights 2>/dev/null || { git_auth fetch -q --depth 1 origin luna25-weights && git reset -q --soft FETCH_HEAD && git commit -qm "luna25 weights $tag" && git_auth push -q origin HEAD:luna25-weights; }) \
+    && echo "weights uploaded: https://github.com/$REPO/tree/luna25-weights/$tag"
+}
+
 finish() {
   echo "elapsed: $(( ($(date +%s) - t0) / 60 )) min. log: $LOG"
   local saved=0
+  save_weights || echo "WEIGHTS NOT SAVED"
   save_results && saved=1
   [ "${KEEP_POD:-0}" = "1" ] && return
   [ -n "${RUNPOD_POD_ID:-}" ] && command -v runpodctl >/dev/null || return
