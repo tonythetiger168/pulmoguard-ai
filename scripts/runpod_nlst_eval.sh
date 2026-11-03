@@ -149,7 +149,17 @@ for a in json.load(sys.stdin).get('assets',[]):
 }
 
 echo "== 1/4 LUNA25 data + NLST cohort =="
-if [ -n "${LUNA25_WEIGHTS_TAG:-}" ] && fetch_weights; then
+random_weights() {  # 只給冒煙測試用：隨機初始化的 5 個 fold 模型，驗證整條管線能跑通（分數無意義）
+  python - "$RUNS" <<'PY'
+import os, sys, torch
+from monai.networks.nets import resnet18
+for k in range(5):
+    os.makedirs(f"{sys.argv[1]}/fold{k}", exist_ok=True)
+    torch.save(resnet18(spatial_dims=3, n_input_channels=1, num_classes=1).state_dict(), f"{sys.argv[1]}/fold{k}/best.pt")
+PY
+}
+
+if [ "${SMOKE_RANDOM_WEIGHTS:-0}" = "1" ] && random_weights || { [ -n "${LUNA25_WEIGHTS_TAG:-}" ] && fetch_weights; }; then
   SKIP_LUNA25_TRAIN=1
   mkdir -p "$L25" && wget -q -O "$L25/LUNA25_Public_Training_Development_Data.csv" \
     "https://zenodo.org/records/14673658/files/LUNA25_Public_Training_Development_Data.csv?download=1"
