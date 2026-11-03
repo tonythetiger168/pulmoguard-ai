@@ -66,6 +66,22 @@ bash scripts/runpod_pilot.sh
 
 CI 以合成資料驗證：重採樣幾何、世界座標→體素換算、病人層級切分、FROC/CPM 計算，以及前處理→訓練→續跑的端到端流程。合成資料上的數字不代表真實效能。
 
+## Lung-RADS 結構化報告（原型）
+
+把影像模型的輸出轉成 Lung-RADS v2022 基線分級報告（中英），CPU 即可執行：
+
+```bash
+python -m scripts.make_lungrads_report --detections examples/lungrads/detections.json \
+    --malignancy examples/lungrads/candidate_scores.csv --seg examples/lungrads/segmentation_mock.json \
+    --out runs/reports
+```
+
+- 分級只看量測數字與型態（`src/report/lungrads.py`）；AI 惡性度不會自動升級，只提示醫師評估 4X。
+- 報告每一句都帶 `sources` 欄位，指回偵測器、LUNA25、分割模型的數字。
+- `--llm openai` 可接任何 OpenAI 相容服務（vLLM、llama.cpp、Ollama，或日後的 HeliosLM server）潤飾病人說明；
+  若 LLM 新增數字、改分級或出現確診字眼，會自動回退到規則模板。
+- LIDC 分割仍在訓練，範例分割為 mock，報告會標註。
+
 ## 開發路線圖
 
 | 階段 | 里程碑 |

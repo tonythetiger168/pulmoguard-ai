@@ -1,0 +1,2 @@
+{"seriesuid": "demo-0001", "mock": true, "note": "LIDC detector-crop segmentation is still training; these values are placeholders.",
+ "lesions": [{"center_mm": [-62.0, 41.3, -120.1], "diam_mm": 8.9, "volume_mm3": 369.0}]}
