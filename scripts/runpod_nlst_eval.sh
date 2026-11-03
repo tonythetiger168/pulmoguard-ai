@@ -121,7 +121,7 @@ finish() {
   local rc=$?
   [ -n "${PREP_PID:-}" ] && kill "$PREP_PID" 2>/dev/null || true
   echo "exit code $rc; elapsed: $(( ($(date +%s) - t0) / 60 )) min. log: $LOG"
-  save_weights || echo "WEIGHTS NOT SAVED"
+  [ "${SKIP_LUNA25_TRAIN:-0}" = "1" ] || save_weights || echo "WEIGHTS NOT SAVED"
   save_results || echo "results NOT pushed"
 }
 trap finish EXIT
@@ -135,8 +135,28 @@ NCPU=$(python -c "from src.preprocess.pipeline import _container_limits as c;pri
 NW=$(( NCPU > 8 ? 6 : (NCPU > 2 ? NCPU - 2 : 1) ))
 echo "cpus=$NCPU nlst_workers=$NW"
 
+fetch_weights() {  # LUNA25_WEIGHTS_TAG=luna25-YYYYMMDD_HHMM → 直接用另一次訓練存好的 fold 權重，不重訓
+  local api="https://api.github.com/repos/$REPO/releases/tags/$LUNA25_WEIGHTS_TAG"
+  curl -sS -H "Authorization: Bearer $GH_TOKEN" "$api" | python -c "
+import json,sys
+for a in json.load(sys.stdin).get('assets',[]):
+    if a['name'].endswith('_fp16.pt'): print(a['url'], a['name'])" | while read -r url name; do
+    k=$(echo "$name" | grep -oE 'fold[0-9]+'); mkdir -p "$RUNS/$k"
+    curl -sS -fL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/octet-stream" -o "$RUNS/$k/best.pt" "$url"
+    echo "weights $name -> $RUNS/$k/best.pt"
+  done
+  [ "$(ls "$RUNS"/fold*/best.pt 2>/dev/null | wc -l)" -ge 5 ]
+}
+
 echo "== 1/4 LUNA25 data + NLST cohort =="
-bash scripts/download_luna25.sh "$L25"
+if [ -n "${LUNA25_WEIGHTS_TAG:-}" ] && fetch_weights; then
+  SKIP_LUNA25_TRAIN=1
+  mkdir -p "$L25" && wget -q -O "$L25/LUNA25_Public_Training_Development_Data.csv" \
+    "https://zenodo.org/records/14673658/files/LUNA25_Public_Training_Development_Data.csv?download=1"
+else
+  SKIP_LUNA25_TRAIN=0
+  bash scripts/download_luna25.sh "$L25"
+fi
 python -m scripts.nlst_cohort --luna25_csv "$L25/LUNA25_Public_Training_Development_Data.csv" --out "$NRUN/cohort.csv"
 if [ -n "${LIMIT:-}" ]; then
   python - "$NRUN/cohort.csv" "$LIMIT" <<'PY'
@@ -150,13 +170,15 @@ fi
 echo "== 2/4 NLST download+convert (background) and LUNA25 5-fold training =="
 python -m scripts.nlst_prepare --cohort "$NRUN/cohort.csv" --out "$MHD" --workers "$NW" \
   > "$WS/runs/nlst_prepare.log" 2>&1 & PREP_PID=$!
+if [ "$SKIP_LUNA25_TRAIN" = "0" ]; then
 # shellcheck disable=SC2086
 python -m scripts.train_luna25 --csv "$L25/LUNA25_Public_Training_Development_Data.csv" \
   --blocks "$L25/nodule_blocks" --out "$RUNS" ${LUNA25_EXTRA:-}
+fi
 echo "LUNA25 done; waiting for NLST preparation"
 wait "$PREP_PID"; PREP_PID=""
 tail -3 "$WS/runs/nlst_prepare.log"
-rm -rf "$L25/nodule_blocks"
+rm -rf "$L25/nodule_blocks" 2>/dev/null || true
 
 echo "== 3/4 detector + malignancy on NLST =="
 python -m scripts.nlst_validate --cohort "$NRUN/cohort.csv" --mhd_dir "$MHD" --luna25_runs "$RUNS" \
