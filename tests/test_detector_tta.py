@@ -2,8 +2,7 @@
 import numpy as np
 import pandas as pd
 import pytest
-
-sitk = pytest.importorskip("SimpleITK")
+import SimpleITK as sitk
 
 from scripts.detector_tta import flip_volume, merge, unflip
 
