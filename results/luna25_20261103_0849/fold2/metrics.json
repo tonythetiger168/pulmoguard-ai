@@ -1,0 +1,121 @@
+{
+  "fold": 2,
+  "test_auc": 0.9001936816388199,
+  "best_val_auc": 0.8760725429017162,
+  "epochs_run": 22,
+  "minutes": 6.9,
+  "n_test": 1232,
+  "n_test_malignant": 111,
+  "history": [
+    {
+      "epoch": 0,
+      "loss": 0.59739,
+      "val_auc": 0.82875
+    },
+    {
+      "epoch": 1,
+      "loss": 0.49198,
+      "val_auc": 0.85323
+    },
+    {
+      "epoch": 2,
+      "loss": 0.47129,
+      "val_auc": 0.83164
+    },
+    {
+      "epoch": 3,
+      "loss": 0.44655,
+      "val_auc": 0.8224
+    },
+    {
+      "epoch": 4,
+      "loss": 0.41525,
+      "val_auc": 0.85032
+    },
+    {
+      "epoch": 5,
+      "loss": 0.4078,
+      "val_auc": 0.84856
+    },
+    {
+      "epoch": 6,
+      "loss": 0.41635,
+      "val_auc": 0.82814
+    },
+    {
+      "epoch": 7,
+      "loss": 0.39723,
+      "val_auc": 0.84351
+    },
+    {
+      "epoch": 8,
+      "loss": 0.38633,
+      "val_auc": 0.85849
+    },
+    {
+      "epoch": 9,
+      "loss": 0.37379,
+      "val_auc": 0.8548
+    },
+    {
+      "epoch": 10,
+      "loss": 0.37719,
+      "val_auc": 0.85906
+    },
+    {
+      "epoch": 11,
+      "loss": 0.36676,
+      "val_auc": 0.85952
+    },
+    {
+      "epoch": 12,
+      "loss": 0.3515,
+      "val_auc": 0.85741
+    },
+    {
+      "epoch": 13,
+      "loss": 0.34711,
+      "val_auc": 0.87607
+    },
+    {
+      "epoch": 14,
+      "loss": 0.34157,
+      "val_auc": 0.84267
+    },
+    {
+      "epoch": 15,
+      "loss": 0.33421,
+      "val_auc": 0.86512
+    },
+    {
+      "epoch": 16,
+      "loss": 0.29704,
+      "val_auc": 0.85833
+    },
+    {
+      "epoch": 17,
+      "loss": 0.32428,
+      "val_auc": 0.86326
+    },
+    {
+      "epoch": 18,
+      "loss": 0.31469,
+      "val_auc": 0.85886
+    },
+    {
+      "epoch": 19,
+      "loss": 0.31139,
+      "val_auc": 0.85652
+    },
+    {
+      "epoch": 20,
+      "loss": 0.28968,
+      "val_auc": 0.85655
+    },
+    {
+      "epoch": 21,
+      "loss": 0.27928,
+      "val_auc": 0.8531
+    }
+  ]
+}
