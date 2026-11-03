@@ -102,13 +102,18 @@ PY
   else
     echo "release create failed: $(echo "$rel" | head -c 300)"
   fi
-  echo "falling back to branch luna25-weights"
+  local wb=luna25-weights
+  echo "falling back to branch $wb"
   local tmp; tmp=$(mktemp -d)
-  git_auth clone -q --depth 1 "$REMOTE" "$tmp" && git -C "$tmp" checkout -q --orphan luna25-weights && git -C "$tmp" rm -rqf . || return 1
+  git_auth clone -q --depth 1 "$REMOTE" "$tmp" && git -C "$tmp" checkout -q --orphan "$wb" && git -C "$tmp" rm -rqf . || return 1
   mkdir -p "$tmp/$tag" && cp "$W"/* "$tmp/$tag/"
   git -C "$tmp" add "$tag" && git -C "$tmp" -c user.name=runpod-luna25 -c user.email=runpod-luna25@users.noreply.github.com commit -qm "luna25 weights $tag"
-  (cd "$tmp" && git_auth push -q origin HEAD:luna25-weights 2>/dev/null || { git_auth fetch -q --depth 1 origin luna25-weights && git reset -q --soft FETCH_HEAD && git commit -qm "luna25 weights $tag" && git_auth push -q origin HEAD:luna25-weights; }) \
-    && echo "weights uploaded: https://github.com/$REPO/tree/luna25-weights/$tag"
+  local ref="HEAD:$wb"
+  if ! (cd "$tmp" && git_auth push -q origin "$ref" 2>/dev/null); then   # 分支已存在：接在它後面再推
+    (cd "$tmp" && git_auth fetch -q --depth 1 origin "$wb" && git reset -q --soft FETCH_HEAD \
+      && git commit -qm "luna25 weights $tag" && git_auth push -q origin "$ref") || return 1
+  fi
+  echo "weights uploaded: https://github.com/$REPO/tree/$wb/$tag"
 }
 
 finish() {
