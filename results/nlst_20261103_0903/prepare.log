@@ -1,0 +1,4 @@
+10 series in cohort, 10 to prepare
+2026-11-03 09:18:56,744 - Disk size needed: 794.61 MB
+2026-11-03 09:18:56,744 - Disk size available: 69.32 GB
+2026-11-03 09:19:00,571 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
