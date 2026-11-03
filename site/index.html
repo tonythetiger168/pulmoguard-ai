@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PulmoGuard AI · Bitstar Labs</title>
+<meta name="description" content="PulmoGuard AI: an open research project for AI-assisted low-dose CT lung cancer screening, by Bitstar Labs.">
+<style>
+:root{--bg:#fbfaf7;--fg:#1d2023;--muted:#5d646b;--line:#e3e0d8;--card:#ffffff;--accent:#0b6e69;--accent-soft:#e3f1ef;--ok:#2f7d32;--run:#a15c00}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121416;--fg:#e8e6e1;--muted:#9aa1a8;--line:#2a2e33;--card:#1a1d20;--accent:#5cc5bd;--accent-soft:#163331;--ok:#7cc47f;--run:#f0b35a}}
+:root[data-theme="dark"]{--bg:#121416;--fg:#e8e6e1;--muted:#9aa1a8;--line:#2a2e33;--card:#1a1d20;--accent:#5cc5bd;--accent-soft:#163331;--ok:#7cc47f;--run:#f0b35a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI","Noto Sans TC","PingFang TC",sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:0 16px}
+header{border-bottom:1px solid var(--line)}
+nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0;gap:12px}
+.brand{font-weight:600;letter-spacing:.02em;color:var(--fg);text-decoration:none}
+.lang{display:flex;gap:4px}
+.lang button{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:4px 10px;border-radius:6px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.hero{padding:56px 0 40px}
+.eyebrow{color:var(--accent);font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.08em;margin:0 0 8px}
+h1{font-size:clamp(32px,6vw,46px);line-height:1.15;margin:0 0 16px}
+h2{font-size:22px;margin:0 0 14px}
+.lede{font-size:18px;color:var(--muted);max-width:640px;margin:0}
+section{padding:36px 0;border-top:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:28px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.stat b{display:block;font-size:28px;font-variant-numeric:tabular-nums}
+.stat span{color:var(--muted);font-size:14px}
+.layers{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.layers li{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:10px 14px}
+.layers code{font-family:ui-monospace,Menlo,monospace;color:var(--accent);margin-right:8px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:560px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0;font-weight:600}
+.done{color:var(--ok)}.running{color:var(--run)}
+.note{color:var(--muted);font-size:14px;margin-top:10px}
+.bars{display:grid;gap:6px;margin-top:8px}
+.bar{display:grid;grid-template-columns:72px 1fr 52px;gap:10px;align-items:center;font-size:14px;font-variant-numeric:tabular-nums}
+.bar i{display:block;height:10px;border-radius:5px;background:var(--accent)}
+.bar .track{background:var(--accent-soft);border-radius:5px}
+.disclaimer{background:var(--accent-soft);border-radius:10px;padding:16px;font-size:15px}
+footer{padding:28px 0 40px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+a{color:var(--accent)}
+[data-l]{display:none}
+html[lang="en"] [data-l="en"],html[lang="zh-TW"] [data-l="zh"]{display:revert}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav>
+  <a class="brand" href="/">Bitstar Labs</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-set="en" aria-pressed="true">EN</button>
+    <button type="button" data-set="zh-TW" aria-pressed="false">中文</button>
+  </div>
+</nav></div></header>
+
+<main class="wrap">
+<div class="hero">
+  <p class="eyebrow">Research project · 研究專案</p>
+  <h1>PulmoGuard AI</h1>
+  <p class="lede" data-l="en">An open research platform for low-dose CT (LDCT) lung cancer screening. It combines 3D imaging AI for nodule detection and characterisation with a language model for reports and an agent for follow-up scheduling.</p>
+  <p class="lede" data-l="zh">開放的低劑量電腦斷層（LDCT）肺癌篩檢研究平台：結合 3D 影像 AI（結節偵測與惡性表徵）、大型語言模型（報告生成）與智慧代理（追蹤管理排程）。</p>
+  <div class="stats">
+    <div class="stat"><b>0.888</b><span data-l="en">Detection CPM, LUNA16 pilot</span><span data-l="zh">偵測 CPM（LUNA16 試跑）</span></div>
+    <div class="stat"><b>89 / 112</b><span data-l="en">Scans / nodules evaluated</span><span data-l="zh">評估掃描 / 結節數</span></div>
+    <div class="stat"><b>$2.2</b><span data-l="en">GPU spend so far (USD)</span><span data-l="zh">目前 GPU 花費（美元）</span></div>
+  </div>
+</div>
+
+<section>
+  <h2 data-l="en">What it does</h2><h2 data-l="zh">系統架構</h2>
+  <ul class="layers">
+    <li><code>L4</code><span data-l="en">Clinician review workstation and PACS integration</span><span data-l="zh">醫師審核工作台與 PACS 整合</span></li>
+    <li><code>L3</code><span data-l="en">Agents for follow-up, recall scheduling and report QA</span><span data-l="zh">Agent：追蹤管理、召回排程、報告品管</span></li>
+    <li><code>L2</code><span data-l="en">Locally deployed language model with retrieval over screening guidelines</span><span data-l="zh">本地部署語言模型 + 篩檢指引 RAG</span></li>
+    <li><code>L1</code><span data-l="en">Imaging AI: nodule detection (CADe), characterisation (CADx), segmentation</span><span data-l="zh">影像 AI：結節偵測（CADe）、惡性表徵（CADx）、分割</span></li>
+    <li><code>L0</code><span data-l="en">DICOM ingestion and de-identification pipeline</span><span data-l="zh">DICOM 匯入與去識別化管線</span></li>
+  </ul>
+</section>
+
+<section>
+  <h2 data-l="en">Results so far</h2><h2 data-l="zh">目前成果</h2>
+  <p data-l="en">Pilot on the public LUNA16 dataset (subset 0, 89 scans, 112 nodules), using a pretrained MONAI 3D detector. CPM is the mean sensitivity at 1/8, 1/4, 1/2, 1, 2, 4 and 8 false positives per scan.</p>
+  <p data-l="zh">於公開資料集 LUNA16（subset 0，89 例掃描、112 顆結節）以 MONAI 預訓練 3D 偵測器試跑。CPM 為每例 1/8、1/4、1/2、1、2、4、8 個假陽性時敏感度的平均。</p>
+  <div class="bars" aria-label="Sensitivity by false positives per scan">
+    <div class="bar"><span>FP 1/8</span><span class="track"><i style="width:75.9%"></i></span><span>75.9%</span></div>
+    <div class="bar"><span>FP 1/4</span><span class="track"><i style="width:81.3%"></i></span><span>81.3%</span></div>
+    <div class="bar"><span>FP 1/2</span><span class="track"><i style="width:84.8%"></i></span><span>84.8%</span></div>
+    <div class="bar"><span>FP 1</span><span class="track"><i style="width:89.3%"></i></span><span>89.3%</span></div>
+    <div class="bar"><span>FP 2</span><span class="track"><i style="width:93.8%"></i></span><span>93.8%</span></div>
+    <div class="bar"><span>FP 4</span><span class="track"><i style="width:97.3%"></i></span><span>97.3%</span></div>
+    <div class="bar"><span>FP 8</span><span class="track"><i style="width:99.1%"></i></span><span>99.1%</span></div>
+  </div>
+  <p class="note" data-l="en">One subset only, so this is an early pilot number, not a validated benchmark. Full 10-fold evaluation is next.</p>
+  <p class="note" data-l="zh">僅一個 subset，屬早期試跑數字，非正式驗證結果；下一步為完整 10-fold 評估。</p>
+</section>
+
+<section>
+  <h2 data-l="en">Training runs and cost</h2><h2 data-l="zh">訓練進度與花費</h2>
+  <p data-l="en">Every run uses a RunPod GPU pod that is deleted when the run finishes. Costs are in USD and updated as each run ends.</p>
+  <p data-l="zh">每次訓練使用 RunPod GPU pod，跑完即刪除。金額為美元，每次訓練結束後更新。</p>
+  <div class="tablewrap"><table>
+    <thead><tr>
+      <th><span data-l="en">Dataset / stage</span><span data-l="zh">資料集／階段</span></th>
+      <th><span data-l="en">Status</span><span data-l="zh">狀態</span></th>
+      <th class="num"><span data-l="en">Estimate</span><span data-l="zh">預估</span></th>
+      <th class="num"><span data-l="en">Actual</span><span data-l="zh">實際</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><span data-l="en">LUNA16 pilot (pretrained detector)</span><span data-l="zh">LUNA16 最小試跑（預訓練偵測器）</span></td><td class="done"><span data-l="en">Done</span><span data-l="zh">完成</span></td><td class="num">$1–3</td><td class="num">$2.2</td></tr>
+      <tr><td><span data-l="en">LUNA25 malignancy risk model</span><span data-l="zh">LUNA25 惡性風險模型</span></td><td class="running"><span data-l="en">Running</span><span data-l="zh">執行中</span></td><td class="num">$2–3</td><td class="num">—</td></tr>
+      <tr><td><span data-l="en">LUNA16 false-positive reduction</span><span data-l="zh">LUNA16 假陽性削減</span></td><td class="running"><span data-l="en">Running</span><span data-l="zh">執行中</span></td><td class="num">$2–3</td><td class="num">—</td></tr>
+      <tr><td>LIDC-IDRI + NLST</td><td class="running"><span data-l="en">Starting</span><span data-l="zh">啟動中</span></td><td class="num">$36–70</td><td class="num">—</td></tr>
+      <tr><td><span data-l="en">Total</span><span data-l="zh">合計</span></td><td></td><td class="num">$42–78</td><td class="num">$2.2</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note"><span data-l="en">As of 2 November 2026.</span><span data-l="zh">截至 2026-11-02。</span></p>
+</section>
+
+<section>
+  <h2 data-l="en">Data</h2><h2 data-l="zh">資料</h2>
+  <p data-l="en">Training and evaluation use public, de-identified research datasets from around the world, including LUNA16, LUNA25, LIDC-IDRI and NLST, each under its own licence. No patient data is published on this page.</p>
+  <p data-l="zh">訓練與評估使用全球公開、已去識別化的研究資料集（LUNA16、LUNA25、LIDC-IDRI、NLST 等），各依其授權使用。本頁不含任何病人資料。</p>
+</section>
+
+<section>
+  <div class="disclaimer">
+    <p data-l="en" style="margin:0"><b>Research use only.</b> PulmoGuard AI is in research and development. Its outputs are not medical advice and it is not approved for clinical use.</p>
+    <p data-l="zh" style="margin:0"><b>僅供研究用途。</b>本專案處於研究開發階段，所有模型輸出不構成醫療診斷建議，亦未取得臨床使用許可。</p>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <span data-l="en">Source code:</span><span data-l="zh">原始碼：</span>
+  <a href="https://github.com/tonythetiger168/pulmoguard-ai">github.com/tonythetiger168/pulmoguard-ai</a> (Apache-2.0) · © 2026 Bitstar Labs
+</div></footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btns=document.querySelectorAll('[data-set]');
+  function set(l){root.lang=l;btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.set===l)});try{localStorage.setItem('pg-lang',l)}catch(e){}}
+  var saved=null;try{saved=localStorage.getItem('pg-lang')}catch(e){}
+  set(saved||((navigator.language||'').toLowerCase().indexOf('zh')===0?'zh-TW':'en'));
+  btns.forEach(function(b){b.addEventListener('click',function(){set(b.dataset.set)})});
+})();
+</script>
+</body>
+</html>
