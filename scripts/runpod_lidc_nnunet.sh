@@ -10,6 +10,8 @@
 #   LIMIT=20 EPOCHS_TRAINER=nnUNetTrainer_5epochs bash scripts/runpod_lidc_nnunet.sh   # 小量試跑
 # 需要環境變數 GH_TOKEN（fine-grained PAT，本 repo Contents: Read and write）
 set -euo pipefail
+export PIP_DEFAULT_TIMEOUT=120 PIP_RETRIES=10   # 2026-11-03：PyPI 讀取逾時讓整個 run 在第 1 分鐘就結束
+pipi() { for i in 1 2 3; do pip install -q "$@" && return 0; echo "pip install failed (try $i), retrying"; sleep $((30 * i)); done; return 1; }
 WS=${WS:-/workspace}
 DICOM=$WS/data/lidc_dicom
 DS=Dataset501_LIDCNodule
@@ -144,12 +146,12 @@ trap finish EXIT
 
 command -v unzip >/dev/null || (apt-get update -qq && apt-get install -y -qq unzip) || true
 preflight
-pip install -q -r requirements.txt
-pip install -q "nnunetv2>=2.6,<2.9" "pylidc==0.2.3" "sqlalchemy<2" "pydicom<3" "setuptools<81" idc-index
+pipi -r requirements.txt
+pipi "nnunetv2>=2.6,<2.9" "pylidc==0.2.3" "sqlalchemy<2" "pydicom<3" "setuptools<81" idc-index
 # 2026-11-02 第一次全量訓練：映像檔內是 torch 2.8.0 nightly（dev 版）+ torch.compile，
 # 第 17 epoch 起 pseudo Dice 一直是 0、loss 停在 -0.2 → 換正式版 torch、關掉 compile
 if python -c "import torch,sys;sys.exit(0 if 'dev' in torch.__version__ else 1)"; then
-  pip install -q "torch==2.7.1" "torchvision==0.22.1" --index-url https://download.pytorch.org/whl/cu128
+  pipi "torch==2.7.1" "torchvision==0.22.1" --index-url https://download.pytorch.org/whl/cu128
 fi
 export nnUNet_compile=${nnUNet_compile:-f}
 python -c "import torch;print('torch', torch.__version__, 'cuda', torch.cuda.is_available())"
