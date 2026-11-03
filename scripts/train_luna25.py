@@ -23,7 +23,7 @@ import time
 import numpy as np
 import pandas as pd
 import torch
-from monai.networks.nets import resnet18
+from monai.networks.nets import resnet18, resnet50
 from sklearn.metrics import average_precision_score, roc_auc_score
 from torch import nn
 
@@ -32,8 +32,22 @@ from src.datasets.luna25 import filter_available, get_loaders, inner_split, load
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 
-def build_model():
-    return resnet18(spatial_dims=3, n_input_channels=1, num_classes=1).to(DEVICE)
+ARCHS = ("resnet18", "medicalnet18", "medicalnet50")
+
+
+def build_model(arch: str = "resnet18", pretrained: bool = True):
+    """resnet18 = 從頭訓練（原本的基準）；medicalnet18/50 = MedicalNet 預訓練骨幹（23 個醫療資料集，
+    權重從 Hugging Face TencentMedicalNet 下載）+ 新的線性分類頭"""
+    if arch == "resnet18":
+        return resnet18(spatial_dims=3, n_input_channels=1, num_classes=1).to(DEVICE)
+    fn, shortcut, bias, feat = {"medicalnet18": (resnet18, "A", True, 512),
+                                "medicalnet50": (resnet50, "B", False, 2048)}[arch]
+    backbone = fn(pretrained=pretrained, spatial_dims=3, n_input_channels=1, feed_forward=False,
+                  shortcut_type=shortcut, bias_downsample=bias, conv1_t_stride=2)
+    return nn.Sequential(backbone, nn.Dropout(0.2), nn.Linear(feat, 1)).to(DEVICE)
+
+
+FLIPS = [(), (2,), (3,), (4,), (2, 3), (2, 4), (3, 4), (2, 3, 4)]   # 8 種翻轉（z, y, x 軸）
 
 
 def safe_auc(y, p):
@@ -68,15 +82,23 @@ def train_epoch(model, loader, opt, loss_fn, scaler, amp):
 
 
 @torch.no_grad()
-def predict(model, loader, amp):
+def predict(model, loader, amp, tta=False):
+    """tta=True 時另外回傳 8 種翻轉平均的機率"""
     model.eval()
-    ids, ys, ps = [], [], []
+    ids, ys, ps, pt = [], [], [], []
     for b in loader:
-        with torch.autocast(device_type=DEVICE, dtype=torch.float16, enabled=amp):
-            logit = model(b["image"].to(DEVICE, non_blocking=True)).squeeze(1)
-        ps.append(torch.sigmoid(logit.float()).cpu().numpy())
+        x = b["image"].to(DEVICE, non_blocking=True)
+        probs = []
+        for f in (FLIPS if tta else FLIPS[:1]):
+            with torch.autocast(device_type=DEVICE, dtype=torch.float16, enabled=amp):
+                logit = model(torch.flip(x, f) if f else x).squeeze(1)
+            probs.append(torch.sigmoid(logit.float()).cpu().numpy())
+        ps.append(probs[0])
+        pt.append(np.mean(probs, 0))
         ys.append(b["label"].numpy())
         ids += list(b["id"])
+    if tta:
+        return ids, np.concatenate(ys), np.concatenate(ps), np.concatenate(pt)
     return ids, np.concatenate(ys), np.concatenate(ps)
 
 
@@ -97,7 +119,7 @@ def run_fold(k, df, cfg, amp):
     _, test_l = get_loaders(train.head(cfg.batch_size), test, cfg.blocks, cfg.size_px, cfg.size_mm,
                             cfg.batch_size, cfg.num_workers)
     torch.manual_seed(cfg.seed + k)
-    model = build_model()
+    model = build_model(cfg.arch)
     opt = torch.optim.AdamW(model.parameters(), lr=cfg.lr, weight_decay=cfg.weight_decay)
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=cfg.epochs)
     scaler = torch.amp.GradScaler(DEVICE, enabled=amp)
@@ -122,9 +144,9 @@ def run_fold(k, df, cfg, amp):
                 break
 
     model.load_state_dict(torch.load(best_path, map_location=DEVICE))
-    ids, y, p = predict(model, test_l, amp)
-    pred = pd.DataFrame({"AnnotationID": ids, "label": y.astype(int), "prob": p, "fold": k})
-    m = {"fold": k, "test_auc": safe_auc(y, p), "best_val_auc": best, "epochs_run": len(hist),
+    ids, y, p, ptta = predict(model, test_l, amp, tta=True)
+    pred = pd.DataFrame({"AnnotationID": ids, "label": y.astype(int), "prob": p, "prob_tta": ptta, "fold": k})
+    m = {"fold": k, "test_auc": safe_auc(y, p), "test_auc_tta": safe_auc(y, ptta), "best_val_auc": best, "epochs_run": len(hist),
          "minutes": round((time.time() - t0) / 60, 1), "n_test": len(test), "n_test_malignant": int(y.sum()),
          "history": hist}
     json.dump(m, open(os.path.join(fdir, "metrics.json"), "w"), indent=2)
@@ -156,15 +178,22 @@ def main(cfg):
     for k in folds:
         p, m = run_fold(k, df, cfg, amp)
         preds.append(p)
-        per_fold.append({key: m[key] for key in ("fold", "test_auc", "best_val_auc", "epochs_run", "minutes")})
+        per_fold.append({key: m.get(key) for key in ("fold", "test_auc", "test_auc_tta", "best_val_auc",
+                                                       "epochs_run", "minutes")})
     oof = pd.concat(preds, ignore_index=True)
     oof.to_csv(os.path.join(cfg.out, "oof_predictions.csv"), index=False)
     aucs = [f["test_auc"] for f in per_fold]
     summary = {
         "task": "LUNA25 nodule malignancy (benign vs malignant), patient-level CV",
-        "model": "MONAI 3D ResNet-18 from scratch, 64^3 patch, 50 mm FOV",
+        "model": {"resnet18": "MONAI 3D ResNet-18 from scratch",
+                  "medicalnet18": "MedicalNet ResNet-18 (pretrained, 23 datasets) + linear head",
+                  "medicalnet50": "MedicalNet ResNet-50 (pretrained, 23 datasets) + linear head"}[cfg.arch]
+                 + f", {cfg.size_px}^3 patch, {cfg.size_mm:g} mm FOV, lr {cfg.lr:g}",
+        "arch": cfg.arch,
         "n_nodules": int(len(oof)), "n_malignant": int(oof.label.sum()),
         "oof_auc": safe_auc(oof.label, oof.prob), "oof_auc_95ci": bootstrap_auc(oof.label, oof.prob),
+        "oof_auc_tta": safe_auc(oof.label, oof.prob_tta) if "prob_tta" in oof else None,
+        "oof_auc_tta_95ci": bootstrap_auc(oof.label, oof.prob_tta) if "prob_tta" in oof else None,
         "oof_average_precision": float(average_precision_score(oof.label, oof.prob)) if oof.label.nunique() == 2 else None,
         "fold_auc_mean": float(np.nanmean(aucs)), "fold_auc_std": float(np.nanstd(aucs)),
         "per_fold": per_fold, "wall_hours": round((time.time() - t0) / 3600, 3), "device": DEVICE,
@@ -180,6 +209,7 @@ def parse_args(argv=None):
     p.add_argument("--csv", default="data/luna25/LUNA25_Public_Training_Development_Data.csv")
     p.add_argument("--blocks", default="data/luna25/nodule_blocks")
     p.add_argument("--out", default="runs/luna25")
+    p.add_argument("--arch", choices=ARCHS, default="resnet18")
     p.add_argument("--folds", type=int, default=5)
     p.add_argument("--only_fold", type=int, default=None, help="只跑某一個 fold（例如先跑 fold 0 看趨勢）")
     p.add_argument("--size_px", type=int, default=64)
