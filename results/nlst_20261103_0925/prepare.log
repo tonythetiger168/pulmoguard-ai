@@ -1,0 +1,6 @@
+10 series in cohort, 10 to prepare
+2026-11-03 09:26:56,957 - Disk size needed: 794.61 MB
+2026-11-03 09:26:56,957 - Disk size available: 81.63 GB
+2026-11-03 09:27:00,380 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-03 09:27:06,884 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_49h3nz9l/b00000
+[10/10] prepared, 0 errors

@@ -1,0 +1,74 @@
+preflight ok: GitHub push works
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: python -m pip install --upgrade pip
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: python -m pip install --upgrade pip
+torch 2.8.0.dev20250319+cu128 cuda True
+cpus=23 nlst_workers=6
+== 1/4 LUNA25 data + NLST cohort ==
+2026-11-03 09:26:40,791 - Fetching index ct_index
+2026-11-03 09:26:41,544 - Fetching index clinical_index
+2026-11-03 09:26:41,977 - Since clinical_index was fetched, also installing corresponding tables.
+2026-11-03 09:26:44,042 - IDC clinical data downloaded successfully to /root/.local/share/IDC/v25/clinical_data
+T0 thin-slice CT with label: {0: 22464, 1: 270} | LUNA25 patients excluded: 2120 listed | cohort: 141 pos + 423 neg = 564 scans, 52.1 GB
+== 2/4 NLST download+convert (background) and LUNA25 5-fold training ==
+LUNA25 done; waiting for NLST preparation
+2026-11-03 09:27:00,380 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-03 09:27:06,884 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_49h3nz9l/b00000
+[10/10] prepared, 0 errors
+== 3/4 detector + malignancy on NLST ==
++ git clone -q --depth 1 --filter=blob:none --sparse https://github.com/Project-MONAI/model-zoo.git /workspace/models/bundles/_model_zoo
++ git -C /workspace/models/bundles/_model_zoo sparse-checkout set models/lung_nodule_ct_detection
++ curl -4 -fL --retry 5 --retry-all-errors -o /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt https://developer.download.nvidia.com/assets/Clara/monai/tutorials/model_zoo/model_lung_nodule_ct_detection.pt
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  6 79.8M    6 5389k    0     0  4976k      0  0:00:16  0:00:01  0:00:15 4976k100 79.8M  100 79.8M    0     0  40.5M      0  0:00:01  0:00:01 --:--:-- 40.5M
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst/datalist.json --output_dir /workspace/runs/nlst --output_filename detections.json
+2026-11-03 09:27:24,809 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-03 09:27:25,790 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-03 09:27:25,791 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-03 09:27:25,791 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-03 09:27:25,791 - INFO - > whether_raw_luna16: True
+2026-11-03 09:27:25,791 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-03 09:27:25,791 - INFO - > data_list_file_path: '/workspace/runs/nlst/datalist.json'
+2026-11-03 09:27:25,791 - INFO - > output_dir: '/workspace/runs/nlst'
+2026-11-03 09:27:25,791 - INFO - > output_filename: 'detections.json'
+2026-11-03 09:27:25,791 - INFO - ---
+
+
+2026-11-03 09:27:25,791 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-03 09:28:24,348 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:58.473
+2026-11-03 09:28:24,349 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:58.557
+103 detections on 10 scans
+loaded 5 LUNA25 fold models
+{
+  "task": "NLST T0 LDCT -> lung cancer diagnosed within 365 days (patient level)",
+  "cohort_note": "NLST patients not in LUNA25; same trial and scanners, so internal-external rather than external",
+  "pipeline": "MONAI lung_nodule_ct_detection -> top 5 candidates with det >= 0.3 -> LUNA25 ResNet-18 5-fold ensemble -> patient score = max malignancy",
+  "malignancy_model": {
+    "auc": 0.8,
+    "auc_95ci": [
+      0.4258928571428572,
+      1.0
+    ],
+    "ap": 0.8261904761904761,
+    "n": 10,
+    "n_pos": 5
+  },
+  "detector_only": {
+    "auc": 0.76,
+    "auc_95ci": [
+      0.33333333333333337,
+      1.0
+    ],
+    "ap": 0.6861904761904761,
+    "n": 10,
+    "n_pos": 5
+  },
+  "scans_without_candidates": 1,
+  "positives_without_candidates": 0
+}
+exit code 0; elapsed: 2 min. log: /workspace/runs/nlst_20261103_0925.log
