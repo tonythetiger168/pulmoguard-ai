@@ -1,0 +1,122 @@
+{
+  "fold": 3,
+  "test_auc": 0.8464333317274495,
+  "test_auc_tta": 0.8575259751730341,
+  "best_val_auc": 0.8859297229032018,
+  "epochs_run": 22,
+  "minutes": 6.3,
+  "n_test": 1233,
+  "n_test_malignant": 111,
+  "history": [
+    {
+      "epoch": 0,
+      "loss": 0.58685,
+      "val_auc": 0.83674
+    },
+    {
+      "epoch": 1,
+      "loss": 0.48604,
+      "val_auc": 0.85699
+    },
+    {
+      "epoch": 2,
+      "loss": 0.43854,
+      "val_auc": 0.83751
+    },
+    {
+      "epoch": 3,
+      "loss": 0.43656,
+      "val_auc": 0.86497
+    },
+    {
+      "epoch": 4,
+      "loss": 0.42385,
+      "val_auc": 0.84761
+    },
+    {
+      "epoch": 5,
+      "loss": 0.40309,
+      "val_auc": 0.85478
+    },
+    {
+      "epoch": 6,
+      "loss": 0.38979,
+      "val_auc": 0.86343
+    },
+    {
+      "epoch": 7,
+      "loss": 0.37072,
+      "val_auc": 0.88562
+    },
+    {
+      "epoch": 8,
+      "loss": 0.35298,
+      "val_auc": 0.87038
+    },
+    {
+      "epoch": 9,
+      "loss": 0.33747,
+      "val_auc": 0.86845
+    },
+    {
+      "epoch": 10,
+      "loss": 0.3242,
+      "val_auc": 0.87272
+    },
+    {
+      "epoch": 11,
+      "loss": 0.32185,
+      "val_auc": 0.85564
+    },
+    {
+      "epoch": 12,
+      "loss": 0.30857,
+      "val_auc": 0.86342
+    },
+    {
+      "epoch": 13,
+      "loss": 0.30803,
+      "val_auc": 0.88593
+    },
+    {
+      "epoch": 14,
+      "loss": 0.30183,
+      "val_auc": 0.86769
+    },
+    {
+      "epoch": 15,
+      "loss": 0.27385,
+      "val_auc": 0.88089
+    },
+    {
+      "epoch": 16,
+      "loss": 0.26158,
+      "val_auc": 0.88573
+    },
+    {
+      "epoch": 17,
+      "loss": 0.25636,
+      "val_auc": 0.86789
+    },
+    {
+      "epoch": 18,
+      "loss": 0.25173,
+      "val_auc": 0.8573
+    },
+    {
+      "epoch": 19,
+      "loss": 0.24069,
+      "val_auc": 0.86467
+    },
+    {
+      "epoch": 20,
+      "loss": 0.22882,
+      "val_auc": 0.85885
+    },
+    {
+      "epoch": 21,
+      "loss": 0.19534,
+      "val_auc": 0.85678
+    }
+  ]
+}

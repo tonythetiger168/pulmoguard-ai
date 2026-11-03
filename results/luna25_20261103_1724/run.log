@@ -1,0 +1,525 @@
+preflight ok: GitHub push works
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: python -m pip install --upgrade pip
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+httpcore 1.0.7 requires h11<0.15,>=0.13, but you have h11 0.16.0 which is incompatible.
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: python -m pip install --upgrade pip
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+pretrained ok medicalnet18
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+pretrained ok medicalnet50
+name, memory.total [MiB]
+NVIDIA L4, 23034 MiB
+== 1/2 download LUNA25 nodule blocks ==
+
+     0K                                    100% 1.66M=0.5sLUNA25_Public_Training_Development_Data.csv: OK
+
+     0K ........ ........ ........ ........  0% 20.1M 3m41s
+ 32768K ........ ........ ........ ........  1% 19.2M 3m45s
+ 65536K ........ ........ ........ ........  2% 13.6M 4m16s
+ 98304K ........ ........ ........ ........  2% 13.1M 4m34s
+131072K ........ ........ ........ ........  3% 10.0M 5m4s
+163840K ........ ........ ........ ........  4% 8.95M 5m31s
+196608K ........ ........ ........ ........  5% 37.1M 4m58s
+229376K ........ ........ ........ ........  5% 10.0M 5m12s
+262144K ........ ........ ........ ........  6% 8.78M 5m28s
+294912K ........ ........ ........ ........  7% 9.54M 5m37s
+327680K ........ ........ ........ ........  7% 8.60M 5m47s
+360448K ........ ........ ........ ........  8% 8.81M 5m55s
+393216K ........ ........ ........ ........  9% 9.02M 5m59s
+425984K ........ ........ ........ ........ 10% 9.10M 6m3s
+458752K ........ ........ ........ ........ 10% 8.53M 6m7s
+491520K ........ ........ ........ ........ 11% 8.53M 6m11s
+524288K ........ ........ ........ ........ 12% 8.18M 6m14s
+557056K ........ ........ ........ ........ 12% 7.99M 6m18s
+589824K ........ ........ ........ ........ 13% 9.13M 6m17s
+622592K ........ ........ ........ ........ 14% 8.65M 6m18s
+655360K ........ ........ ........ ........ 15% 8.60M 6m18s
+688128K ........ ........ ........ ........ 15% 7.92M 6m19s
+720896K ........ ........ ........ ........ 16% 8.34M 6m19s
+753664K ........ ........ ........ ........ 17% 7.91M 6m20s
+786432K ........ ........ ........ ........ 17% 9.35M 6m17s
+819200K ........ ........ ........ ........ 18% 9.84M 6m14s
+851968K ........ ........ ........ ........ 19% 8.23M 6m13s
+884736K ........ ........ ........ ........ 20% 7.10M 6m15s
+917504K ........ ........ ........ ........ 20% 8.69M 6m13s
+950272K ........ ........ ........ ........ 21% 9.18M 6m10s
+983040K ........ ........ ........ ........ 22% 11.9M 6m4s
+1015808K ........ ........ ........ ........ 22% 13.1M 5m58s
+1048576K ........ ........ ........ ........ 23% 15.1M 5m50s
+1081344K ........ ........ ........ ........ 24% 8.78M 5m48s
+1114112K ........ ........ ........ ........ 25% 9.00M 5m46s
+1146880K ........ ........ ........ ........ 25% 9.50M 5m43s
+1179648K ........ ........ ........ ........ 26% 8.78M 5m40s
+1212416K ........ ........ ........ ........ 27% 8.31M 5m39s
+1245184K ........ ........ ........ ........ 27% 17.5M 5m31s
+1277952K ........ ........ ........ ........ 28% 71.9M 5m21s
+1310720K ........ ........ ........ ........ 29% 24.1M 5m13s
+1343488K ........ ........ ........ ........ 30% 10.0M 5m10s
+1376256K ........ ........ ........ ........ 30% 10.1M 5m7s
+1409024K ........ ........ ........ ........ 31% 9.17M 5m5s
+1441792K ........ ........ ........ ........ 32% 10.3M 5m1s
+1474560K ........ ........ ........ ........ 32% 9.57M 4m58s
+1507328K ........ ........ ........ ........ 33% 9.05M 4m56s
+1540096K ........ ........ ........ ........ 34% 9.11M 4m53s
+1572864K ........ ........ ........ ........ 35% 9.21M 4m51s
+1605632K ........ ........ ........ ........ 35% 9.25M 4m48s
+1638400K ........ ........ ........ ........ 36% 10.4M 4m45s
+1671168K ........ ........ ........ ........ 37% 10.1M 4m41s
+1703936K ........ ........ ........ ........ 37% 10.9M 4m38s
+1736704K ........ ........ ........ ........ 38% 10.7M 4m34s
+1769472K ........ ........ ........ ........ 39% 21.5M 4m28s
+1802240K ........ ........ ........ ........ 40% 61.4M 4m21s
+1835008K ........ ........ ........ ........ 40% 18.3M 4m16s
+1867776K ........ ........ ........ ........ 41% 29.9M 4m10s
+1900544K ........ ........ ........ ........ 42% 70.9M 4m4s
+1933312K ........ ........ ........ ........ 42% 69.9M 3m57s
+1966080K ........ ........ ........ ........ 43% 9.07M 3m55s
+1998848K ........ ........ ........ ........ 44% 9.48M 3m53s
+2031616K ........ ........ ........ ........ 45% 8.23M 3m51s
+2064384K ........ ........ ........ ........ 45% 8.72M 3m48s
+2097152K ........ ........ ........ ........ 46% 8.16M 3m47s
+2129920K ........ ........ ........ ........ 47% 9.10M 3m44s
+2162688K ........ ........ ........ ........ 47% 8.47M 3m42s
+2195456K ........ ........ ........ ........ 48% 8.16M 3m40s
+2228224K ........ ........ ........ ........ 49% 14.5M 3m36s
+2260992K ........ ........ ........ ........ 50% 11.8M 3m32s
+2293760K ........ ........ ........ ........ 50% 9.20M 3m30s
+2326528K ........ ........ ........ ........ 51% 13.1M 3m26s
+2359296K ........ ........ ........ ........ 52% 8.63M 3m24s
+2392064K ........ ........ ........ ........ 52% 8.71M 3m21s
+2424832K ........ ........ ........ ........ 53% 14.2M 3m18s
+2457600K ........ ........ ........ ........ 54% 9.74M 3m15s
+2490368K ........ ........ ........ ........ 55% 8.07M 3m12s
+2523136K ........ ........ ........ ........ 55% 8.38M 3m10s
+2555904K ........ ........ ........ ........ 56% 7.94M 3m8s
+2588672K ........ ........ ........ ........ 57% 5.88M 3m6s
+2621440K ........ ........ ........ ........ 57% 6.94M 3m4s
+2654208K ........ ........ ........ ........ 58% 8.37M 3m2s
+2686976K ........ ........ ........ ........ 59% 10.7M 2m59s
+2719744K ........ ........ ........ ........ 60% 12.7M 2m55s
+2752512K ........ ........ ........ ........ 60% 9.72M 2m52s
+2785280K ........ ........ ........ ........ 61% 8.80M 2m49s
+2818048K ........ ........ ........ ........ 62% 9.45M 2m46s
+2850816K ........ ........ ........ ........ 62% 10.8M 2m43s
+2883584K ........ ........ ........ ........ 63% 12.2M 2m40s
+2916352K ........ ........ ........ ........ 64% 10.4M 2m36s
+2949120K ........ ........ ........ ........ 65% 9.64M 2m33s
+2981888K ........ ........ ........ ........ 65% 3.20M 2m34s
+3014656K ........ ........ ........ ........ 66% 3.79M 2m33s
+3047424K ........ ........ ........ ........ 67% 4.13M 2m32s
+3080192K ........ ........ ........ ........ 67% 6.03M 2m30s
+3112960K ........ ........ ........ ........ 68% 8.13M 2m27s
+3145728K ........ ........ ........ ........ 69% 9.59M 2m23s
+3178496K ........ ........ ........ ........ 70% 9.05M 2m20s
+3211264K ........ ........ ........ ........ 70% 5.98M 2m18s
+3244032K ........ ........ ........ ........ 71% 6.80M 2m15s
+3276800K ........ ........ ........ ........ 72% 7.96M 2m12s
+3309568K ........ ........ ........ ........ 72% 11.0M 2m8s
+3342336K ........ ........ ........ ........ 73% 13.1M 2m4s
+3375104K ........ ........ ........ ........ 74% 16.1M 2m1s
+3407872K ........ ........ ........ ........ 75% 12.8M 1m57s
+3440640K ........ ........ ........ ........ 75% 16.1M 1m53s
+3473408K ........ ........ ........ ........ 76% 15.5M 1m49s
+3506176K ........ ........ ........ ........ 77% 53.0M 1m45s
+3538944K ........ ........ ........ ........ 77% 59.6M 1m41s
+3571712K ........ ........ ........ ........ 78% 13.5M 98s
+3604480K ........ ........ ........ ........ 79% 8.33M 95s
+3637248K ........ ........ ........ ........ 80% 35.0M 91s
+3670016K ........ ........ ........ ........ 80% 61.9M 87s
+3702784K ........ ........ ........ ........ 81% 17.0M 83s
+3735552K ........ ........ ........ ........ 82% 25.0M 80s
+3768320K ........ ........ ........ ........ 82% 36.0M 76s
+3801088K ........ ........ ........ ........ 83% 10.5M 73s
+3833856K ........ ........ ........ ........ 84% 37.4M 69s
+3866624K ........ ........ ........ ........ 85% 9.56M 66s
+3899392K ........ ........ ........ ........ 85% 9.88M 63s
+3932160K ........ ........ ........ ........ 86% 42.0M 60s
+3964928K ........ ........ ........ ........ 87% 10.8M 56s
+3997696K ........ ........ ........ ........ 87% 9.55M 53s
+4030464K ........ ........ ........ ........ 88% 8.38M 50s
+4063232K ........ ........ ........ ........ 89% 8.70M 47s
+4096000K ........ ........ ........ ........ 90% 8.45M 44s
+4128768K ........ ........ ........ ........ 90% 9.12M 41s
+4161536K ........ ........ ........ ........ 91% 9.44M 38s
+4194304K ........ ........ ........ ........ 92% 22.3M 35s
+4227072K ........ ........ ........ ........ 92% 66.2M 31s
+4259840K ........ ........ ........ ........ 93% 15.7M 28s
+4292608K ........ ........ ........ ........ 94% 9.22M 25s
+4325376K ........ ........ ........ ........ 95% 8.81M 22s
+4358144K ........ ........ ........ ........ 95% 9.58M 19s
+4390912K ........ ........ ........ ........ 96% 9.78M 16s
+4423680K ........ ........ ........ ........ 97% 7.97M 13s
+4456448K ........ ........ ........ ........ 97% 8.12M 9s
+4489216K ........ ........ ........ ........ 98% 8.05M 6s
+4521984K ........ ........ ........ ........ 99% 8.46M 3s
+4554752K ........ ........ ........ ........100% 8.98M 0s
+4587520K                                    100% 0.00 =7m21s
+     0K ........ ........ ........ ........  1% 3.35M 9m48s
+ 32768K ........ ........ ........ ........  3% 71.1M 5m3s
+ 65536K ........ ........ ........ ........  4% 11.3M 4m15s
+ 98304K ........ ........ ........ ........  6% 10.9M 3m51s
+131072K ........ ........ ........ ........  7% 74.5M 3m6s
+163840K ........ ........ ........ ........  9% 54.6M 2m38s
+196608K ........ ........ ........ ........ 11% 9.03M 2m41s
+229376K ........ ........ ........ ........ 12% 7.96M 2m46s
+262144K ........ ........ ........ ........ 14% 8.09M 2m48s
+294912K ........ ........ ........ ........ 15% 7.67M 2m51s
+327680K ........ ........ ........ ........ 17% 7.83M 2m51s
+360448K ........ ........ ........ ........ 19% 8.70M 2m50s
+393216K ........ ........ ........ ........ 20% 8.39M 2m48s
+425984K ........ ........ ........ ........ 22% 8.74M 2m46s
+458752K ........ ........ ........ ........ 23% 7.79M 2m44s
+491520K ........ ........ ........ ........ 25% 8.67M 2m42s
+524288K ........ ........ ........ ........ 27% 8.41M 2m39s
+557056K ........ ........ ........ ........ 28% 7.43M 2m38s
+589824K ........ ........ ........ ........ 30% 7.58M 2m36s
+622592K ........ ........ ........ ........ 31% 8.48M 2m32s
+655360K ........ ........ ........ ........ 33% 8.27M 2m29s
+688128K ........ ........ ........ ........ 35% 8.04M 2m27s
+720896K ........ ........ ........ ........ 36% 6.33M 2m25s
+753664K ........ ........ ........ ........ 38% 4.34M 2m28s
+786432K ........ ........ ........ ........ 39% 2.73M 2m36s
+819200K ........ ........ ........ ........ 41% 4.67M 2m35s
+851968K ........ ........ ........ ........ 43% 10.5M 2m30s
+884736K ........ ........ ........ ........ 44% 12.1M 2m23s
+917504K ........ ........ ........ ........ 46% 12.0M 2m18s
+950272K ........ ........ ........ ........ 47% 11.6M 2m12s
+983040K ........ ........ ........ ........ 49% 12.9M 2m6s
+1015808K ........ ........ ........ ........ 51% 9.84M 2m2s
+1048576K ........ ........ ........ ........ 52% 7.90M 1m58s
+1081344K ........ ........ ........ ........ 54% 7.31M 1m54s
+1114112K ........ ........ ........ ........ 55% 7.10M 1m50s
+1146880K ........ ........ ........ ........ 57% 7.75M 1m47s
+1179648K ........ ........ ........ ........ 59% 7.55M 1m43s
+1212416K ........ ........ ........ ........ 60% 3.27M 1m42s
+1245184K ........ ........ ........ ........ 62% 5.16M 99s
+1277952K ........ ........ ........ ........ 63% 6.46M 96s
+1310720K ........ ........ ........ ........ 65% 7.20M 92s
+1343488K ........ ........ ........ ........ 67% 11.6M 87s
+1376256K ........ ........ ........ ........ 68% 11.6M 82s
+1409024K ........ ........ ........ ........ 70% 12.9M 77s
+1441792K ........ ........ ........ ........ 71% 14.7M 72s
+1474560K ........ ........ ........ ........ 73% 14.5M 67s
+1507328K ........ ........ ........ ........ 75% 19.7M 62s
+1540096K ........ ........ ........ ........ 76% 10.0M 58s
+1572864K ........ ........ ........ ........ 78% 9.65M 54s
+1605632K ........ ........ ........ ........ 79% 16.0M 49s
+1638400K ........ ........ ........ ........ 81% 10.1M 45s
+1671168K ........ ........ ........ ........ 83% 9.66M 41s
+1703936K ........ ........ ........ ........ 84% 9.73M 37s
+1736704K ........ ........ ........ ........ 86% 10.6M 33s
+1769472K ........ ........ ........ ........ 87% 10.6M 29s
+1802240K ........ ........ ........ ........ 89% 12.3M 25s
+1835008K ........ ........ ........ ........ 91% 9.78M 21s
+1867776K ........ ........ ........ ........ 92% 9.30M 17s
+1900544K ........ ........ ........ ........ 94% 9.05M 14s
+1933312K ........ ........ ........ ........ 95% 11.2M 10s
+1966080K ........ ........ ........ ........ 97% 11.3M 6s
+1998848K ........ ........ ........ ........ 99% 9.60M 2s
+2031616K ........ ........ .                100% 9.83M=3m56s-rw-r--r-- 1 root root 6796805532 Nov  3 17:36 luna25_nodule_blocks.zip
+-rw-r--r-- 1 root root 4697620480 Nov  3 17:32 luna25_nodule_blocks.zip.001
+-rw-r--r-- 1 root root 2099185052 Nov  3 17:36 luna25_nodule_blocks.zip.002
+zip: 12329 entries; extensions {'.npy': 12326}
+    6163 files in luna25_nodule_blocks/image/
+    6163 files in luna25_nodule_blocks/metadata/
+  first entries: ['luna25_nodule_blocks/', 'luna25_nodule_blocks/image/', 'luna25_nodule_blocks/image/100012_1_19990102.npy', 'luna25_nodule_blocks/image/100012_1_20000102.npy', 'luna25_nodule_blocks/image/100035_1_19990102.npy']
+    6163 .npy in ./_extract/luna25_nodule_blocks/image
+    6163 .npy in ./_extract/luna25_nodule_blocks/metadata
+image dir: ./_extract/luna25_nodule_blocks/image
+metadata dir: ./_extract/luna25_nodule_blocks/metadata
+nodule_blocks: 6163 image, 6163 metadata
+LUNA25 ready in /workspace/data/luna25: 6163 blocks, 6163 annotations
+== 2/2 train malignancy model (patient-level 5-fold CV) ==
+-- arch medicalnet18 --
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+6163 nodules (555 malignant) from 2120 patients | 5 folds | device cuda amp True
+fold 0: train 4225 (mal 380) | val 705 (mal 64) | test 1233 (mal 111)
+fold 0 epoch 000 | loss 0.6379 | val AUC 0.6586 | 16s
+fold 0 epoch 001 | loss 0.5074 | val AUC 0.8844 | 31s
+fold 0 epoch 002 | loss 0.4525 | val AUC 0.8462 | 45s
+fold 0 epoch 003 | loss 0.4500 | val AUC 0.8663 | 58s
+fold 0 epoch 004 | loss 0.4197 | val AUC 0.8525 | 72s
+fold 0 epoch 005 | loss 0.4074 | val AUC 0.8734 | 86s
+fold 0 epoch 006 | loss 0.4159 | val AUC 0.8807 | 100s
+fold 0 epoch 007 | loss 0.4127 | val AUC 0.8607 | 114s
+fold 0 epoch 008 | loss 0.3875 | val AUC 0.8609 | 128s
+fold 0 epoch 009 | loss 0.3864 | val AUC 0.8790 | 142s
+fold 0: early stop at epoch 9
+fold 0: test AUC 0.8421
+fold 1: train 4226 (mal 381) | val 704 (mal 63) | test 1233 (mal 111)
+fold 1 epoch 000 | loss 0.6038 | val AUC 0.7615 | 14s
+fold 1 epoch 001 | loss 0.5134 | val AUC 0.8554 | 28s
+fold 1 epoch 002 | loss 0.4778 | val AUC 0.8524 | 42s
+fold 1 epoch 003 | loss 0.4654 | val AUC 0.8497 | 55s
+fold 1 epoch 004 | loss 0.4492 | val AUC 0.8498 | 69s
+fold 1 epoch 005 | loss 0.4280 | val AUC 0.8532 | 82s
+fold 1 epoch 006 | loss 0.4243 | val AUC 0.8728 | 96s
+fold 1 epoch 007 | loss 0.4108 | val AUC 0.8741 | 110s
+fold 1 epoch 008 | loss 0.4136 | val AUC 0.8420 | 124s
+fold 1 epoch 009 | loss 0.3929 | val AUC 0.8357 | 137s
+fold 1 epoch 010 | loss 0.3668 | val AUC 0.8657 | 151s
+fold 1 epoch 011 | loss 0.3866 | val AUC 0.8604 | 165s
+fold 1 epoch 012 | loss 0.3883 | val AUC 0.8357 | 178s
+fold 1 epoch 013 | loss 0.3815 | val AUC 0.8702 | 192s
+fold 1 epoch 014 | loss 0.3596 | val AUC 0.8568 | 206s
+fold 1 epoch 015 | loss 0.3466 | val AUC 0.8493 | 220s
+fold 1: early stop at epoch 15
+fold 1: test AUC 0.8603
+fold 2: train 4226 (mal 380) | val 705 (mal 64) | test 1232 (mal 111)
+fold 2 epoch 000 | loss 0.6194 | val AUC 0.8450 | 15s
+fold 2 epoch 001 | loss 0.5042 | val AUC 0.7885 | 28s
+fold 2 epoch 002 | loss 0.4746 | val AUC 0.8365 | 42s
+fold 2 epoch 003 | loss 0.4673 | val AUC 0.8374 | 56s
+fold 2 epoch 004 | loss 0.4457 | val AUC 0.8553 | 70s
+fold 2 epoch 005 | loss 0.4449 | val AUC 0.8405 | 83s
+fold 2 epoch 006 | loss 0.4205 | val AUC 0.8606 | 97s
+fold 2 epoch 007 | loss 0.4190 | val AUC 0.8415 | 111s
+fold 2 epoch 008 | loss 0.4032 | val AUC 0.8111 | 125s
+fold 2 epoch 009 | loss 0.3898 | val AUC 0.8332 | 138s
+fold 2 epoch 010 | loss 0.3856 | val AUC 0.8276 | 152s
+fold 2 epoch 011 | loss 0.3870 | val AUC 0.8510 | 166s
+fold 2 epoch 012 | loss 0.3774 | val AUC 0.8462 | 179s
+fold 2 epoch 013 | loss 0.3713 | val AUC 0.8645 | 193s
+fold 2 epoch 014 | loss 0.3494 | val AUC 0.8306 | 207s
+fold 2 epoch 015 | loss 0.3528 | val AUC 0.8695 | 221s
+fold 2 epoch 016 | loss 0.3415 | val AUC 0.8578 | 234s
+fold 2 epoch 017 | loss 0.3327 | val AUC 0.8362 | 248s
+fold 2 epoch 018 | loss 0.3193 | val AUC 0.8598 | 262s
+fold 2 epoch 019 | loss 0.3187 | val AUC 0.8599 | 276s
+fold 2 epoch 020 | loss 0.3084 | val AUC 0.8710 | 290s
+fold 2 epoch 021 | loss 0.2767 | val AUC 0.8648 | 303s
+fold 2 epoch 022 | loss 0.2985 | val AUC 0.8579 | 317s
+fold 2 epoch 023 | loss 0.2841 | val AUC 0.8645 | 331s
+fold 2 epoch 024 | loss 0.2624 | val AUC 0.8520 | 345s
+fold 2 epoch 025 | loss 0.2639 | val AUC 0.8481 | 359s
+fold 2 epoch 026 | loss 0.2476 | val AUC 0.8421 | 372s
+fold 2 epoch 027 | loss 0.2324 | val AUC 0.8516 | 386s
+fold 2 epoch 028 | loss 0.2332 | val AUC 0.8407 | 400s
+fold 2: early stop at epoch 28
+fold 2: test AUC 0.9000
+fold 3: train 4226 (mal 381) | val 704 (mal 63) | test 1233 (mal 111)
+fold 3 epoch 000 | loss 0.6149 | val AUC 0.7655 | 15s
+fold 3 epoch 001 | loss 0.4959 | val AUC 0.7846 | 28s
+fold 3 epoch 002 | loss 0.4691 | val AUC 0.8493 | 42s
+fold 3 epoch 003 | loss 0.4537 | val AUC 0.8444 | 56s
+fold 3 epoch 004 | loss 0.4414 | val AUC 0.8444 | 70s
+fold 3 epoch 005 | loss 0.4131 | val AUC 0.8013 | 84s
+fold 3 epoch 006 | loss 0.4280 | val AUC 0.8187 | 97s
+fold 3 epoch 007 | loss 0.4067 | val AUC 0.8200 | 111s
+fold 3 epoch 008 | loss 0.3961 | val AUC 0.8351 | 125s
+fold 3 epoch 009 | loss 0.3924 | val AUC 0.8344 | 139s
+fold 3 epoch 010 | loss 0.3822 | val AUC 0.8356 | 152s
+fold 3: early stop at epoch 10
+fold 3: test AUC 0.8427
+fold 4: train 4226 (mal 380) | val 705 (mal 64) | test 1232 (mal 111)
+fold 4 epoch 000 | loss 0.6022 | val AUC 0.8492 | 15s
+fold 4 epoch 001 | loss 0.5101 | val AUC 0.8603 | 28s
+fold 4 epoch 002 | loss 0.4845 | val AUC 0.8884 | 42s
+fold 4 epoch 003 | loss 0.4539 | val AUC 0.8742 | 56s
+fold 4 epoch 004 | loss 0.4455 | val AUC 0.8543 | 70s
+fold 4 epoch 005 | loss 0.4376 | val AUC 0.9096 | 83s
+fold 4 epoch 006 | loss 0.4469 | val AUC 0.8896 | 97s
+fold 4 epoch 007 | loss 0.4230 | val AUC 0.8991 | 111s
+fold 4 epoch 008 | loss 0.4165 | val AUC 0.9145 | 125s
+fold 4 epoch 009 | loss 0.4030 | val AUC 0.8968 | 138s
+fold 4 epoch 010 | loss 0.4019 | val AUC 0.8980 | 152s
+fold 4 epoch 011 | loss 0.4019 | val AUC 0.8823 | 166s
+fold 4 epoch 012 | loss 0.3951 | val AUC 0.8986 | 179s
+fold 4 epoch 013 | loss 0.3777 | val AUC 0.8929 | 193s
+fold 4 epoch 014 | loss 0.3769 | val AUC 0.8811 | 207s
+fold 4 epoch 015 | loss 0.3567 | val AUC 0.8905 | 220s
+fold 4 epoch 016 | loss 0.3581 | val AUC 0.9067 | 234s
+fold 4: early stop at epoch 16
+fold 4: test AUC 0.8563
+{
+  "task": "LUNA25 nodule malignancy (benign vs malignant), patient-level CV",
+  "model": "MedicalNet ResNet-18 (pretrained, 23 datasets) + linear head, 64^3 patch, 50 mm FOV, lr 0.0001",
+  "arch": "medicalnet18",
+  "n_nodules": 6163,
+  "n_malignant": 555,
+  "oof_auc": 0.853337895670278,
+  "oof_auc_95ci": [
+    0.8382793226287973,
+    0.8685705699403005
+  ],
+  "oof_auc_tta": 0.8621955764609117,
+  "oof_auc_tta_95ci": [
+    0.8475896999637761,
+    0.8765721263393628
+  ],
+  "oof_average_precision": 0.40846751693531824,
+  "fold_auc_mean": 0.8602615132604112,
+  "fold_auc_std": 0.021138824711758812,
+  "wall_hours": 0.333,
+  "device": "cuda",
+  "gpu": "NVIDIA L4",
+  "licence_note": "LUNA25 labels are CC BY-NC 4.0: research use only, not for commercial product training"
+}
+medicalnet18 {'oof_auc': 0.853337895670278, 'oof_auc_tta': 0.8621955764609117, 'oof_auc_95ci': [0.8382793226287973, 0.8685705699403005], 'wall_hours': 0.333}
+-- arch medicalnet50 --
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+6163 nodules (555 malignant) from 2120 patients | 5 folds | device cuda amp True
+fold 0: train 4225 (mal 380) | val 705 (mal 64) | test 1233 (mal 111)
+fold 0 epoch 000 | loss 0.6096 | val AUC 0.8480 | 20s
+fold 0 epoch 001 | loss 0.4951 | val AUC 0.8751 | 37s
+fold 0 epoch 002 | loss 0.4787 | val AUC 0.8752 | 54s
+fold 0 epoch 003 | loss 0.4389 | val AUC 0.8503 | 70s
+fold 0 epoch 004 | loss 0.4244 | val AUC 0.8632 | 87s
+fold 0 epoch 005 | loss 0.4032 | val AUC 0.8647 | 104s
+fold 0 epoch 006 | loss 0.3922 | val AUC 0.8441 | 120s
+fold 0 epoch 007 | loss 0.3813 | val AUC 0.8421 | 137s
+fold 0 epoch 008 | loss 0.3735 | val AUC 0.8422 | 153s
+fold 0 epoch 009 | loss 0.3533 | val AUC 0.8109 | 170s
+fold 0 epoch 010 | loss 0.3435 | val AUC 0.8329 | 187s
+fold 0: early stop at epoch 10
+fold 0: test AUC 0.8606
+fold 1: train 4226 (mal 381) | val 704 (mal 63) | test 1233 (mal 111)
+fold 1 epoch 000 | loss 0.5789 | val AUC 0.8365 | 17s
+fold 1 epoch 001 | loss 0.4846 | val AUC 0.8769 | 34s
+fold 1 epoch 002 | loss 0.4670 | val AUC 0.8620 | 51s
+fold 1 epoch 003 | loss 0.4483 | val AUC 0.8582 | 68s
+fold 1 epoch 004 | loss 0.4172 | val AUC 0.8669 | 84s
+fold 1 epoch 005 | loss 0.4136 | val AUC 0.8293 | 101s
+fold 1 epoch 006 | loss 0.4017 | val AUC 0.8489 | 117s
+fold 1 epoch 007 | loss 0.3932 | val AUC 0.8558 | 134s
+fold 1 epoch 008 | loss 0.3794 | val AUC 0.8602 | 150s
+fold 1 epoch 009 | loss 0.3756 | val AUC 0.8699 | 167s
+fold 1: early stop at epoch 9
+fold 1: test AUC 0.8309
+fold 2: train 4226 (mal 380) | val 705 (mal 64) | test 1232 (mal 111)
+fold 2 epoch 000 | loss 0.5996 | val AUC 0.8275 | 17s
+fold 2 epoch 001 | loss 0.5105 | val AUC 0.8314 | 34s
+fold 2 epoch 002 | loss 0.4565 | val AUC 0.8500 | 51s
+fold 2 epoch 003 | loss 0.4620 | val AUC 0.8500 | 68s
+fold 2 epoch 004 | loss 0.4291 | val AUC 0.8519 | 85s
+fold 2 epoch 005 | loss 0.4050 | val AUC 0.8281 | 102s
+fold 2 epoch 006 | loss 0.3797 | val AUC 0.8489 | 118s
+fold 2 epoch 007 | loss 0.3628 | val AUC 0.8578 | 135s
+fold 2 epoch 008 | loss 0.3624 | val AUC 0.8288 | 151s
+fold 2 epoch 009 | loss 0.3801 | val AUC 0.8440 | 168s
+fold 2 epoch 010 | loss 0.3430 | val AUC 0.8167 | 184s
+fold 2 epoch 011 | loss 0.3214 | val AUC 0.8291 | 201s
+fold 2 epoch 012 | loss 0.3203 | val AUC 0.8294 | 218s
+fold 2 epoch 013 | loss 0.3132 | val AUC 0.8286 | 234s
+fold 2 epoch 014 | loss 0.2986 | val AUC 0.8470 | 251s
+fold 2 epoch 015 | loss 0.3034 | val AUC 0.8407 | 268s
+fold 2: early stop at epoch 15
+fold 2: test AUC 0.8694
+fold 3: train 4226 (mal 381) | val 704 (mal 63) | test 1233 (mal 111)
+fold 3 epoch 000 | loss 0.5868 | val AUC 0.8367 | 18s
+fold 3 epoch 001 | loss 0.4860 | val AUC 0.8570 | 34s
+fold 3 epoch 002 | loss 0.4385 | val AUC 0.8375 | 51s
+fold 3 epoch 003 | loss 0.4366 | val AUC 0.8650 | 68s
+fold 3 epoch 004 | loss 0.4239 | val AUC 0.8476 | 85s
+fold 3 epoch 005 | loss 0.4031 | val AUC 0.8548 | 101s
+fold 3 epoch 006 | loss 0.3898 | val AUC 0.8634 | 118s
+fold 3 epoch 007 | loss 0.3707 | val AUC 0.8856 | 135s
+fold 3 epoch 008 | loss 0.3530 | val AUC 0.8704 | 151s
+fold 3 epoch 009 | loss 0.3375 | val AUC 0.8684 | 168s
+fold 3 epoch 010 | loss 0.3242 | val AUC 0.8727 | 185s
+fold 3 epoch 011 | loss 0.3218 | val AUC 0.8556 | 201s
+fold 3 epoch 012 | loss 0.3086 | val AUC 0.8634 | 218s
+fold 3 epoch 013 | loss 0.3080 | val AUC 0.8859 | 234s
+fold 3 epoch 014 | loss 0.3018 | val AUC 0.8677 | 251s
+fold 3 epoch 015 | loss 0.2738 | val AUC 0.8809 | 268s
+fold 3 epoch 016 | loss 0.2616 | val AUC 0.8857 | 284s
+fold 3 epoch 017 | loss 0.2564 | val AUC 0.8679 | 301s
+fold 3 epoch 018 | loss 0.2517 | val AUC 0.8573 | 318s
+fold 3 epoch 019 | loss 0.2407 | val AUC 0.8647 | 334s
+fold 3 epoch 020 | loss 0.2288 | val AUC 0.8589 | 351s
+fold 3 epoch 021 | loss 0.1953 | val AUC 0.8568 | 367s
+fold 3: early stop at epoch 21
+fold 3: test AUC 0.8464
+fold 4: train 4226 (mal 380) | val 705 (mal 64) | test 1232 (mal 111)
+fold 4 epoch 000 | loss 0.6356 | val AUC 0.8153 | 18s
+fold 4 epoch 001 | loss 0.5345 | val AUC 0.8180 | 34s
+fold 4 epoch 002 | loss 0.4861 | val AUC 0.8522 | 51s
+fold 4 epoch 003 | loss 0.4683 | val AUC 0.8581 | 68s
+fold 4 epoch 004 | loss 0.4263 | val AUC 0.8716 | 85s
+fold 4 epoch 005 | loss 0.4400 | val AUC 0.8626 | 102s
+fold 4 epoch 006 | loss 0.4080 | val AUC 0.8702 | 118s
+fold 4 epoch 007 | loss 0.3807 | val AUC 0.8727 | 135s
+fold 4 epoch 008 | loss 0.3896 | val AUC 0.8659 | 152s
+fold 4 epoch 009 | loss 0.3706 | val AUC 0.8689 | 168s
+fold 4 epoch 010 | loss 0.3572 | val AUC 0.8279 | 185s
+fold 4 epoch 011 | loss 0.3413 | val AUC 0.8493 | 201s
+fold 4 epoch 012 | loss 0.3286 | val AUC 0.8780 | 218s
+fold 4 epoch 013 | loss 0.3177 | val AUC 0.8624 | 235s
+fold 4 epoch 014 | loss 0.2979 | val AUC 0.8755 | 251s
+fold 4 epoch 015 | loss 0.3008 | val AUC 0.8744 | 268s
+fold 4 epoch 016 | loss 0.2778 | val AUC 0.8746 | 285s
+fold 4 epoch 017 | loss 0.2778 | val AUC 0.8776 | 301s
+fold 4 epoch 018 | loss 0.2621 | val AUC 0.8885 | 318s
+fold 4 epoch 019 | loss 0.2557 | val AUC 0.8641 | 335s
+fold 4 epoch 020 | loss 0.2494 | val AUC 0.8641 | 351s
+fold 4 epoch 021 | loss 0.2337 | val AUC 0.8777 | 368s
+fold 4 epoch 022 | loss 0.2267 | val AUC 0.8623 | 385s
+fold 4 epoch 023 | loss 0.2137 | val AUC 0.8801 | 401s
+fold 4 epoch 024 | loss 0.2021 | val AUC 0.8592 | 418s
+fold 4 epoch 025 | loss 0.1949 | val AUC 0.8795 | 435s
+fold 4 epoch 026 | loss 0.1839 | val AUC 0.8725 | 451s
+fold 4: early stop at epoch 26
+fold 4: test AUC 0.8569
+{
+  "task": "LUNA25 nodule malignancy (benign vs malignant), patient-level CV",
+  "model": "MedicalNet ResNet-50 (pretrained, 23 datasets) + linear head, 64^3 patch, 50 mm FOV, lr 0.0001",
+  "arch": "medicalnet50",
+  "n_nodules": 6163,
+  "n_malignant": 555,
+  "oof_auc": 0.8458442572386937,
+  "oof_auc_95ci": [
+    0.8287663785267627,
+    0.8619770404618612
+  ],
+  "oof_auc_tta": 0.85277017388287,
+  "oof_auc_tta_95ci": [
+    0.8366218243515936,
+    0.8682560660365389
+  ],
+  "oof_average_precision": 0.39888246726073384,
+  "fold_auc_mean": 0.8528506452996142,
+  "fold_auc_std": 0.013233772326445722,
+  "wall_hours": 0.42,
+  "device": "cuda",
+  "gpu": "NVIDIA L4",
+  "licence_note": "LUNA25 labels are CC BY-NC 4.0: research use only, not for commercial product training"
+}
+medicalnet50 {'oof_auc': 0.8458442572386937, 'oof_auc_tta': 0.85277017388287, 'oof_auc_95ci': [0.8287663785267627, 0.8619770404618612], 'wall_hours': 0.42}
+elapsed: 65 min. log: /workspace/runs/luna25_20261103_1724.log
+exported fold0 66.0 MB
+exported fold1 66.0 MB
+exported fold2 66.0 MB
+exported fold3 66.0 MB
+exported fold4 66.0 MB
+scripts/runpod_luna25.sh: line 104: rel: command not found
+scripts/runpod_luna25.sh: line 108: api: unbound variable
+release create failed: 
+falling back to branch luna25-weights
+weights uploaded: https://github.com/tonythetiger168/pulmoguard-ai/tree/luna25-weights/luna25-20261103_1724
+exported fold0 92.5 MB
+exported fold1 92.5 MB
+exported fold2 92.5 MB
+exported fold3 92.5 MB
+exported fold4 92.5 MB
+scripts/runpod_luna25.sh: line 104: rel: command not found
+scripts/runpod_luna25.sh: line 108: api: unbound variable
+release create failed: 
+falling back to branch luna25-weights
+Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'root@e7f5962b42bb.(none)')
+WEIGHTS NOT SAVED (medicalnet50)
