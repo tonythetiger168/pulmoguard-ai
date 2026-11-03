@@ -1,0 +1,28 @@
+{
+  "task": "NLST T0 LDCT -> lung cancer diagnosed within 365 days (patient level)",
+  "cohort_note": "NLST patients not in LUNA25; same trial and scanners, so internal-external rather than external",
+  "pipeline": "MONAI lung_nodule_ct_detection -> top 5 candidates with det >= 0.3 -> LUNA25 ResNet-18 5-fold ensemble -> patient score = max malignancy",
+  "malignancy_model": {
+    "auc": 0.8755260466441996,
+    "auc_95ci": [
+      0.8359329553003485,
+      0.9124688032571348
+    ],
+    "ap": 0.7821920979888748,
+    "n": 564,
+    "n_pos": 141
+  },
+  "detector_only": {
+    "auc": 0.7688328890230203,
+    "auc_95ci": [
+      0.726031502711898,
+      0.8098204227989364
+    ],
+    "ap": 0.4856932125807746,
+    "n": 564,
+    "n_pos": 141
+  },
+  "scans_without_candidates": 42,
+  "detector_failed_scans": 0,
+  "positives_without_candidates": 2
+}
