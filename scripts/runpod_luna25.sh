@@ -100,8 +100,8 @@ for p in sorted(glob.glob(f"{runs}/fold*/best.pt")):
     print("exported", k, round(os.path.getsize(f) / 1e6, 1), "MB")
 PY
   cp "$RUNS/summary.json" "$W/" 2>/dev/null || true
-  local tag="luna25-$STAMP" sha
-  [ "$ARCH" = resnet18 ] || tag="luna25-$ARCH-$STAMP" api="https://api.github.com/repos/$REPO" rel id ok=1
+  local tag="luna25-$STAMP" sha api="https://api.github.com/repos/$REPO" rel id ok=1
+  [ "$ARCH" = resnet18 ] || tag="luna25-$ARCH-$STAMP"
   sha=$(git rev-parse HEAD 2>/dev/null || echo main)
   local body; body=$(python -c "import json;s=json.load(open('$RUNS/summary.json'));print(json.dumps({'tag_name':'$tag','target_commitish':'$sha','name':'LUNA25 malignancy $ARCH ($STAMP)','prerelease':True,'body':f\"5-fold patient-level CV, OOF AUC {s['oof_auc']:.3f} (95% CI {s['oof_auc_95ci'][0]:.3f}-{s['oof_auc_95ci'][1]:.3f}). fp16 state_dicts, arch $ARCH (see scripts/train_luna25.py build_model); input 64^3 patch, 50 mm FOV, HU -1000..400 scaled to 0..1. Labels CC BY-NC 4.0: research use only.\"}))" 2>/dev/null) \
     || body="{\"tag_name\":\"$tag\",\"target_commitish\":\"$sha\",\"prerelease\":true}"
@@ -126,7 +126,8 @@ PY
   local ref="HEAD:$wb"
   if ! (cd "$tmp" && git_auth push -q origin "$ref" 2>/dev/null); then   # 分支已存在：接在它後面再推
     (cd "$tmp" && git_auth fetch -q --depth 1 origin "$wb" && git reset -q --soft FETCH_HEAD \
-      && git commit -qm "luna25 weights $tag" && git_auth push -q origin "$ref") || return 1
+      && git -c user.name=runpod-luna25 -c user.email=runpod-luna25@users.noreply.github.com commit -qm "luna25 weights $tag" \
+      && git_auth push -q origin "$ref") || return 1
   fi
   echo "weights uploaded: https://github.com/$REPO/tree/$wb/$tag"
 }
