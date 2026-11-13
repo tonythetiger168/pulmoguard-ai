@@ -76,3 +76,46 @@ def test_exam_labels_horizons():
     gf = growth_flags(pd.DataFrame({"dicom_patient_id": ["a", "a"], "study_yr": [1, 2],
                                     "sct_ab_gwth": ["2", "1"], "sct_ab_preexist": [2, 1]}))
     assert gf.set_index("exam").grew_flag.to_dict() == {1: True, 2: False}
+
+
+def test_crop_cube_and_central_component():
+    from scripts.nlst_longitudinal_extract import central_component, crop_cube
+
+    arr = np.zeros((100, 100, 100), np.int16)
+    arr[48:53, 48:53, 48:53] = 7
+    c = crop_cube(arr, (50, 50, 50))
+    assert c.shape == (64, 64, 64) and (c == 7).sum() == 125
+    edge = crop_cube(arr, (2, 2, 2), fill=-1000)
+    assert (edge == -1000).sum() > 0 and (edge == 0).sum() > 0
+    seg = np.zeros((64, 64, 64), np.uint8)
+    seg[30:35, 30:35, 30:35] = 1      # 靠近中心
+    seg[0:3, 0:3, 0:3] = 1            # 角落的鄰近結節
+    m = central_component(seg)
+    assert m.sum() == 125 and m[32, 32, 32]
+    far = np.zeros((64, 64, 64), np.uint8)
+    far[0:3, 0:3, 0:3] = 1
+    assert not central_component(far).any()
+
+
+def test_registration_recovers_translation(tmp_path):
+    import SimpleITK as sitk
+
+    from scripts.nlst_longitudinal_extract import apply_affine, register_prior_to_current
+
+    rng = np.random.default_rng(0)
+    z, y, x = np.mgrid[:96, :96, :96]
+    base = np.full((96, 96, 96), -1000, np.float32)
+    body = ((x - 48) ** 2 / 40**2 + (y - 48) ** 2 / 30**2 + (z - 48) ** 2 / 44**2) < 1
+    base[body] = 40
+    for _ in range(25):  # 肺內的「血管」與結節，讓 MI 有結構可對
+        cz, cy, cx = rng.integers(20, 76, 3)
+        base[(x - cx) ** 2 + (y - cy) ** 2 + (z - cz) ** 2 < rng.integers(4, 30)] = -500
+    shift = np.array([3.0, -4.0, 5.0])  # 前次 → 本次，LPS mm（x, y, z）
+    prior = sitk.GetImageFromArray(base)
+    prior.SetSpacing((2.0, 2.0, 2.0))
+    cur = sitk.Resample(prior, prior, sitk.TranslationTransform(3, tuple(-shift)), sitk.sitkLinear, -1000)
+    sitk.WriteImage(prior, str(tmp_path / "p.mhd"))
+    sitk.WriteImage(cur, str(tmp_path / "c.mhd"))
+    tf = register_prior_to_current(tmp_path / "p.mhd", tmp_path / "c.mhd", shrink=1)
+    pt = np.array([[96.0, 96.0, 96.0]])
+    assert np.linalg.norm(apply_affine(tf, pt) - (pt + shift)) < 2.0
