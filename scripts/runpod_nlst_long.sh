@@ -5,6 +5,7 @@
 #   LIMIT_PATIENTS=50 bash scripts/runpod_nlst_long.sh        # 試跑
 #   bash scripts/runpod_nlst_long.sh                          # 全量（2,695 人）
 #   RESUME_DIR=results/nlst_long_YYYYMMDD_HHMM bash ...        # 從上次推回的進度續跑
+#   SHARD=0 NSHARD=2 bash ...                                  # 兩個 pod 各跑一半病人
 # 需要 GH_TOKEN（本 repo Contents: Read and write）
 set -euo pipefail
 export PIP_DEFAULT_TIMEOUT=120 PIP_RETRIES=10
@@ -145,6 +146,12 @@ echo "== 3/4 NLST download+convert (background) =="
 python - "$NRUN/cohort.csv" "$NRUN/done.txt" "$NRUN/todo_cohort.csv" <<'PY'
 import os, sys, pandas as pd
 c = pd.read_csv(sys.argv[1], dtype=str)
+shard, nshard = int(os.environ.get("SHARD", 0)), int(os.environ.get("NSHARD", 1))
+if nshard > 1:  # 多個 pod 平行：依病人排序後取 i::n
+    pts = sorted(c.PatientID.unique())[shard::nshard]
+    c = c[c.PatientID.isin(pts)]
+    c.to_csv(sys.argv[1], index=False)
+    print(f"shard {shard}/{nshard}: {len(pts)} patients")
 done = set(open(sys.argv[2]).read().split()) if os.path.exists(sys.argv[2]) else set()
 c[~c.PatientID.isin(done)].to_csv(sys.argv[3], index=False)
 print(f"{(~c.PatientID.isin(done)).sum()} scans to prepare")

@@ -23,11 +23,14 @@ from scripts.nlst_longitudinal_extract import apply_affine
 from src.eval.nodule_growth import build_tracks
 
 
-def make_transforms(tf: pd.DataFrame, max_metric: float = -0.2) -> dict:
-    """MI metric 越負越好；比 max_metric 差的對位視為失敗（該對檢查不做配對）。"""
+def make_transforms(tf: pd.DataFrame, max_metric: float = -0.5, max_dev: float = 0.2) -> dict:
+    """對位品質把關：MI metric 越負越好；仿射矩陣要接近純旋轉（行列式 0.85–1.18、每個元素離單位矩陣 ≤ max_dev）。
+    2026-11-13 試跑 96 對裡有 9 對矩陣偏離 > 0.15（縮放 0.4 倍或 1.5 倍），屬於對位失敗。"""
     out = {}
     for _, r in tf.iterrows():
-        if r.metric <= max_metric:
+        m = np.array([[r[f"m{i}{j}"] for j in range(3)] for i in range(3)])
+        ok = r.metric <= max_metric and 0.85 <= np.linalg.det(m) <= 1.18 and np.abs(m - np.eye(3)).max() <= max_dev
+        if ok:
             out[(str(r.PatientID), int(r.prior_exam), int(r.exam))] = (lambda row: lambda p: apply_affine(row, p))(r)
     return out
 
