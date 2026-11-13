@@ -1,0 +1,1653 @@
+preflight ok: GitHub push works
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: python -m pip install --upgrade pip
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: python -m pip install --upgrade pip
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+torchaudio 2.6.0.dev20250319+cu128 requires torch==2.8.0.dev20250319, but you have torch 2.7.1+cu128 which is incompatible.
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: python -m pip install --upgrade pip
+torch 2.7.1+cu128 cuda True
+cpus=256 prepare_workers=6 reg_workers=4
+== 1/4 weights (LUNA25 luna25-20261103_0849, LIDC ROI lidc-nnunet-20261103_0855) ==
+weights luna25_resnet18_fold0_fp16.pt -> /workspace/runs/luna25/fold0/best.pt
+weights luna25_resnet18_fold1_fp16.pt -> /workspace/runs/luna25/fold1/best.pt
+weights luna25_resnet18_fold2_fp16.pt -> /workspace/runs/luna25/fold2/best.pt
+weights luna25_resnet18_fold3_fp16.pt -> /workspace/runs/luna25/fold3/best.pt
+weights luna25_resnet18_fold4_fp16.pt -> /workspace/runs/luna25/fold4/best.pt
+/workspace/models/lidc_roi:
+total 16
+drwxr-xr-x 3 root root   74 Nov 13 05:19 .
+drwxr-xr-x 3 root root   30 Nov 13 05:16 ..
+-rw-r--r-- 1 root root  258 Nov 13 05:19 dataset.json
+drwxr-xr-x 2 root root   42 Nov 13 05:19 fold_0
+-rw-r--r-- 1 root root 9761 Nov 13 05:19 plans.json
+
+/workspace/models/lidc_roi/fold_0:
+total 127140
+drwxr-xr-x 2 root root        42 Nov 13 05:19 .
+drwxr-xr-x 3 root root        74 Nov 13 05:19 ..
+-rw-r--r-- 1 root root 130187639 Nov 13 05:19 checkpoint_final.pth
+== 2/4 cohort ==
+2026-11-13 05:19:24,372 - Fetching index ct_index
+2026-11-13 05:19:25,562 - Fetching index clinical_index
+2026-11-13 05:19:26,042 - Since clinical_index was fetched, also installing corresponding tables.
+2026-11-13 05:19:27,835 - IDC clinical data downloaded successfully to /root/.local/share/IDC/v25/clinical_data
+patients: 2695 ({'growth': 1000, 'random': 1000, 'cancer': 695}) | scans: 7664 | in LUNA25: 414 patients | 678.1 GB
+== 3/4 NLST download+convert (background) ==
+shard 1/2: 1347 patients
+3823 scans to prepare
+== 4/4 detector + LIDC seg + LUNA25 features + registration ==
+1347 patients to process (0 already done)
++ git clone -q --depth 1 --filter=blob:none --sparse https://github.com/Project-MONAI/model-zoo.git /workspace/models/bundles/_model_zoo
++ git -C /workspace/models/bundles/_model_zoo sparse-checkout set models/lung_nodule_ct_detection
++ curl -4 -fL --retry 5 --retry-all-errors -o /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt https://developer.download.nvidia.com/assets/Clara/monai/tutorials/model_zoo/model_lung_nodule_ct_detection.pt
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0 79.8M    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 79.8M  100 79.8M    0     0  77.9M      0  0:00:01  0:00:01 --:--:-- 78.0M
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 05:21:28,212 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 05:21:29,335 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 05:21:29,335 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 05:21:29,335 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 05:21:29,335 - INFO - > whether_raw_luna16: True
+2026-11-13 05:21:29,335 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 05:21:29,335 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 05:21:29,335 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 05:21:29,335 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 05:21:29,335 - INFO - ---
+
+
+2026-11-13 05:21:29,335 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 05:27:10,215 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:40.672
+2026-11-13 05:27:10,216 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:40.880
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 05:27:18,986 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 05:27:20,149 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 05:27:20,150 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 05:27:20,150 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 05:27:20,150 - INFO - > whether_raw_luna16: True
+2026-11-13 05:27:20,150 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 05:27:20,150 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 05:27:20,150 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 05:27:20,150 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 05:27:20,150 - INFO - ---
+
+
+2026-11-13 05:27:20,150 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 05:33:08,797 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:48.507
+2026-11-13 05:33:08,797 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:48.647
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 05:33:17,219 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 05:33:18,410 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 05:33:18,411 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 05:33:18,411 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 05:33:18,411 - INFO - > whether_raw_luna16: True
+2026-11-13 05:33:18,411 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 05:33:18,411 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 05:33:18,411 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 05:33:18,411 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 05:33:18,411 - INFO - ---
+
+
+2026-11-13 05:33:18,411 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 05:34:00,381 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:41.820
+2026-11-13 05:34:00,381 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:41.970
+detector: 83 scans done, 0 failed
+[30/1347 patients] scans 83, nodules 283, registrations 53/53, detector 761s, seg+feat 142s, total 1040s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 05:37:27,413 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 05:37:28,618 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 05:37:28,618 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 05:37:28,618 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 05:37:28,618 - INFO - > whether_raw_luna16: True
+2026-11-13 05:37:28,618 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 05:37:28,618 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 05:37:28,618 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 05:37:28,618 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 05:37:28,618 - INFO - ---
+
+
+2026-11-13 05:37:28,619 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 05:43:58,643 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:06:29.884
+2026-11-13 05:43:58,644 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:06:30.025
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 05:44:07,227 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 05:44:08,425 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 05:44:08,425 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 05:44:08,425 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 05:44:08,425 - INFO - > whether_raw_luna16: True
+2026-11-13 05:44:08,425 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 05:44:08,426 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 05:44:08,426 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 05:44:08,426 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 05:44:08,426 - INFO - ---
+
+
+2026-11-13 05:44:08,426 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 05:51:08,562 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:06:59.981
+2026-11-13 05:51:08,563 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:07:00.137
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 05:51:17,365 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 05:51:18,561 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 05:51:18,562 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 05:51:18,562 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 05:51:18,562 - INFO - > whether_raw_luna16: True
+2026-11-13 05:51:18,562 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 05:51:18,562 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 05:51:18,562 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 05:51:18,562 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 05:51:18,562 - INFO - ---
+
+
+2026-11-13 05:51:18,562 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 05:53:29,646 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:02:10.925
+2026-11-13 05:53:29,647 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:02:11.084
+detector: 88 scans done, 0 failed
+[60/1347 patients] scans 88, nodules 355, registrations 58/58, detector 971s, seg+feat 155s, total 1179s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 05:57:07,138 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 05:57:08,368 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 05:57:08,368 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 05:57:08,368 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 05:57:08,368 - INFO - > whether_raw_luna16: True
+2026-11-13 05:57:08,368 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 05:57:08,368 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 05:57:08,368 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 05:57:08,368 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 05:57:08,368 - INFO - ---
+
+
+2026-11-13 05:57:08,369 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:01:37,200 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:04:28.699
+2026-11-13 06:01:37,200 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:04:28.832
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 06:01:46,435 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:01:47,665 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:01:47,665 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:01:47,665 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:01:47,665 - INFO - > whether_raw_luna16: True
+2026-11-13 06:01:47,666 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:01:47,666 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 06:01:47,666 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:01:47,666 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 06:01:47,666 - INFO - ---
+
+
+2026-11-13 06:01:47,666 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:07:11,711 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:23.896
+2026-11-13 06:07:11,711 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:24.045
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 06:07:19,917 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:07:21,102 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:07:21,102 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:07:21,103 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:07:21,103 - INFO - > whether_raw_luna16: True
+2026-11-13 06:07:21,103 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:07:21,103 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 06:07:21,103 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:07:21,103 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 06:07:21,103 - INFO - ---
+
+
+2026-11-13 06:07:21,103 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:09:13,574 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:52.337
+2026-11-13 06:09:13,575 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:52.472
+detector: 87 scans done, 0 failed
+[90/1347 patients] scans 87, nodules 372, registrations 57/57, detector 736s, seg+feat 176s, total 997s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 06:13:43,206 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:13:44,386 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:13:44,387 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:13:44,387 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:13:44,387 - INFO - > whether_raw_luna16: True
+2026-11-13 06:13:44,387 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:13:44,387 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 06:13:44,387 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:13:44,387 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 06:13:44,387 - INFO - ---
+
+
+2026-11-13 06:13:44,388 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:19:27,208 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:42.678
+2026-11-13 06:19:27,208 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:42.820
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 06:19:35,740 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:19:36,923 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:19:36,924 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:19:36,924 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:19:36,924 - INFO - > whether_raw_luna16: True
+2026-11-13 06:19:36,924 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:19:36,924 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 06:19:36,924 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:19:36,924 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 06:19:36,924 - INFO - ---
+
+
+2026-11-13 06:19:36,924 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:21:42,890 - ignite.engine.engine.DetectionEvaluator - ERROR - Current run is terminating due to exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+2026-11-13 06:21:42,890 - ERROR - Exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+2026-11-13 06:21:43,996 - ignite.engine.engine.DetectionEvaluator - ERROR - Engine run is terminating due to exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+2026-11-13 06:21:43,996 - ERROR - Exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 374, in evaluate
+    return eval(value[len(self.prefix) :], globals_, locals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 151, in run
+    super().run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/workflow.py", line 282, in run
+    super().run(data=self.data_loader, max_epochs=self.state.max_epochs)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1056, in run
+    return self._internal_run()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1099, in _internal_run
+    return next(self._internal_run_generator)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1174, in _internal_run_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/__main__.py", line 31, in <module>
+    fire.Fire()
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/scripts.py", line 1012, in run
+    workflow.run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 488, in run
+    return self._run_expr(id=self.run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 532, in _run_expr
+    ret.append(self.parser.get_parsed_content(sub_id, **kwargs))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_parser.py", line 290, in get_parsed_content
+    return self.ref_resolver.get_resolved_content(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 193, in get_resolved_content
+    return self._resolve_one_item(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 175, in _resolve_one_item
+    item.evaluate(globals={f"{self._vars}": self.resolved_content}) if run_eval else item
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 376, in evaluate
+    raise RuntimeError(f"Failed to evaluate {self}") from e
+RuntimeError: Failed to evaluate ConfigExpression: 
+"$__local_refs['evaluator'].run()"
+bundle failed on 40 scans (0001): CalledProcessError
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 06:21:52,202 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:21:53,394 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:21:53,395 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:21:53,395 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:21:53,395 - INFO - > whether_raw_luna16: True
+2026-11-13 06:21:53,395 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:21:53,395 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 06:21:53,395 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:21:53,395 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 06:21:53,395 - INFO - ---
+
+
+2026-11-13 06:21:53,395 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:23:53,076 - ignite.engine.engine.DetectionEvaluator - ERROR - Current run is terminating due to exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+2026-11-13 06:23:53,076 - ERROR - Exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+2026-11-13 06:23:54,205 - ignite.engine.engine.DetectionEvaluator - ERROR - Engine run is terminating due to exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+2026-11-13 06:23:54,205 - ERROR - Exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 374, in evaluate
+    return eval(value[len(self.prefix) :], globals_, locals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 151, in run
+    super().run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/workflow.py", line 282, in run
+    super().run(data=self.data_loader, max_epochs=self.state.max_epochs)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1056, in run
+    return self._internal_run()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1099, in _internal_run
+    return next(self._internal_run_generator)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1174, in _internal_run_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/__main__.py", line 31, in <module>
+    fire.Fire()
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/scripts.py", line 1012, in run
+    workflow.run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 488, in run
+    return self._run_expr(id=self.run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 532, in _run_expr
+    ret.append(self.parser.get_parsed_content(sub_id, **kwargs))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_parser.py", line 290, in get_parsed_content
+    return self.ref_resolver.get_resolved_content(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 193, in get_resolved_content
+    return self._resolve_one_item(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 175, in _resolve_one_item
+    item.evaluate(globals={f"{self._vars}": self.resolved_content}) if run_eval else item
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 376, in evaluate
+    raise RuntimeError(f"Failed to evaluate {self}") from e
+RuntimeError: Failed to evaluate ConfigExpression: 
+"$__local_refs['evaluator'].run()"
+bundle failed on 20 scans (0002): CalledProcessError
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0003.json --output_dir /workspace/runs/nlst_long --output_filename det_0003.json
+2026-11-13 06:24:02,290 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:24:03,426 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:24:03,427 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:24:03,427 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:24:03,427 - INFO - > whether_raw_luna16: True
+2026-11-13 06:24:03,427 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:24:03,427 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0003.json'
+2026-11-13 06:24:03,427 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:24:03,427 - INFO - > output_filename: 'det_0003.json'
+2026-11-13 06:24:03,427 - INFO - ---
+
+
+2026-11-13 06:24:03,427 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:25:52,464 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:48.904
+2026-11-13 06:25:52,465 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:49.038
+detector: 50 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0004.json --output_dir /workspace/runs/nlst_long --output_filename det_0004.json
+2026-11-13 06:26:00,724 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:26:01,894 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:26:01,895 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:26:01,895 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:26:01,895 - INFO - > whether_raw_luna16: True
+2026-11-13 06:26:01,895 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:26:01,895 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0004.json'
+2026-11-13 06:26:01,895 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:26:01,895 - INFO - > output_filename: 'det_0004.json'
+2026-11-13 06:26:01,895 - INFO - ---
+
+
+2026-11-13 06:26:01,895 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:26:35,792 - ignite.engine.engine.DetectionEvaluator - ERROR - Current run is terminating due to exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+2026-11-13 06:26:35,792 - ERROR - Exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+2026-11-13 06:26:36,087 - ignite.engine.engine.DetectionEvaluator - ERROR - Engine run is terminating due to exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+2026-11-13 06:26:36,087 - ERROR - Exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 374, in evaluate
+    return eval(value[len(self.prefix) :], globals_, locals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 151, in run
+    super().run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/workflow.py", line 282, in run
+    super().run(data=self.data_loader, max_epochs=self.state.max_epochs)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1056, in run
+    return self._internal_run()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1099, in _internal_run
+    return next(self._internal_run_generator)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1174, in _internal_run_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/__main__.py", line 31, in <module>
+    fire.Fire()
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/scripts.py", line 1012, in run
+    workflow.run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 488, in run
+    return self._run_expr(id=self.run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 532, in _run_expr
+    ret.append(self.parser.get_parsed_content(sub_id, **kwargs))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_parser.py", line 290, in get_parsed_content
+    return self.ref_resolver.get_resolved_content(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 193, in get_resolved_content
+    return self._resolve_one_item(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 175, in _resolve_one_item
+    item.evaluate(globals={f"{self._vars}": self.resolved_content}) if run_eval else item
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 376, in evaluate
+    raise RuntimeError(f"Failed to evaluate {self}") from e
+RuntimeError: Failed to evaluate ConfigExpression: 
+"$__local_refs['evaluator'].run()"
+bundle failed on 10 scans (0004): CalledProcessError
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0005.json --output_dir /workspace/runs/nlst_long --output_filename det_0005.json
+2026-11-13 06:26:44,119 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:26:45,277 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:26:45,278 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:26:45,278 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:26:45,278 - INFO - > whether_raw_luna16: True
+2026-11-13 06:26:45,278 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:26:45,278 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0005.json'
+2026-11-13 06:26:45,278 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:26:45,278 - INFO - > output_filename: 'det_0005.json'
+2026-11-13 06:26:45,278 - INFO - ---
+
+
+2026-11-13 06:26:45,278 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:27:20,075 - ignite.engine.engine.DetectionEvaluator - ERROR - Current run is terminating due to exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+2026-11-13 06:27:20,076 - ERROR - Exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+2026-11-13 06:27:20,312 - ignite.engine.engine.DetectionEvaluator - ERROR - Engine run is terminating due to exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+2026-11-13 06:27:20,312 - ERROR - Exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 374, in evaluate
+    return eval(value[len(self.prefix) :], globals_, locals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 151, in run
+    super().run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/workflow.py", line 282, in run
+    super().run(data=self.data_loader, max_epochs=self.state.max_epochs)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1056, in run
+    return self._internal_run()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1099, in _internal_run
+    return next(self._internal_run_generator)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1174, in _internal_run_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/__main__.py", line 31, in <module>
+    fire.Fire()
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/scripts.py", line 1012, in run
+    workflow.run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 488, in run
+    return self._run_expr(id=self.run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 532, in _run_expr
+    ret.append(self.parser.get_parsed_content(sub_id, **kwargs))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_parser.py", line 290, in get_parsed_content
+    return self.ref_resolver.get_resolved_content(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 193, in get_resolved_content
+    return self._resolve_one_item(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 175, in _resolve_one_item
+    item.evaluate(globals={f"{self._vars}": self.resolved_content}) if run_eval else item
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 376, in evaluate
+    raise RuntimeError(f"Failed to evaluate {self}") from e
+RuntimeError: Failed to evaluate ConfigExpression: 
+"$__local_refs['evaluator'].run()"
+bundle failed on 5 scans (0005): CalledProcessError
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0006.json --output_dir /workspace/runs/nlst_long --output_filename det_0006.json
+2026-11-13 06:27:28,337 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:27:29,510 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:27:29,510 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:27:29,510 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:27:29,510 - INFO - > whether_raw_luna16: True
+2026-11-13 06:27:29,510 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:27:29,510 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0006.json'
+2026-11-13 06:27:29,510 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:27:29,510 - INFO - > output_filename: 'det_0006.json'
+2026-11-13 06:27:29,510 - INFO - ---
+
+
+2026-11-13 06:27:29,511 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:28:04,283 - ignite.engine.engine.DetectionEvaluator - ERROR - Current run is terminating due to exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+2026-11-13 06:28:04,283 - ERROR - Exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+2026-11-13 06:28:04,383 - ignite.engine.engine.DetectionEvaluator - ERROR - Engine run is terminating due to exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+2026-11-13 06:28:04,383 - ERROR - Exception: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 374, in evaluate
+    return eval(value[len(self.prefix) :], globals_, locals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 151, in run
+    super().run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/workflow.py", line 282, in run
+    super().run(data=self.data_loader, max_epochs=self.state.max_epochs)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1056, in run
+    return self._internal_run()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1099, in _internal_run
+    return next(self._internal_run_generator)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1174, in _internal_run_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in postprocess_detections
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 664, in <listcomp>
+    split_anchors = [list(a.split(num_anchors_per_level)) for a in anchors]  # List[List[Tensor]]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/_tensor.py", line 1053, in split
+    return torch._VF.split_with_sizes(self, split_size, dim)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: split_with_sizes expects split_sizes to sum exactly to 5709549 (input tensor's size at dimension 0), but got split_sizes=[5005632, 625704, 72912]
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/__main__.py", line 31, in <module>
+    fire.Fire()
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/scripts.py", line 1012, in run
+    workflow.run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 488, in run
+    return self._run_expr(id=self.run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 532, in _run_expr
+    ret.append(self.parser.get_parsed_content(sub_id, **kwargs))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_parser.py", line 290, in get_parsed_content
+    return self.ref_resolver.get_resolved_content(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 193, in get_resolved_content
+    return self._resolve_one_item(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 175, in _resolve_one_item
+    item.evaluate(globals={f"{self._vars}": self.resolved_content}) if run_eval else item
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 376, in evaluate
+    raise RuntimeError(f"Failed to evaluate {self}") from e
+RuntimeError: Failed to evaluate ConfigExpression: 
+"$__local_refs['evaluator'].run()"
+bundle failed on 2 scans (0006): CalledProcessError
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0007.json --output_dir /workspace/runs/nlst_long --output_filename det_0007.json
+2026-11-13 06:28:12,416 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:28:13,591 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:28:13,591 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:28:13,591 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:28:13,591 - INFO - > whether_raw_luna16: True
+2026-11-13 06:28:13,591 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:28:13,591 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0007.json'
+2026-11-13 06:28:13,591 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:28:13,591 - INFO - > output_filename: 'det_0007.json'
+2026-11-13 06:28:13,591 - INFO - ---
+
+
+2026-11-13 06:28:13,592 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:28:34,581 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:20.847
+2026-11-13 06:28:34,582 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:20.990
+detector: 51 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0008.json --output_dir /workspace/runs/nlst_long --output_filename det_0008.json
+2026-11-13 06:28:42,710 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:28:43,839 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:28:43,839 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:28:43,839 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:28:43,839 - INFO - > whether_raw_luna16: True
+2026-11-13 06:28:43,839 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:28:43,839 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0008.json'
+2026-11-13 06:28:43,839 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:28:43,839 - INFO - > output_filename: 'det_0008.json'
+2026-11-13 06:28:43,839 - INFO - ---
+
+
+2026-11-13 06:28:43,840 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:29:08,030 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:24.050
+2026-11-13 06:29:08,031 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:24.191
+detector: 52 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0009.json --output_dir /workspace/runs/nlst_long --output_filename det_0009.json
+2026-11-13 06:29:16,351 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:29:17,570 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:29:17,570 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:29:17,571 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:29:17,571 - INFO - > whether_raw_luna16: True
+2026-11-13 06:29:17,571 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:29:17,571 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0009.json'
+2026-11-13 06:29:17,571 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:29:17,571 - INFO - > output_filename: 'det_0009.json'
+2026-11-13 06:29:17,571 - INFO - ---
+
+
+2026-11-13 06:29:17,571 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:30:02,681 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:44.968
+2026-11-13 06:30:02,681 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:45.110
+detector: 55 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0010.json --output_dir /workspace/runs/nlst_long --output_filename det_0010.json
+2026-11-13 06:30:10,512 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:30:11,723 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:30:11,723 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:30:11,723 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:30:11,723 - INFO - > whether_raw_luna16: True
+2026-11-13 06:30:11,724 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:30:11,724 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0010.json'
+2026-11-13 06:30:11,724 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:30:11,724 - INFO - > output_filename: 'det_0010.json'
+2026-11-13 06:30:11,724 - INFO - ---
+
+
+2026-11-13 06:30:11,724 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:31:00,968 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:49.101
+2026-11-13 06:31:00,968 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:49.244
+detector: 60 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0011.json --output_dir /workspace/runs/nlst_long --output_filename det_0011.json
+2026-11-13 06:31:09,145 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:31:10,386 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:31:10,387 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:31:10,387 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:31:10,387 - INFO - > whether_raw_luna16: True
+2026-11-13 06:31:10,387 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:31:10,387 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0011.json'
+2026-11-13 06:31:10,387 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:31:10,387 - INFO - > output_filename: 'det_0011.json'
+2026-11-13 06:31:10,387 - INFO - ---
+
+
+2026-11-13 06:31:10,387 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:33:30,298 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:02:19.756
+2026-11-13 06:33:30,299 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:02:19.912
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0012.json --output_dir /workspace/runs/nlst_long --output_filename det_0012.json
+2026-11-13 06:33:39,448 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:33:40,623 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:33:40,624 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:33:40,624 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:33:40,624 - INFO - > whether_raw_luna16: True
+2026-11-13 06:33:40,624 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:33:40,624 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0012.json'
+2026-11-13 06:33:40,624 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:33:40,624 - INFO - > output_filename: 'det_0012.json'
+2026-11-13 06:33:40,624 - INFO - ---
+
+
+2026-11-13 06:33:40,624 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:34:52,965 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:12.197
+2026-11-13 06:34:52,966 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:12.341
+detector: 87 scans done, 0 failed
+[120/1347 patients] scans 87, nodules 296, registrations 57/57, detector 1278s, seg+feat 127s, total 1468s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 06:38:11,006 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:38:12,164 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:38:12,165 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:38:12,165 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:38:12,165 - INFO - > whether_raw_luna16: True
+2026-11-13 06:38:12,165 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:38:12,165 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 06:38:12,165 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:38:12,165 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 06:38:12,165 - INFO - ---
+
+
+2026-11-13 06:38:12,165 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:44:12,440 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:06:00.140
+2026-11-13 06:44:12,441 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:06:00.276
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 06:44:20,788 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:44:21,959 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:44:21,959 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:44:21,959 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:44:21,959 - INFO - > whether_raw_luna16: True
+2026-11-13 06:44:21,960 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:44:21,960 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 06:44:21,960 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:44:21,960 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 06:44:21,960 - INFO - ---
+
+
+2026-11-13 06:44:21,960 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:48:53,987 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:04:31.881
+2026-11-13 06:48:53,987 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:04:32.028
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 06:49:02,771 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:49:04,150 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:49:04,150 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:49:04,151 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:49:04,151 - INFO - > whether_raw_luna16: True
+2026-11-13 06:49:04,151 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:49:04,151 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 06:49:04,151 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:49:04,151 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 06:49:04,151 - INFO - ---
+
+
+2026-11-13 06:49:04,151 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:50:09,795 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:05.492
+2026-11-13 06:50:09,796 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:05.645
+detector: 87 scans done, 0 failed
+[150/1347 patients] scans 87, nodules 330, registrations 57/57, detector 727s, seg+feat 135s, total 944s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 06:53:54,697 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:53:55,865 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:53:55,865 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:53:55,865 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:53:55,865 - INFO - > whether_raw_luna16: True
+2026-11-13 06:53:55,865 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:53:55,865 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 06:53:55,865 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:53:55,865 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 06:53:55,865 - INFO - ---
+
+
+2026-11-13 06:53:55,866 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 06:59:02,541 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:06.539
+2026-11-13 06:59:02,542 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:06.676
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 06:59:10,778 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 06:59:11,959 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 06:59:11,959 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 06:59:11,959 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 06:59:11,959 - INFO - > whether_raw_luna16: True
+2026-11-13 06:59:11,959 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 06:59:11,960 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 06:59:11,960 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 06:59:11,960 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 06:59:11,960 - INFO - ---
+
+
+2026-11-13 06:59:11,960 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 07:04:37,344 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:25.235
+2026-11-13 07:04:37,344 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:25.384
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 07:04:45,611 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 07:04:46,747 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 07:04:46,748 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 07:04:46,748 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 07:04:46,748 - INFO - > whether_raw_luna16: True
+2026-11-13 07:04:46,748 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 07:04:46,748 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 07:04:46,748 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 07:04:46,748 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 07:04:46,748 - INFO - ---
+
+
+2026-11-13 07:04:46,748 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 07:05:53,740 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:06.854
+2026-11-13 07:05:53,741 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:06.993
+detector: 86 scans done, 0 failed
+[180/1347 patients] scans 86, nodules 346, registrations 56/56, detector 727s, seg+feat 139s, total 929s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 07:09:23,865 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 07:09:25,041 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 07:09:25,042 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 07:09:25,042 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 07:09:25,042 - INFO - > whether_raw_luna16: True
+2026-11-13 07:09:25,042 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 07:09:25,042 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 07:09:25,042 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 07:09:25,042 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 07:09:25,042 - INFO - ---
+
+
+2026-11-13 07:09:25,043 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 07:13:57,943 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:04:32.781
+2026-11-13 07:13:57,943 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:04:32.901
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 07:14:06,011 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 07:14:07,173 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 07:14:07,173 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 07:14:07,173 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 07:14:07,174 - INFO - > whether_raw_luna16: True
+2026-11-13 07:14:07,174 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 07:14:07,174 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 07:14:07,174 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 07:14:07,174 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 07:14:07,174 - INFO - ---
+
+
+2026-11-13 07:14:07,174 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 07:20:12,314 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:06:04.994
+2026-11-13 07:20:12,314 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:06:05.140
+detector: 80 scans done, 0 failed
+[210/1347 patients] scans 80, nodules 370, registrations 50/50, detector 657s, seg+feat 147s, total 824s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 07:23:08,144 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 07:23:09,330 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 07:23:09,331 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 07:23:09,331 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 07:23:09,331 - INFO - > whether_raw_luna16: True
+2026-11-13 07:23:09,331 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 07:23:09,331 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 07:23:09,331 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 07:23:09,331 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 07:23:09,331 - INFO - ---
+
+
+2026-11-13 07:23:09,331 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 07:28:58,505 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:49.028
+2026-11-13 07:28:58,506 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:49.174
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 07:29:06,757 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 07:29:07,891 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 07:29:07,891 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 07:29:07,891 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 07:29:07,891 - INFO - > whether_raw_luna16: True
+2026-11-13 07:29:07,891 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 07:29:07,891 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 07:29:07,891 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 07:29:07,891 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 07:29:07,891 - INFO - ---
+
+
+2026-11-13 07:29:07,892 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 07:34:46,010 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:37.974
+2026-11-13 07:34:46,011 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:38.119
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 07:34:54,250 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 07:34:55,437 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 07:34:55,438 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 07:34:55,438 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 07:34:55,438 - INFO - > whether_raw_luna16: True
+2026-11-13 07:34:55,438 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 07:34:55,438 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 07:34:55,438 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 07:34:55,438 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 07:34:55,438 - INFO - ---
+
+
+2026-11-13 07:34:55,438 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 07:36:08,138 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:12.546
+2026-11-13 07:36:08,138 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:12.700
+detector: 87 scans done, 0 failed
+[240/1347 patients] scans 87, nodules 360, registrations 57/57, detector 788s, seg+feat 145s, total 1002s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 07:39:51,217 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 07:39:52,555 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 07:39:52,556 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 07:39:52,556 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 07:39:52,556 - INFO - > whether_raw_luna16: True
+2026-11-13 07:39:52,556 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 07:39:52,556 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 07:39:52,556 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 07:39:52,556 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 07:39:52,556 - INFO - ---
+
+
+2026-11-13 07:39:52,556 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 07:45:57,314 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:06:04.566
+2026-11-13 07:45:57,315 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:06:04.758
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 07:46:05,745 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 07:46:06,889 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 07:46:06,890 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 07:46:06,890 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 07:46:06,890 - INFO - > whether_raw_luna16: True
+2026-11-13 07:46:06,890 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 07:46:06,890 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 07:46:06,890 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 07:46:06,890 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 07:46:06,890 - INFO - ---
+
+
+2026-11-13 07:46:06,890 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 07:51:24,745 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:17.705
+2026-11-13 07:51:24,745 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:17.855
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 07:51:32,874 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 07:51:34,088 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 07:51:34,089 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 07:51:34,089 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 07:51:34,089 - INFO - > whether_raw_luna16: True
+2026-11-13 07:51:34,089 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 07:51:34,089 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 07:51:34,089 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 07:51:34,089 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 07:51:34,089 - INFO - ---
+
+
+2026-11-13 07:51:34,089 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 07:52:39,299 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:05.058
+2026-11-13 07:52:39,299 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:05.210
+detector: 86 scans done, 0 failed
+[270/1347 patients] scans 86, nodules 400, registrations 56/56, detector 777s, seg+feat 156s, total 1020s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 07:56:50,357 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 07:56:51,537 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 07:56:51,538 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 07:56:51,538 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 07:56:51,538 - INFO - > whether_raw_luna16: True
+2026-11-13 07:56:51,538 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 07:56:51,538 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 07:56:51,538 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 07:56:51,538 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 07:56:51,538 - INFO - ---
+
+
+2026-11-13 07:56:51,539 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 08:02:35,540 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:43.846
+2026-11-13 08:02:35,540 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:44.002
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 08:02:43,727 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 08:02:44,873 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 08:02:44,873 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 08:02:44,873 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 08:02:44,873 - INFO - > whether_raw_luna16: True
+2026-11-13 08:02:44,873 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 08:02:44,873 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 08:02:44,873 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 08:02:44,873 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 08:02:44,873 - INFO - ---
+
+
+2026-11-13 08:02:44,874 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 08:09:11,845 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:06:26.833
+2026-11-13 08:09:11,845 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:06:26.972
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 08:09:20,012 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 08:09:21,216 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 08:09:21,216 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 08:09:21,216 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 08:09:21,216 - INFO - > whether_raw_luna16: True
+2026-11-13 08:09:21,216 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 08:09:21,216 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 08:09:21,216 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 08:09:21,216 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 08:09:21,216 - INFO - ---
+
+
+2026-11-13 08:09:21,217 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 08:10:04,897 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:43.526
+2026-11-13 08:10:04,898 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:43.681
+detector: 85 scans done, 0 failed
+[300/1347 patients] scans 85, nodules 341, registrations 55/55, detector 803s, seg+feat 137s, total 1001s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 08:13:31,088 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 08:13:32,279 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 08:13:32,280 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 08:13:32,280 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 08:13:32,280 - INFO - > whether_raw_luna16: True
+2026-11-13 08:13:32,280 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 08:13:32,280 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 08:13:32,280 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 08:13:32,280 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 08:13:32,280 - INFO - ---
+
+
+2026-11-13 08:13:32,280 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 08:18:45,498 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:13.068
+2026-11-13 08:18:45,499 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:13.218
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 08:18:53,860 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 08:18:54,992 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 08:18:54,993 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 08:18:54,993 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 08:18:54,993 - INFO - > whether_raw_luna16: True
+2026-11-13 08:18:54,993 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 08:18:54,993 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 08:18:54,993 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 08:18:54,993 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 08:18:54,993 - INFO - ---
+
+
+2026-11-13 08:18:54,993 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
