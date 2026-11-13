@@ -1,0 +1,58 @@
+preflight ok: GitHub push works
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: python -m pip install --upgrade pip
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: python -m pip install --upgrade pip
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+torchaudio 2.6.0.dev20250319+cu128 requires torch==2.8.0.dev20250319, but you have torch 2.7.1+cu128 which is incompatible.
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: python -m pip install --upgrade pip
+torch 2.7.1+cu128 cuda True
+cpus=20 prepare_workers=6 reg_workers=4
+== 1/4 weights (LUNA25 luna25-20261103_0849, LIDC ROI lidc-nnunet-20261103_0855) ==
+weights luna25_resnet18_fold0_fp16.pt -> /workspace/runs/luna25/fold0/best.pt
+weights luna25_resnet18_fold1_fp16.pt -> /workspace/runs/luna25/fold1/best.pt
+weights luna25_resnet18_fold2_fp16.pt -> /workspace/runs/luna25/fold2/best.pt
+weights luna25_resnet18_fold3_fp16.pt -> /workspace/runs/luna25/fold3/best.pt
+weights luna25_resnet18_fold4_fp16.pt -> /workspace/runs/luna25/fold4/best.pt
+/workspace/models/lidc_roi:
+total 16
+drwxr-xr-x 3 root root   74 Nov 13 00:53 .
+drwxr-xr-x 3 root root   30 Nov 13 00:47 ..
+-rw-r--r-- 1 root root  258 Nov 13 00:53 dataset.json
+drwxr-xr-x 2 root root   42 Nov 13 00:53 fold_0
+-rw-r--r-- 1 root root 9761 Nov 13 00:53 plans.json
+
+/workspace/models/lidc_roi/fold_0:
+total 127140
+drwxr-xr-x 2 root root        42 Nov 13 00:53 .
+drwxr-xr-x 3 root root        74 Nov 13 00:53 ..
+-rw-r--r-- 1 root root 130187639 Nov 13 00:53 checkpoint_final.pth
+== 2/4 cohort ==
+2026-11-13 00:53:18,314 - Fetching index ct_index
+2026-11-13 00:53:19,339 - Fetching index clinical_index
+2026-11-13 00:53:19,613 - Since clinical_index was fetched, also installing corresponding tables.
+2026-11-13 00:53:20,449 - IDC clinical data downloaded successfully to /root/.local/share/IDC/v25/clinical_data
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/repo/scripts/nlst_longitudinal_cohort.py", line 136, in <module>
+    main()
+  File "/workspace/repo/scripts/nlst_longitudinal_cohort.py", line 124, in main
+    cohort = m.merge(picked[["stratum"]], left_on="PatientID", right_index=True)
+                     ~~~~~~^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py", line 4336, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py", line 6557, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py", line 6606, in _raise_if_missing
+    raise KeyError(f"None of [{key}] are in the [{axis_name}]")
+KeyError: "None of [Index(['stratum'], dtype='str')] are in the [columns]"
+exit code 1; elapsed: 5 min. log: /workspace/runs/nlst_long_20261113_0047.log
