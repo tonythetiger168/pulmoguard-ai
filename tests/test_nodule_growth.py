@@ -119,3 +119,29 @@ def test_registration_recovers_translation(tmp_path):
     tf = register_prior_to_current(tmp_path / "p.mhd", tmp_path / "c.mhd", shrink=1)
     pt = np.array([[96.0, 96.0, 96.0]])
     assert np.linalg.norm(apply_affine(tf, pt) - (pt + shift)) < 2.0
+
+
+def test_tracks_script_end_to_end(tmp_path):
+    import json
+    import subprocess
+    import sys
+
+    nod = pd.DataFrame({
+        "PatientID": ["p", "p", "p"], "exam": [0, 1, 1], "exam_day": [0, 365, 365],
+        "SeriesInstanceUID": ["s0", "s1", "s1"], "x": [0.0, 5.0, 80.0], "y": [0.0] * 3, "z": [0.0] * 3,
+        "long_d": [6, 8, 5], "short_d": [6, 8, 5], "mean_d": [6.0, 8.0, 5.0], "volume": [100.0, 200.0, 60.0],
+        "det_prob": [0.9, 0.9, 0.9], "seg_voxels": [100, 200, 60], "malignancy": [0.1, 0.3, 0.05],
+        "emb_row": ["e:0", "e:1", "e:2"],
+    })
+    nod.to_csv(tmp_path / "nodules.csv", index=False)
+    tf = {"PatientID": "p", "prior_exam": 0, "exam": 1, "metric": -0.6, "o0": 5.0, "o1": 0.0, "o2": 0.0}
+    tf.update({f"m{i}{j}": float(i == j) for i in range(3) for j in range(3)})
+    pd.DataFrame([tf]).to_csv(tmp_path / "transforms.csv", index=False)
+    subprocess.run([sys.executable, "-m", "scripts.nlst_longitudinal_tracks", "--run_dir", str(tmp_path),
+                    "--out", str(tmp_path / "o"), "--ctabc", str(tmp_path / "missing.parquet")], check=True)
+    t = pd.read_csv(tmp_path / "o" / "tracks.csv")
+    grown = t[(t.exam == 1) & (t.x == 5.0)].iloc[0]
+    assert not grown.is_new and abs(grown.vdt_days - 365) < 1e-6 and grown.lungrads_growth
+    assert t[(t.exam == 1) & (t.x == 80.0)].is_new.item()
+    qc = json.load(open(tmp_path / "o" / "qc.json"))
+    assert qc["registrations_ok"] == 1 and qc["matched_to_prior_pct"] == 50.0
