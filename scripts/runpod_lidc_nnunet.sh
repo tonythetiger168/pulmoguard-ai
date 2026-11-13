@@ -134,8 +134,8 @@ save_roi_dataset() {  # ROI 資料集（nnU-Net raw 格式）打包 → Release 
   [ -n "$id" ] || { echo "ROI release create failed: $(printf '%s' "$rel" | head -c 300)"; return 1; }
   for f in "$tgz".part*; do
     curl -sS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Content-Type: application/octet-stream" \
-      --data-binary @"$f" "https://uploads.github.com/repos/$REPO/releases/$id/assets?name=$(basename "$f")" \
-      -o /dev/null -w "uploaded $(basename "$f"): HTTP %{http_code}\n" || true
+      -T "$f" "https://uploads.github.com/repos/$REPO/releases/$id/assets?name=$(basename "$f")" \
+      -o /dev/null -w "uploaded $(basename "$f"): HTTP %{http_code}\n" || true   # -T 串流上傳；--data-binary @ 會整檔讀進記憶體（1.1 GB 時 OOM）
   done
   rm -f "$tgz" "$tgz".part*
   echo "ROI dataset: https://github.com/$REPO/releases/tag/$tag"
