@@ -4056,3 +4056,1800 @@ monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current defaul
 
 
 2026-11-13 14:19:23,106 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+results pushed (progress): https://github.com/tonythetiger168/pulmoguard-ai/tree/pilot-results/results/nlst_long_20261113_full_s1b
+2026-11-13 14:25:38,295 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:06:15.037
+2026-11-13 14:25:38,296 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:06:15.189
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 14:25:46,285 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 14:25:47,459 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 14:25:47,460 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 14:25:47,460 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 14:25:47,460 - INFO - > whether_raw_luna16: True
+2026-11-13 14:25:47,460 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 14:25:47,460 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 14:25:47,460 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 14:25:47,460 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 14:25:47,460 - INFO - ---
+
+
+2026-11-13 14:25:47,460 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 14:26:20,397 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:32.788
+2026-11-13 14:26:20,397 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:32.937
+detector: 83 scans done, 0 failed
+[960/1347 patients] scans 83, nodules 471, registrations 53/53, detector 834s, seg+feat 181s, total 1031s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 14:29:44,982 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 14:29:46,114 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 14:29:46,115 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 14:29:46,115 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 14:29:46,115 - INFO - > whether_raw_luna16: True
+2026-11-13 14:29:46,115 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 14:29:46,115 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 14:29:46,115 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 14:29:46,115 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 14:29:46,115 - INFO - ---
+
+
+2026-11-13 14:29:46,115 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 14:36:26,512 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:06:40.258
+2026-11-13 14:36:26,513 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:06:40.397
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 14:36:34,779 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 14:36:35,907 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 14:36:35,908 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 14:36:35,908 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 14:36:35,908 - INFO - > whether_raw_luna16: True
+2026-11-13 14:36:35,908 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 14:36:35,908 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 14:36:35,908 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 14:36:35,908 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 14:36:35,908 - INFO - ---
+
+
+2026-11-13 14:36:35,908 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 14:42:27,416 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:51.368
+2026-11-13 14:42:27,416 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:51.507
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 14:42:35,687 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 14:42:36,865 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 14:42:36,866 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 14:42:36,866 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 14:42:36,866 - INFO - > whether_raw_luna16: True
+2026-11-13 14:42:36,866 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 14:42:36,866 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 14:42:36,866 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 14:42:36,866 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 14:42:36,866 - INFO - ---
+
+
+2026-11-13 14:42:36,866 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 14:43:06,710 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:29.687
+2026-11-13 14:43:06,711 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:29.844
+detector: 82 scans done, 0 failed
+[990/1347 patients] scans 82, nodules 413, registrations 52/52, detector 810s, seg+feat 164s, total 998s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 14:46:23,154 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 14:46:24,294 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 14:46:24,294 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 14:46:24,294 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 14:46:24,294 - INFO - > whether_raw_luna16: True
+2026-11-13 14:46:24,294 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 14:46:24,294 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 14:46:24,294 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 14:46:24,294 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 14:46:24,294 - INFO - ---
+
+
+2026-11-13 14:46:24,294 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 14:51:41,002 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:16.560
+2026-11-13 14:51:41,002 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:16.707
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 14:51:48,984 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 14:51:50,180 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 14:51:50,180 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 14:51:50,180 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 14:51:50,180 - INFO - > whether_raw_luna16: True
+2026-11-13 14:51:50,180 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 14:51:50,180 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 14:51:50,180 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 14:51:50,180 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 14:51:50,181 - INFO - ---
+
+
+2026-11-13 14:51:50,181 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 14:57:20,243 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:29.903
+2026-11-13 14:57:20,243 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:30.062
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 14:57:29,536 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 14:57:30,747 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 14:57:30,747 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 14:57:30,747 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 14:57:30,747 - INFO - > whether_raw_luna16: True
+2026-11-13 14:57:30,747 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 14:57:30,747 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 14:57:30,747 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 14:57:30,747 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 14:57:30,747 - INFO - ---
+
+
+2026-11-13 14:57:30,748 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 14:58:11,687 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:40.792
+2026-11-13 14:58:11,688 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:40.940
+detector: 83 scans done, 0 failed
+[1020/1347 patients] scans 83, nodules 279, registrations 53/53, detector 717s, seg+feat 118s, total 930s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 15:01:53,356 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:01:54,556 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:01:54,556 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:01:54,556 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:01:54,556 - INFO - > whether_raw_luna16: True
+2026-11-13 15:01:54,556 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:01:54,556 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 15:01:54,556 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:01:54,556 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 15:01:54,557 - INFO - ---
+
+
+2026-11-13 15:01:54,557 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:06:55,403 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:00.706
+2026-11-13 15:06:55,404 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:00.847
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 15:07:05,229 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:07:06,421 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:07:06,422 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:07:06,422 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:07:06,422 - INFO - > whether_raw_luna16: True
+2026-11-13 15:07:06,422 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:07:06,422 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 15:07:06,422 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:07:06,422 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 15:07:06,422 - INFO - ---
+
+
+2026-11-13 15:07:06,422 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:12:35,224 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:28.650
+2026-11-13 15:12:35,224 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:28.802
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 15:12:44,574 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:12:45,752 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:12:45,752 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:12:45,752 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:12:45,753 - INFO - > whether_raw_luna16: True
+2026-11-13 15:12:45,753 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:12:45,753 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 15:12:45,753 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:12:45,753 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 15:12:45,753 - INFO - ---
+
+
+2026-11-13 15:12:45,753 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:13:44,206 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:58.305
+2026-11-13 15:13:44,206 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:58.453
+detector: 86 scans done, 0 failed
+  registration 206292 0->1 failed: RuntimeError: Exception thrown in SimpleITK ImageRegistrationMethod_Execute: /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkSmoothingRecursiveGaussianImageFilter.hxx:214:
+ITK ERROR: SmoothingRecursiveGaussianImageFilter(0x7b1f44025e30): The number of pixels along dimension 2 is less than 4. This filter requires a minimum of four pixels along the dimension to be processed.
+  registration 206292 1->2 failed: RuntimeError: Exception thrown in SimpleITK ImageRegistrationMethod_Execute: /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkSmoothingRecursiveGaussianImageFilter.hxx:214:
+ITK ERROR: SmoothingRecursiveGaussianImageFilter(0x7b1f44d8e6a0): The number of pixels along dimension 2 is less than 4. This filter requires a minimum of four pixels along the dimension to be processed.
+[1050/1347 patients] scans 86, nodules 374, registrations 54/56, detector 719s, seg+feat 157s, total 955s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 15:17:48,246 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:17:49,406 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:17:49,406 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:17:49,406 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:17:49,406 - INFO - > whether_raw_luna16: True
+2026-11-13 15:17:49,406 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:17:49,406 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 15:17:49,406 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:17:49,407 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 15:17:49,407 - INFO - ---
+
+
+2026-11-13 15:17:49,407 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:22:52,141 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:02.611
+2026-11-13 15:22:52,142 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:02.735
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 15:23:01,192 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:23:02,353 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:23:02,353 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:23:02,353 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:23:02,353 - INFO - > whether_raw_luna16: True
+2026-11-13 15:23:02,353 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:23:02,353 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 15:23:02,353 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:23:02,353 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 15:23:02,353 - INFO - ---
+
+
+2026-11-13 15:23:02,354 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:26:03,865 - ignite.engine.engine.DetectionEvaluator - ERROR - Current run is terminating due to exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 15:26:03,866 - ERROR - Exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 15:26:06,747 - ignite.engine.engine.DetectionEvaluator - ERROR - Engine run is terminating due to exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 15:26:06,748 - ERROR - Exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 374, in evaluate
+    return eval(value[len(self.prefix) :], globals_, locals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 151, in run
+    super().run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/workflow.py", line 282, in run
+    super().run(data=self.data_loader, max_epochs=self.state.max_epochs)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1056, in run
+    return self._internal_run()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1099, in _internal_run
+    return next(self._internal_run_generator)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1174, in _internal_run_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/__main__.py", line 31, in <module>
+    fire.Fire()
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/scripts.py", line 1012, in run
+    workflow.run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 488, in run
+    return self._run_expr(id=self.run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 532, in _run_expr
+    ret.append(self.parser.get_parsed_content(sub_id, **kwargs))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_parser.py", line 290, in get_parsed_content
+    return self.ref_resolver.get_resolved_content(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 193, in get_resolved_content
+    return self._resolve_one_item(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 175, in _resolve_one_item
+    item.evaluate(globals={f"{self._vars}": self.resolved_content}) if run_eval else item
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 376, in evaluate
+    raise RuntimeError(f"Failed to evaluate {self}") from e
+RuntimeError: Failed to evaluate ConfigExpression: 
+"$__local_refs['evaluator'].run()"
+bundle failed on 40 scans (0001): CalledProcessError
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 15:26:15,578 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:26:16,770 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:26:16,771 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:26:16,771 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:26:16,771 - INFO - > whether_raw_luna16: True
+2026-11-13 15:26:16,771 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:26:16,771 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 15:26:16,771 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:26:16,771 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 15:26:16,771 - INFO - ---
+
+
+2026-11-13 15:26:16,771 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:29:20,276 - ignite.engine.engine.DetectionEvaluator - ERROR - Current run is terminating due to exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 15:29:20,277 - ERROR - Exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 15:29:20,431 - ignite.engine.engine.DetectionEvaluator - ERROR - Engine run is terminating due to exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 15:29:20,431 - ERROR - Exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 374, in evaluate
+    return eval(value[len(self.prefix) :], globals_, locals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 151, in run
+    super().run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/workflow.py", line 282, in run
+    super().run(data=self.data_loader, max_epochs=self.state.max_epochs)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1056, in run
+    return self._internal_run()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1099, in _internal_run
+    return next(self._internal_run_generator)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1174, in _internal_run_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/__main__.py", line 31, in <module>
+    fire.Fire()
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/scripts.py", line 1012, in run
+    workflow.run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 488, in run
+    return self._run_expr(id=self.run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 532, in _run_expr
+    ret.append(self.parser.get_parsed_content(sub_id, **kwargs))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_parser.py", line 290, in get_parsed_content
+    return self.ref_resolver.get_resolved_content(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 193, in get_resolved_content
+    return self._resolve_one_item(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 175, in _resolve_one_item
+    item.evaluate(globals={f"{self._vars}": self.resolved_content}) if run_eval else item
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 376, in evaluate
+    raise RuntimeError(f"Failed to evaluate {self}") from e
+RuntimeError: Failed to evaluate ConfigExpression: 
+"$__local_refs['evaluator'].run()"
+bundle failed on 20 scans (0002): CalledProcessError
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0003.json --output_dir /workspace/runs/nlst_long --output_filename det_0003.json
+2026-11-13 15:29:29,583 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:29:30,904 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:29:30,904 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:29:30,904 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:29:30,904 - INFO - > whether_raw_luna16: True
+2026-11-13 15:29:30,904 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:29:30,904 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0003.json'
+2026-11-13 15:29:30,905 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:29:30,905 - INFO - > output_filename: 'det_0003.json'
+2026-11-13 15:29:30,905 - INFO - ---
+
+
+2026-11-13 15:29:30,905 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:31:18,421 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:47.351
+2026-11-13 15:31:18,422 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:47.517
+detector: 50 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0004.json --output_dir /workspace/runs/nlst_long --output_filename det_0004.json
+2026-11-13 15:31:27,468 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:31:28,640 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:31:28,641 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:31:28,641 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:31:28,641 - INFO - > whether_raw_luna16: True
+2026-11-13 15:31:28,641 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:31:28,641 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0004.json'
+2026-11-13 15:31:28,641 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:31:28,641 - INFO - > output_filename: 'det_0004.json'
+2026-11-13 15:31:28,641 - INFO - ---
+
+
+2026-11-13 15:31:28,641 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:33:05,165 - ignite.engine.engine.DetectionEvaluator - ERROR - Current run is terminating due to exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 15:33:05,165 - ERROR - Exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 15:33:05,315 - ignite.engine.engine.DetectionEvaluator - ERROR - Engine run is terminating due to exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 15:33:05,316 - ERROR - Exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 374, in evaluate
+    return eval(value[len(self.prefix) :], globals_, locals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 151, in run
+    super().run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/workflow.py", line 282, in run
+    super().run(data=self.data_loader, max_epochs=self.state.max_epochs)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1056, in run
+    return self._internal_run()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1099, in _internal_run
+    return next(self._internal_run_generator)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1174, in _internal_run_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/__main__.py", line 31, in <module>
+    fire.Fire()
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/scripts.py", line 1012, in run
+    workflow.run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 488, in run
+    return self._run_expr(id=self.run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 532, in _run_expr
+    ret.append(self.parser.get_parsed_content(sub_id, **kwargs))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_parser.py", line 290, in get_parsed_content
+    return self.ref_resolver.get_resolved_content(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 193, in get_resolved_content
+    return self._resolve_one_item(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 175, in _resolve_one_item
+    item.evaluate(globals={f"{self._vars}": self.resolved_content}) if run_eval else item
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 376, in evaluate
+    raise RuntimeError(f"Failed to evaluate {self}") from e
+RuntimeError: Failed to evaluate ConfigExpression: 
+"$__local_refs['evaluator'].run()"
+bundle failed on 10 scans (0004): CalledProcessError
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0005.json --output_dir /workspace/runs/nlst_long --output_filename det_0005.json
+2026-11-13 15:33:14,386 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:33:15,632 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:33:15,632 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:33:15,632 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:33:15,632 - INFO - > whether_raw_luna16: True
+2026-11-13 15:33:15,632 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:33:15,632 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0005.json'
+2026-11-13 15:33:15,632 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:33:15,632 - INFO - > output_filename: 'det_0005.json'
+2026-11-13 15:33:15,632 - INFO - ---
+
+
+2026-11-13 15:33:15,633 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:34:34,525 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:18.741
+2026-11-13 15:34:34,525 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:18.893
+detector: 55 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0006.json --output_dir /workspace/runs/nlst_long --output_filename det_0006.json
+2026-11-13 15:34:42,837 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:34:44,028 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:34:44,028 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:34:44,028 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:34:44,028 - INFO - > whether_raw_luna16: True
+2026-11-13 15:34:44,028 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:34:44,028 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0006.json'
+2026-11-13 15:34:44,028 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:34:44,028 - INFO - > output_filename: 'det_0006.json'
+2026-11-13 15:34:44,028 - INFO - ---
+
+
+2026-11-13 15:34:44,029 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:35:23,780 - ignite.engine.engine.DetectionEvaluator - ERROR - Current run is terminating due to exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 15:35:23,781 - ERROR - Exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 15:35:23,974 - ignite.engine.engine.DetectionEvaluator - ERROR - Engine run is terminating due to exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 15:35:23,974 - ERROR - Exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 374, in evaluate
+    return eval(value[len(self.prefix) :], globals_, locals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 151, in run
+    super().run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/workflow.py", line 282, in run
+    super().run(data=self.data_loader, max_epochs=self.state.max_epochs)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1056, in run
+    return self._internal_run()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1099, in _internal_run
+    return next(self._internal_run_generator)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1174, in _internal_run_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/__main__.py", line 31, in <module>
+    fire.Fire()
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/scripts.py", line 1012, in run
+    workflow.run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 488, in run
+    return self._run_expr(id=self.run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 532, in _run_expr
+    ret.append(self.parser.get_parsed_content(sub_id, **kwargs))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_parser.py", line 290, in get_parsed_content
+    return self.ref_resolver.get_resolved_content(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 193, in get_resolved_content
+    return self._resolve_one_item(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 175, in _resolve_one_item
+    item.evaluate(globals={f"{self._vars}": self.resolved_content}) if run_eval else item
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 376, in evaluate
+    raise RuntimeError(f"Failed to evaluate {self}") from e
+RuntimeError: Failed to evaluate ConfigExpression: 
+"$__local_refs['evaluator'].run()"
+bundle failed on 5 scans (0006): CalledProcessError
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0007.json --output_dir /workspace/runs/nlst_long --output_filename det_0007.json
+2026-11-13 15:35:32,470 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:35:33,666 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:35:33,667 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:35:33,667 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:35:33,667 - INFO - > whether_raw_luna16: True
+2026-11-13 15:35:33,667 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:35:33,667 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0007.json'
+2026-11-13 15:35:33,667 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:35:33,667 - INFO - > output_filename: 'det_0007.json'
+2026-11-13 15:35:33,667 - INFO - ---
+
+
+2026-11-13 15:35:33,667 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:36:10,578 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:36.757
+2026-11-13 15:36:10,578 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:36.910
+detector: 57 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0008.json --output_dir /workspace/runs/nlst_long --output_filename det_0008.json
+2026-11-13 15:36:19,111 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:36:20,411 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:36:20,412 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:36:20,412 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:36:20,412 - INFO - > whether_raw_luna16: True
+2026-11-13 15:36:20,412 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:36:20,412 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0008.json'
+2026-11-13 15:36:20,412 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:36:20,412 - INFO - > output_filename: 'det_0008.json'
+2026-11-13 15:36:20,412 - INFO - ---
+
+
+2026-11-13 15:36:20,413 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:37:03,425 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:42.845
+2026-11-13 15:37:03,425 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:43.012
+detector: 60 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0009.json --output_dir /workspace/runs/nlst_long --output_filename det_0009.json
+2026-11-13 15:37:12,081 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:37:13,268 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:37:13,268 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:37:13,268 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:37:13,268 - INFO - > whether_raw_luna16: True
+2026-11-13 15:37:13,268 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:37:13,268 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0009.json'
+2026-11-13 15:37:13,268 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:37:13,268 - INFO - > output_filename: 'det_0009.json'
+2026-11-13 15:37:13,268 - INFO - ---
+
+
+2026-11-13 15:37:13,268 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:40:11,334 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:02:57.922
+2026-11-13 15:40:11,334 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:02:58.066
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0010.json --output_dir /workspace/runs/nlst_long --output_filename det_0010.json
+2026-11-13 15:40:19,939 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:40:21,110 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:40:21,111 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:40:21,111 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:40:21,111 - INFO - > whether_raw_luna16: True
+2026-11-13 15:40:21,111 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:40:21,111 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0010.json'
+2026-11-13 15:40:21,111 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:40:21,111 - INFO - > output_filename: 'det_0010.json'
+2026-11-13 15:40:21,111 - INFO - ---
+
+
+2026-11-13 15:40:21,112 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:40:36,703 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:15.447
+2026-11-13 15:40:36,703 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:15.591
+detector: 81 scans done, 0 failed
+[1080/1347 patients] scans 81, nodules 401, registrations 51/51, detector 1377s, seg+feat 158s, total 1573s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 15:44:01,977 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:44:03,156 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:44:03,157 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:44:03,157 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:44:03,157 - INFO - > whether_raw_luna16: True
+2026-11-13 15:44:03,157 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:44:03,157 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 15:44:03,157 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:44:03,157 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 15:44:03,157 - INFO - ---
+
+
+2026-11-13 15:44:03,157 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:50:18,691 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:06:15.388
+2026-11-13 15:50:18,691 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:06:15.533
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 15:50:26,777 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:50:27,975 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:50:27,975 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:50:27,975 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:50:27,975 - INFO - > whether_raw_luna16: True
+2026-11-13 15:50:27,975 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:50:27,975 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 15:50:27,975 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:50:27,975 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 15:50:27,975 - INFO - ---
+
+
+2026-11-13 15:50:27,976 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:55:45,006 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:16.894
+2026-11-13 15:55:45,006 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:17.031
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 15:55:53,714 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 15:55:54,878 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 15:55:54,879 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 15:55:54,879 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 15:55:54,879 - INFO - > whether_raw_luna16: True
+2026-11-13 15:55:54,879 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 15:55:54,879 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 15:55:54,879 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 15:55:54,879 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 15:55:54,879 - INFO - ---
+
+
+2026-11-13 15:55:54,879 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 15:56:35,158 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:40.145
+2026-11-13 15:56:35,159 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:40.279
+detector: 83 scans done, 0 failed
+[1110/1347 patients] scans 83, nodules 356, registrations 53/53, detector 762s, seg+feat 144s, total 972s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 16:00:13,032 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 16:00:14,177 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 16:00:14,177 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 16:00:14,178 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 16:00:14,178 - INFO - > whether_raw_luna16: True
+2026-11-13 16:00:14,178 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 16:00:14,178 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 16:00:14,178 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 16:00:14,178 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 16:00:14,178 - INFO - ---
+
+
+2026-11-13 16:00:14,178 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 16:05:17,002 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:02.691
+2026-11-13 16:05:17,002 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:02.824
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 16:05:25,744 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 16:05:26,912 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 16:05:26,912 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 16:05:26,912 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 16:05:26,912 - INFO - > whether_raw_luna16: True
+2026-11-13 16:05:26,912 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 16:05:26,912 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 16:05:26,912 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 16:05:26,912 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 16:05:26,912 - INFO - ---
+
+
+2026-11-13 16:05:26,913 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 16:11:19,341 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:52.285
+2026-11-13 16:11:19,342 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:52.429
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 16:11:28,388 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 16:11:29,655 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 16:11:29,656 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 16:11:29,656 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 16:11:29,656 - INFO - > whether_raw_luna16: True
+2026-11-13 16:11:29,656 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 16:11:29,656 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 16:11:29,656 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 16:11:29,656 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 16:11:29,656 - INFO - ---
+
+
+2026-11-13 16:11:29,656 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 16:12:20,721 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:50.908
+2026-11-13 16:12:20,722 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:51.065
+detector: 82 scans done, 0 failed
+[1140/1347 patients] scans 82, nodules 351, registrations 52/52, detector 736s, seg+feat 143s, total 951s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 16:16:04,093 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 16:16:05,272 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 16:16:05,273 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 16:16:05,273 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 16:16:05,273 - INFO - > whether_raw_luna16: True
+2026-11-13 16:16:05,273 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 16:16:05,273 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 16:16:05,273 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 16:16:05,273 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 16:16:05,273 - INFO - ---
+
+
+2026-11-13 16:16:05,273 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 16:18:17,660 - ignite.engine.engine.DetectionEvaluator - ERROR - Current run is terminating due to exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 16:18:17,661 - ERROR - Exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 16:18:17,929 - ignite.engine.engine.DetectionEvaluator - ERROR - Engine run is terminating due to exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 16:18:17,929 - ERROR - Exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 374, in evaluate
+    return eval(value[len(self.prefix) :], globals_, locals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 151, in run
+    super().run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/workflow.py", line 282, in run
+    super().run(data=self.data_loader, max_epochs=self.state.max_epochs)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1056, in run
+    return self._internal_run()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1099, in _internal_run
+    return next(self._internal_run_generator)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1174, in _internal_run_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/__main__.py", line 31, in <module>
+    fire.Fire()
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/scripts.py", line 1012, in run
+    workflow.run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 488, in run
+    return self._run_expr(id=self.run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 532, in _run_expr
+    ret.append(self.parser.get_parsed_content(sub_id, **kwargs))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_parser.py", line 290, in get_parsed_content
+    return self.ref_resolver.get_resolved_content(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 193, in get_resolved_content
+    return self._resolve_one_item(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 175, in _resolve_one_item
+    item.evaluate(globals={f"{self._vars}": self.resolved_content}) if run_eval else item
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 376, in evaluate
+    raise RuntimeError(f"Failed to evaluate {self}") from e
+RuntimeError: Failed to evaluate ConfigExpression: 
+"$__local_refs['evaluator'].run()"
+bundle failed on 40 scans (0000): CalledProcessError
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 16:18:26,067 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 16:18:27,176 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 16:18:27,177 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 16:18:27,177 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 16:18:27,177 - INFO - > whether_raw_luna16: True
+2026-11-13 16:18:27,177 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 16:18:27,177 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 16:18:27,177 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 16:18:27,177 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 16:18:27,177 - INFO - ---
+
+
+2026-11-13 16:18:27,177 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 16:20:37,463 - ignite.engine.engine.DetectionEvaluator - ERROR - Current run is terminating due to exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 16:20:37,464 - ERROR - Exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 16:20:37,831 - ignite.engine.engine.DetectionEvaluator - ERROR - Engine run is terminating due to exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+2026-11-13 16:20:37,831 - ERROR - Exception: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 374, in evaluate
+    return eval(value[len(self.prefix) :], globals_, locals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 151, in run
+    super().run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/workflow.py", line 282, in run
+    super().run(data=self.data_loader, max_epochs=self.state.max_epochs)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1056, in run
+    return self._internal_run()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1099, in _internal_run
+    return next(self._internal_run_generator)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1174, in _internal_run_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1123, in _internal_run_as_gen
+    epoch_time_taken += yield from self._run_once_on_dataset_as_gen()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1291, in _run_once_on_dataset_as_gen
+    self._handle_exception(e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 676, in _handle_exception
+    self._fire_event(Events.EXCEPTION_RAISED, e)
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 453, in _fire_event
+    func(*first, *(event_args + others), **kwargs)
+  File "/usr/local/lib/python3.11/dist-packages/monai/handlers/stats_handler.py", line 201, in exception_raised
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/ignite/engine/engine.py", line 1269, in _run_once_on_dataset_as_gen
+    self.state.output = self._process_function(self, self.state.batch)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/engines/evaluator.py", line 328, in _iteration
+    engine.state.output[Keys.PRED] = engine.inferer(inputs, engine.network, *args, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/models/bundles/lung_nodule_ct_detection/scripts/detection_inferer.py", line 66, in __call__
+    return self.detector(inputs, *args, use_inferer=use_inferer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 547, in forward
+    detections = self.postprocess_detections(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 681, in postprocess_detections
+    boxes_per_image = [
+                      ^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/networks/retinanet_detector.py", line 682, in <listcomp>
+    self.box_coder.decode_single(b.to(torch.float32), a).to(compute_dtype)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/apps/detection/utils/box_coder.py", line 225, in decode_single
+    pred_ctr_xyx_axis = dxyz_axis * whd_axis[:, None] + ctr_xyz_axis[:, None]
+                        ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/__main__.py", line 31, in <module>
+    fire.Fire()
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/scripts.py", line 1012, in run
+    workflow.run()
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 488, in run
+    return self._run_expr(id=self.run_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/workflows.py", line 532, in _run_expr
+    ret.append(self.parser.get_parsed_content(sub_id, **kwargs))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_parser.py", line 290, in get_parsed_content
+    return self.ref_resolver.get_resolved_content(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 193, in get_resolved_content
+    return self._resolve_one_item(id=id, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/reference_resolver.py", line 175, in _resolve_one_item
+    item.evaluate(globals={f"{self._vars}": self.resolved_content}) if run_eval else item
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/bundle/config_item.py", line 376, in evaluate
+    raise RuntimeError(f"Failed to evaluate {self}") from e
+RuntimeError: Failed to evaluate ConfigExpression: 
+"$__local_refs['evaluator'].run()"
+bundle failed on 20 scans (0001): CalledProcessError
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 16:20:46,367 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 16:20:47,505 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 16:20:47,506 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 16:20:47,506 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 16:20:47,506 - INFO - > whether_raw_luna16: True
+2026-11-13 16:20:47,506 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 16:20:47,506 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 16:20:47,506 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 16:20:47,506 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 16:20:47,506 - INFO - ---
+
+
+2026-11-13 16:20:47,506 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 16:22:46,711 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:59.054
+2026-11-13 16:22:46,712 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:59.205
+detector: 10 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0003.json --output_dir /workspace/runs/nlst_long --output_filename det_0003.json
+2026-11-13 16:22:54,935 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 16:22:56,143 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 16:22:56,144 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 16:22:56,144 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 16:22:56,144 - INFO - > whether_raw_luna16: True
+2026-11-13 16:22:56,144 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 16:22:56,144 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0003.json'
+2026-11-13 16:22:56,144 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 16:22:56,144 - INFO - > output_filename: 'det_0003.json'
+2026-11-13 16:22:56,144 - INFO - ---
+
+
+2026-11-13 16:22:56,144 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 16:25:06,282 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:02:09.991
+2026-11-13 16:25:06,283 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:02:10.139
+detector: 20 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0004.json --output_dir /workspace/runs/nlst_long --output_filename det_0004.json
+2026-11-13 16:25:15,036 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 16:25:16,174 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 16:25:16,175 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 16:25:16,175 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 16:25:16,175 - INFO - > whether_raw_luna16: True
+2026-11-13 16:25:16,175 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 16:25:16,175 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0004.json'
+2026-11-13 16:25:16,175 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 16:25:16,175 - INFO - > output_filename: 'det_0004.json'
+2026-11-13 16:25:16,175 - INFO - ---
+
+
+2026-11-13 16:25:16,175 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 16:28:43,637 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:03:27.325
+2026-11-13 16:28:43,637 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:03:27.462
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0005.json --output_dir /workspace/runs/nlst_long --output_filename det_0005.json
+2026-11-13 16:28:51,783 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 16:28:52,916 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 16:28:52,916 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 16:28:52,916 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 16:28:52,916 - INFO - > whether_raw_luna16: True
+2026-11-13 16:28:52,916 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 16:28:52,916 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0005.json'
+2026-11-13 16:28:52,916 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 16:28:52,916 - INFO - > output_filename: 'det_0005.json'
+2026-11-13 16:28:52,916 - INFO - ---
+
+
+2026-11-13 16:28:52,917 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 16:36:04,536 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:07:11.467
+2026-11-13 16:36:04,536 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:07:11.620
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0006.json --output_dir /workspace/runs/nlst_long --output_filename det_0006.json
+2026-11-13 16:36:12,907 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 16:36:14,058 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 16:36:14,059 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 16:36:14,059 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 16:36:14,059 - INFO - > whether_raw_luna16: True
+2026-11-13 16:36:14,059 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 16:36:14,059 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0006.json'
+2026-11-13 16:36:14,059 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 16:36:14,059 - INFO - > output_filename: 'det_0006.json'
+2026-11-13 16:36:14,059 - INFO - ---
+
+
+2026-11-13 16:36:14,059 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 16:38:14,710 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:02:00.507
+2026-11-13 16:38:14,711 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:02:00.651
+detector: 87 scans done, 0 failed
+[1170/1347 patients] scans 87, nodules 395, registrations 57/57, detector 1339s, seg+feat 164s, total 1534s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 16:41:38,053 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 16:41:39,196 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 16:41:39,196 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 16:41:39,196 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 16:41:39,196 - INFO - > whether_raw_luna16: True
+2026-11-13 16:41:39,196 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 16:41:39,196 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 16:41:39,197 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 16:41:39,197 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 16:41:39,197 - INFO - ---
+
+
+2026-11-13 16:41:39,197 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 16:47:21,625 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:42.291
+2026-11-13 16:47:21,626 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:42.429
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 16:47:29,790 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 16:47:30,969 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 16:47:30,969 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 16:47:30,969 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 16:47:30,969 - INFO - > whether_raw_luna16: True
+2026-11-13 16:47:30,969 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 16:47:30,969 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 16:47:30,970 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 16:47:30,970 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 16:47:30,970 - INFO - ---
+
+
+2026-11-13 16:47:30,970 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 16:52:55,605 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:24.493
+2026-11-13 16:52:55,605 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:24.635
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 16:53:03,765 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 16:53:04,892 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 16:53:04,893 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 16:53:04,893 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 16:53:04,893 - INFO - > whether_raw_luna16: True
+2026-11-13 16:53:04,893 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 16:53:04,893 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 16:53:04,893 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 16:53:04,893 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 16:53:04,893 - INFO - ---
+
+
+2026-11-13 16:53:04,893 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 16:53:46,877 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:41.843
+2026-11-13 16:53:46,877 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:41.984
+detector: 83 scans done, 0 failed
+[1200/1347 patients] scans 83, nodules 440, registrations 53/53, detector 737s, seg+feat 167s, total 924s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 16:57:01,948 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 16:57:03,129 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 16:57:03,129 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 16:57:03,130 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 16:57:03,130 - INFO - > whether_raw_luna16: True
+2026-11-13 16:57:03,130 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 16:57:03,130 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 16:57:03,130 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 16:57:03,130 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 16:57:03,130 - INFO - ---
+
+
+2026-11-13 16:57:03,130 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 17:02:08,619 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:05.343
+2026-11-13 17:02:08,619 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:05.489
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 17:02:17,007 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 17:02:18,196 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 17:02:18,196 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 17:02:18,197 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 17:02:18,197 - INFO - > whether_raw_luna16: True
+2026-11-13 17:02:18,197 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 17:02:18,197 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 17:02:18,197 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 17:02:18,197 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 17:02:18,197 - INFO - ---
+
+
+2026-11-13 17:02:18,197 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 17:07:10,377 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:04:52.032
+2026-11-13 17:07:10,377 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:04:52.180
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 17:07:18,511 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 17:07:19,687 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 17:07:19,687 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 17:07:19,688 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 17:07:19,688 - INFO - > whether_raw_luna16: True
+2026-11-13 17:07:19,688 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 17:07:19,688 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 17:07:19,688 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 17:07:19,688 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 17:07:19,688 - INFO - ---
+
+
+2026-11-13 17:07:19,688 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 17:07:56,839 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:37.003
+2026-11-13 17:07:56,840 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:37.152
+detector: 84 scans done, 0 failed
+[1230/1347 patients] scans 84, nodules 468, registrations 54/54, detector 663s, seg+feat 175s, total 891s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 17:11:52,584 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 17:11:53,750 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 17:11:53,750 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 17:11:53,750 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 17:11:53,750 - INFO - > whether_raw_luna16: True
+2026-11-13 17:11:53,751 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 17:11:53,751 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 17:11:53,751 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 17:11:53,751 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 17:11:53,751 - INFO - ---
+
+
+2026-11-13 17:11:53,751 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 17:17:53,374 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:59.483
+2026-11-13 17:17:53,374 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:59.623
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 17:18:01,575 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 17:18:02,755 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 17:18:02,755 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 17:18:02,755 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 17:18:02,755 - INFO - > whether_raw_luna16: True
+2026-11-13 17:18:02,755 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 17:18:02,755 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 17:18:02,755 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 17:18:02,756 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 17:18:02,756 - INFO - ---
+
+
+2026-11-13 17:18:02,756 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
