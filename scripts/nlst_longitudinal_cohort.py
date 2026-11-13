@@ -118,8 +118,7 @@ def main() -> None:
     picked = sample_patients(per, args.n_growth, args.n_random, args.seed)
     if args.max_patients and len(picked) > args.max_patients:
         frac = args.max_patients / len(picked)
-        picked = picked.groupby("stratum", group_keys=False).apply(
-            lambda g: g.sample(max(1, round(len(g) * frac)), random_state=args.seed))
+        picked = picked.groupby("stratum").sample(frac=frac, random_state=args.seed)
 
     cohort = m.merge(picked[["stratum"]], left_on="PatientID", right_index=True)
     excl = luna25_patients(args.luna25_csv) if args.luna25_csv else set()
