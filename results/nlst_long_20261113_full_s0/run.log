@@ -1258,3 +1258,593 @@ monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current defaul
 
 
 2026-11-13 07:35:05,859 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+results pushed (progress): https://github.com/tonythetiger168/pulmoguard-ai/tree/pilot-results/results/nlst_long_20261113_full_s0
+2026-11-13 07:36:56,938 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:50.934
+2026-11-13 07:36:56,939 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:51.080
+detector: 89 scans done, 0 failed
+[660/1348 patients] scans 89, nodules 377, registrations 59/59, detector 849s, seg+feat 172s, total 1060s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 07:40:36,589 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 07:40:37,793 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 07:40:37,793 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 07:40:37,793 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 07:40:37,793 - INFO - > whether_raw_luna16: True
+2026-11-13 07:40:37,793 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 07:40:37,793 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 07:40:37,793 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 07:40:37,793 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 07:40:37,793 - INFO - ---
+
+
+2026-11-13 07:40:37,794 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 07:46:31,103 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:53.174
+2026-11-13 07:46:31,103 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:53.310
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 07:46:39,595 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 07:46:40,849 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 07:46:40,849 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 07:46:40,849 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 07:46:40,849 - INFO - > whether_raw_luna16: True
+2026-11-13 07:46:40,850 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 07:46:40,850 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 07:46:40,850 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 07:46:40,850 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 07:46:40,850 - INFO - ---
+
+
+2026-11-13 07:46:40,850 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 07:52:27,154 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:46.130
+2026-11-13 07:52:27,154 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:46.304
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 07:52:35,582 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 07:52:36,869 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 07:52:36,869 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 07:52:36,869 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 07:52:36,870 - INFO - > whether_raw_luna16: True
+2026-11-13 07:52:36,870 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 07:52:36,870 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 07:52:36,870 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 07:52:36,870 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 07:52:36,870 - INFO - ---
+
+
+2026-11-13 07:52:36,870 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 07:53:57,235 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:20.230
+2026-11-13 07:53:57,235 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:20.365
+detector: 88 scans done, 0 failed
+[690/1348 patients] scans 88, nodules 371, registrations 58/58, detector 809s, seg+feat 164s, total 1023s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 07:57:39,854 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 07:57:41,009 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 07:57:41,009 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 07:57:41,009 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 07:57:41,009 - INFO - > whether_raw_luna16: True
+2026-11-13 07:57:41,009 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 07:57:41,009 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 07:57:41,010 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 07:57:41,010 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 07:57:41,010 - INFO - ---
+
+
+2026-11-13 07:57:41,010 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 08:02:48,542 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:07.403
+2026-11-13 08:02:48,542 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:07.532
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 08:02:56,861 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 08:02:58,146 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 08:02:58,146 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 08:02:58,146 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 08:02:58,146 - INFO - > whether_raw_luna16: True
+2026-11-13 08:02:58,146 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 08:02:58,147 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 08:02:58,147 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 08:02:58,147 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 08:02:58,147 - INFO - ---
+
+
+2026-11-13 08:02:58,147 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 08:08:34,213 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:35.921
+2026-11-13 08:08:34,213 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:36.066
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 08:08:42,553 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 08:08:43,742 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 08:08:43,742 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 08:08:43,743 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 08:08:43,743 - INFO - > whether_raw_luna16: True
+2026-11-13 08:08:43,743 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 08:08:43,743 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 08:08:43,743 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 08:08:43,743 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 08:08:43,743 - INFO - ---
+
+
+2026-11-13 08:08:43,743 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 08:10:06,272 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:22.391
+2026-11-13 08:10:06,272 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:22.529
+detector: 86 scans done, 0 failed
+[720/1348 patients] scans 86, nodules 340, registrations 56/56, detector 755s, seg+feat 155s, total 959s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 08:13:38,710 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 08:13:39,917 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 08:13:39,918 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 08:13:39,918 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 08:13:39,918 - INFO - > whether_raw_luna16: True
+2026-11-13 08:13:39,918 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 08:13:39,918 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 08:13:39,918 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 08:13:39,918 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 08:13:39,918 - INFO - ---
+
+
+2026-11-13 08:13:39,919 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 08:19:21,387 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:41.336
+2026-11-13 08:19:21,388 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:41.469
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 08:19:29,478 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 08:19:30,684 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 08:19:30,684 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 08:19:30,684 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 08:19:30,685 - INFO - > whether_raw_luna16: True
+2026-11-13 08:19:30,685 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 08:19:30,685 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 08:19:30,685 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 08:19:30,685 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 08:19:30,685 - INFO - ---
+
+
+2026-11-13 08:19:30,685 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 08:25:30,797 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:59.974
+2026-11-13 08:25:30,798 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:06:00.113
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 08:25:38,798 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 08:25:40,122 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 08:25:40,122 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 08:25:40,123 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 08:25:40,123 - INFO - > whether_raw_luna16: True
+2026-11-13 08:25:40,123 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 08:25:40,123 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 08:25:40,123 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 08:25:40,123 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 08:25:40,123 - INFO - ---
+
+
+2026-11-13 08:25:40,123 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 08:27:49,693 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:02:09.429
+2026-11-13 08:27:49,693 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:02:09.570
+detector: 89 scans done, 0 failed
+[750/1348 patients] scans 89, nodules 372, registrations 59/59, detector 859s, seg+feat 165s, total 1063s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 08:31:22,122 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 08:31:23,266 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 08:31:23,266 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 08:31:23,266 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 08:31:23,266 - INFO - > whether_raw_luna16: True
+2026-11-13 08:31:23,266 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 08:31:23,266 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 08:31:23,266 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 08:31:23,266 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 08:31:23,266 - INFO - ---
+
+
+2026-11-13 08:31:23,267 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 08:37:02,644 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:39.251
+2026-11-13 08:37:02,644 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:39.378
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 08:37:10,932 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 08:37:12,197 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 08:37:12,197 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 08:37:12,197 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 08:37:12,197 - INFO - > whether_raw_luna16: True
+2026-11-13 08:37:12,197 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 08:37:12,197 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 08:37:12,197 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 08:37:12,197 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 08:37:12,197 - INFO - ---
+
+
+2026-11-13 08:37:12,198 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 08:42:22,137 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:09.792
+2026-11-13 08:42:22,137 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:09.939
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 08:42:30,282 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 08:42:31,596 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 08:42:31,596 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 08:42:31,596 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 08:42:31,596 - INFO - > whether_raw_luna16: True
+2026-11-13 08:42:31,596 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 08:42:31,596 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 08:42:31,596 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 08:42:31,597 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 08:42:31,597 - INFO - ---
+
+
+2026-11-13 08:42:31,597 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 08:43:37,198 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:05.461
+2026-11-13 08:43:37,198 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:05.602
+detector: 85 scans done, 0 failed
+[780/1348 patients] scans 85, nodules 323, registrations 55/55, detector 743s, seg+feat 131s, total 928s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 08:46:50,413 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 08:46:51,556 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 08:46:51,557 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 08:46:51,557 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 08:46:51,557 - INFO - > whether_raw_luna16: True
+2026-11-13 08:46:51,557 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 08:46:51,557 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 08:46:51,557 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 08:46:51,557 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 08:46:51,557 - INFO - ---
+
+
+2026-11-13 08:46:51,557 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 08:51:11,827 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:04:20.142
+2026-11-13 08:51:11,827 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:04:20.270
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 08:51:19,789 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 08:51:20,983 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 08:51:20,983 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 08:51:20,983 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 08:51:20,984 - INFO - > whether_raw_luna16: True
+2026-11-13 08:51:20,984 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 08:51:20,984 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 08:51:20,984 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 08:51:20,984 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 08:51:20,984 - INFO - ---
+
+
+2026-11-13 08:51:20,984 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 08:57:21,707 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:06:00.584
+2026-11-13 08:57:21,707 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:06:00.723
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 08:57:30,862 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 08:57:32,030 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 08:57:32,030 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 08:57:32,030 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 08:57:32,030 - INFO - > whether_raw_luna16: True
+2026-11-13 08:57:32,030 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 08:57:32,030 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 08:57:32,030 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 08:57:32,031 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 08:57:32,031 - INFO - ---
+
+
+2026-11-13 08:57:32,031 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 08:58:50,736 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:18.564
+2026-11-13 08:58:50,736 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:18.705
+detector: 88 scans done, 0 failed
+[810/1348 patients] scans 88, nodules 351, registrations 58/58, detector 728s, seg+feat 156s, total 927s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 09:02:17,512 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 09:02:18,679 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 09:02:18,680 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 09:02:18,680 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 09:02:18,680 - INFO - > whether_raw_luna16: True
+2026-11-13 09:02:18,680 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 09:02:18,680 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 09:02:18,680 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 09:02:18,680 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 09:02:18,680 - INFO - ---
+
+
+2026-11-13 09:02:18,680 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 09:07:52,715 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:33.915
+2026-11-13 09:07:52,715 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:34.035
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 09:08:00,744 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 09:08:01,981 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 09:08:01,982 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 09:08:01,982 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 09:08:01,982 - INFO - > whether_raw_luna16: True
+2026-11-13 09:08:01,982 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 09:08:01,982 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 09:08:01,982 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 09:08:01,982 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 09:08:01,982 - INFO - ---
+
+
+2026-11-13 09:08:01,982 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 09:14:56,314 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:06:54.200
+2026-11-13 09:14:56,314 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:06:54.332
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 09:15:05,019 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 09:15:06,338 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 09:15:06,338 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 09:15:06,338 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 09:15:06,338 - INFO - > whether_raw_luna16: True
+2026-11-13 09:15:06,339 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 09:15:06,339 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 09:15:06,339 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 09:15:06,339 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 09:15:06,339 - INFO - ---
+
+
+2026-11-13 09:15:06,339 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 09:17:04,838 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:58.359
+2026-11-13 09:17:04,838 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:58.499
+detector: 89 scans done, 0 failed
+[840/1348 patients] scans 89, nodules 373, registrations 59/59, detector 895s, seg+feat 186s, total 1112s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 09:20:51,066 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 09:20:52,353 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 09:20:52,354 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 09:20:52,354 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 09:20:52,354 - INFO - > whether_raw_luna16: True
+2026-11-13 09:20:52,354 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 09:20:52,354 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 09:20:52,354 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 09:20:52,354 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 09:20:52,354 - INFO - ---
+
+
+2026-11-13 09:20:52,354 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 09:26:38,001 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:45.523
+2026-11-13 09:26:38,001 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:45.647
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 09:26:46,308 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 09:26:47,538 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 09:26:47,538 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 09:26:47,538 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 09:26:47,538 - INFO - > whether_raw_luna16: True
+2026-11-13 09:26:47,538 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 09:26:47,538 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 09:26:47,538 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 09:26:47,539 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 09:26:47,539 - INFO - ---
+
+
+2026-11-13 09:26:47,539 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 09:33:19,434 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:06:31.752
+2026-11-13 09:33:19,434 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:06:31.896
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 09:33:28,764 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 09:33:29,993 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 09:33:29,993 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 09:33:29,993 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 09:33:29,993 - INFO - > whether_raw_luna16: True
+2026-11-13 09:33:29,993 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 09:33:29,993 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 09:33:29,993 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 09:33:29,993 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 09:33:29,993 - INFO - ---
+
+
+2026-11-13 09:33:29,994 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 09:34:35,073 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:04.937
+2026-11-13 09:34:35,073 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:05.079
+detector: 86 scans done, 0 failed
+  registration 133317 0->1 failed: RuntimeError: Exception thrown in SimpleITK ImageRegistrationMethod_Execute: /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkSmoothingRecursiveGaussianImageFilter.hxx:214:
+ITK ERROR: SmoothingRecursiveGaussianImageFilter(0x71a81469b6f0): The number of pixels along dimension 2 is less than 4. This filter requires a minimum of four pixels along the dimension to be processed.
+[870/1348 patients] scans 86, nodules 344, registrations 55/56, detector 833s, seg+feat 148s, total 1019s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 09:37:49,481 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 09:37:50,682 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 09:37:50,682 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 09:37:50,682 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 09:37:50,682 - INFO - > whether_raw_luna16: True
+2026-11-13 09:37:50,682 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 09:37:50,682 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 09:37:50,682 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 09:37:50,682 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 09:37:50,682 - INFO - ---
+
+
+2026-11-13 09:37:50,683 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 09:43:51,619 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:06:00.808
+2026-11-13 09:43:51,620 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:06:00.937
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 09:43:59,706 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 09:44:00,879 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 09:44:00,880 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 09:44:00,880 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 09:44:00,880 - INFO - > whether_raw_luna16: True
+2026-11-13 09:44:00,880 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 09:44:00,880 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 09:44:00,880 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 09:44:00,880 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 09:44:00,880 - INFO - ---
+
+
+2026-11-13 09:44:00,880 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 09:49:31,950 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:30.934
+2026-11-13 09:49:31,950 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:31.070
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 09:49:40,014 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 09:49:41,240 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 09:49:41,240 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 09:49:41,240 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 09:49:41,240 - INFO - > whether_raw_luna16: True
+2026-11-13 09:49:41,240 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 09:49:41,241 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 09:49:41,241 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 09:49:41,241 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 09:49:41,241 - INFO - ---
+
+
+2026-11-13 09:49:41,241 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 09:50:39,936 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:58.568
+2026-11-13 09:50:39,937 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:58.696
+detector: 86 scans done, 0 failed
+[900/1348 patients] scans 86, nodules 332, registrations 56/56, detector 778s, seg+feat 143s, total 963s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 09:53:52,287 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 09:53:53,385 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 09:53:53,386 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 09:53:53,386 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 09:53:53,386 - INFO - > whether_raw_luna16: True
+2026-11-13 09:53:53,386 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 09:53:53,386 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 09:53:53,386 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 09:53:53,386 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 09:53:53,386 - INFO - ---
+
+
+2026-11-13 09:53:53,386 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 10:00:18,375 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:06:24.884
+2026-11-13 10:00:18,375 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:06:24.989
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 10:00:26,217 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 10:00:27,381 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 10:00:27,381 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 10:00:27,381 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 10:00:27,381 - INFO - > whether_raw_luna16: True
+2026-11-13 10:00:27,381 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 10:00:27,381 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 10:00:27,381 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 10:00:27,381 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 10:00:27,381 - INFO - ---
+
+
+2026-11-13 10:00:27,382 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 10:06:02,242 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:34.725
+2026-11-13 10:06:02,242 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:34.861
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 10:06:11,608 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 10:06:12,809 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 10:06:12,810 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 10:06:12,810 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 10:06:12,810 - INFO - > whether_raw_luna16: True
+2026-11-13 10:06:12,810 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 10:06:12,810 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 10:06:12,810 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 10:06:12,810 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 10:06:12,810 - INFO - ---
+
+
+2026-11-13 10:06:12,810 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 10:07:04,023 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:00:51.076
+2026-11-13 10:07:04,023 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:00:51.213
+detector: 84 scans done, 0 failed
+[930/1348 patients] scans 84, nodules 343, registrations 54/54, detector 800s, seg+feat 144s, total 999s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 10:10:31,810 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 10:10:32,934 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 10:10:32,935 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 10:10:32,935 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 10:10:32,935 - INFO - > whether_raw_luna16: True
+2026-11-13 10:10:32,935 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 10:10:32,935 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 10:10:32,935 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 10:10:32,935 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 10:10:32,935 - INFO - ---
+
+
+2026-11-13 10:10:32,935 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 10:17:39,128 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:07:06.078
+2026-11-13 10:17:39,128 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:07:06.193
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 10:17:47,175 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 10:17:48,353 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 10:17:48,353 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 10:17:48,353 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 10:17:48,353 - INFO - > whether_raw_luna16: True
+2026-11-13 10:17:48,353 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 10:17:48,353 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 10:17:48,353 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 10:17:48,353 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 10:17:48,353 - INFO - ---
+
+
+2026-11-13 10:17:48,354 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 10:24:06,296 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:06:17.806
+2026-11-13 10:24:06,296 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:06:17.943
+detector: 80 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0002.json --output_dir /workspace/runs/nlst_long --output_filename det_0002.json
+2026-11-13 10:24:14,430 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 10:24:15,636 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 10:24:15,636 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 10:24:15,636 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 10:24:15,636 - INFO - > whether_raw_luna16: True
+2026-11-13 10:24:15,636 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 10:24:15,636 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0002.json'
+2026-11-13 10:24:15,636 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 10:24:15,636 - INFO - > output_filename: 'det_0002.json'
+2026-11-13 10:24:15,637 - INFO - ---
+
+
+2026-11-13 10:24:15,637 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 10:25:25,805 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:01:10.027
+2026-11-13 10:25:25,805 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:01:10.169
+detector: 87 scans done, 0 failed
+[960/1348 patients] scans 87, nodules 442, registrations 57/57, detector 902s, seg+feat 184s, total 1089s
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0000.json --output_dir /workspace/runs/nlst_long --output_filename det_0000.json
+2026-11-13 10:28:40,996 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 10:28:42,155 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 10:28:42,156 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 10:28:42,156 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 10:28:42,156 - INFO - > whether_raw_luna16: True
+2026-11-13 10:28:42,156 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 10:28:42,156 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0000.json'
+2026-11-13 10:28:42,156 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 10:28:42,156 - INFO - > output_filename: 'det_0000.json'
+2026-11-13 10:28:42,156 - INFO - ---
+
+
+2026-11-13 10:28:42,156 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
+2026-11-13 10:34:33,916 - ignite.engine.engine.DetectionEvaluator - INFO - Epoch[1] Complete. Time taken: 00:05:51.623
+2026-11-13 10:34:33,916 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run finished. Time taken: 00:05:51.760
+detector: 40 scans done, 0 failed
++ /usr/bin/python -m monai.bundle run --config_file configs/inference.json --bundle_root /workspace/models/bundles/lung_nodule_ct_detection --whether_raw_luna16 True --dataset_dir /workspace/data/nlst/mhd --data_list_file_path /workspace/runs/nlst_long/datalist_0001.json --output_dir /workspace/runs/nlst_long --output_filename det_0001.json
+2026-11-13 10:34:41,860 - INFO - Setting logging properties based on config: configs/logging.conf.
+monai.transforms.spatial.dictionary Orientationd.__init__:labels: Current default value of argument `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` was changed in version None from `labels=(('L', 'R'), ('P', 'A'), ('I', 'S'))` to `labels=None`. Default value changed to None meaning that the transform now uses the 'space' of a meta-tensor, if applicable, to determine appropriate axis labels.
+2026-11-13 10:34:43,023 - root - INFO - Restored all variables from /workspace/models/bundles/lung_nodule_ct_detection/models/model.pt
+2026-11-13 10:34:43,023 - INFO - --- input summary of monai.bundle.scripts.run ---
+2026-11-13 10:34:43,023 - INFO - > bundle_root: '/workspace/models/bundles/lung_nodule_ct_detection'
+2026-11-13 10:34:43,023 - INFO - > whether_raw_luna16: True
+2026-11-13 10:34:43,023 - INFO - > dataset_dir: '/workspace/data/nlst/mhd'
+2026-11-13 10:34:43,023 - INFO - > data_list_file_path: '/workspace/runs/nlst_long/datalist_0001.json'
+2026-11-13 10:34:43,023 - INFO - > output_dir: '/workspace/runs/nlst_long'
+2026-11-13 10:34:43,023 - INFO - > output_filename: 'det_0001.json'
+2026-11-13 10:34:43,023 - INFO - ---
+
+
+2026-11-13 10:34:43,024 - ignite.engine.engine.DetectionEvaluator - INFO - Engine run resuming from iteration 0, epoch 0 until 1 epochs
