@@ -145,3 +145,16 @@ def test_tracks_script_end_to_end(tmp_path):
     assert t[(t.exam == 1) & (t.x == 80.0)].is_new.item()
     qc = json.load(open(tmp_path / "o" / "qc.json"))
     assert qc["registrations_ok"] == 1 and qc["matched_to_prior_pct"] == 50.0
+
+
+def test_radiologist_labels_and_exam_metrics():
+    from scripts.nlst_followup_refine import exam_metrics, radiologist_labels
+
+    c = pd.DataFrame({"dicom_patient_id": ["a", "a", "b", "b"], "study_yr": [1, 1, 1, 2],
+                      "sct_ab_code": ["51", "64", "51", "51"], "sct_ab_preexist": [1, 1, 2, 2],
+                      "sct_ab_gwth": ["", "", "2", "1"]})
+    lab = radiologist_labels(c).set_index(["PatientID", "exam"])
+    assert lab.loc[("a", 1)].r_new and not lab.loc[("a", 1)].r_grew
+    assert lab.loc[("b", 1)].r_grew and not lab.loc[("b", 2)].r_grew
+    m = exam_metrics(pd.Series([0.9, 0.1, 0.8]), pd.Series([True, True, False]), 0.5)
+    assert m["both"] == 1 and m["sens"] == 0.5 and m["ppv"] == 0.5
