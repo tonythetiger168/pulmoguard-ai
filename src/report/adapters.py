@@ -96,7 +96,7 @@ def load_tracks(path: str | Path, *, det_threshold: float = 0.5, top_k: int = 5)
 
     欄位：PatientID, SeriesInstanceUID, exam, nodule_id, x/y/z, long_d/short_d/mean_d, volume, prior_mean_d,
     prior_volume, days_since_prior, volume_change_pct, vdt_days, is_new, lungrads_growth, comparable,
-    det_prob, malignancy。
+    det_prob, malignancy；選配 is_new_confident, prior_nearest_mm（沒有時所有 is_new 都視為確定新生）。
     """
     t = pd.read_csv(path, dtype={"SeriesInstanceUID": str, "PatientID": str})
     studies: dict[str, Study] = {}
@@ -113,6 +113,9 @@ def load_tracks(path: str | Path, *, det_threshold: float = 0.5, top_k: int = 5)
                 volume_mm3=_f(r.volume),
                 comparable=bool(r.comparable) if followup else None,
                 is_new=bool(r.is_new) if followup and r.comparable else None,
+                new_confident=(bool(r.is_new_confident) if followup and r.comparable and r.is_new
+                               and hasattr(r, "is_new_confident") else None),
+                prior_nearest_mm=_f(getattr(r, "prior_nearest_mm", float("nan"))) if followup else None,
                 prior_diameter_mm=round(_f(r.prior_mean_d), 1) if followup and _f(r.prior_mean_d) else None,
                 days_since_prior=_f(r.days_since_prior) if followup else None,
                 volume_change_pct=_f(r.volume_change_pct) if followup else None,

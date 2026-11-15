@@ -91,6 +91,9 @@ def is_growing(n: Nodule) -> bool:
 
 def _solid_followup(n: Nodule) -> tuple[str, str, str]:
     d = round(n.diameter_mm, 1)
+    if n.is_new and n.new_confident is False:
+        cat, rule, used = _solid(n)
+        return cat, rule + "; possible new (low confidence match), baseline size rule applied", "is_new"
     if n.is_new:
         cat = "2" if d < 4 else "3" if d < 6 else "4A" if d < 8 else "4B"
         return cat, f"solid, NEW, mean diameter {d:.1f} mm (new thresholds 4/6/8 mm)", "is_new"

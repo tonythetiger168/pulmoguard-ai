@@ -183,3 +183,13 @@ def test_tracks_example_end_to_end(tmp_path):
 def test_growth_flag_mismatch_is_reported():
     s = Study(study_id="s", baseline=False, nodules=[fu(8.0, 6.0, upstream_growth_flag=False)])
     assert any("disagrees" in f["en"] for f in build_report(s)["findings"])
+
+
+def test_low_confidence_new_uses_size_rule_and_asks_manual_check():
+    n = fu(9.0, new=True, new_confident=False, prior_nearest_mm=6.2)
+    a = assess_nodule(n, baseline=False)
+    assert a.category == "4A" and "possible new" in a.rule  # 確定新生 9 mm 會是 4B
+    rep = build_report(Study(study_id="s", baseline=False, nodules=[n]))
+    assert any("6.2 mm" in f["zh"] and "人工對照" in f["zh"] for f in rep["findings"])
+    assert "新出現" not in patient_explanations(rep)["zh"]["text"]
+    assert assess_nodule(fu(9.0, new=True, new_confident=True), baseline=False).category == "4B"

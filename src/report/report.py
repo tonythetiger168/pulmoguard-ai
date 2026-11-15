@@ -59,6 +59,18 @@ def build_report(study: Study, malignancy_review: float = 0.5) -> dict:
                 findings.append(Sentence(
                     f"Nodule {n.nodule_id}: no usable prior-exam registration; compared as baseline.",
                     f"結節 {n.nodule_id}：無法與前次影像對位，以基線規則判讀。", [f"{p}.comparable"]))
+            elif n.is_new and n.new_confident is False:
+                near_en = near_zh = ""
+                srcs = [f"{p}.is_new", f"{p}.new_confident"]
+                if n.prior_nearest_mm is not None:
+                    near_en = f"; a prior-exam candidate lies {n.prior_nearest_mm:.1f} mm away"
+                    near_zh = f"；前次影像在 {n.prior_nearest_mm:.1f} mm 處有候選"
+                    srcs.append(f"{p}.prior_nearest_mm")
+                findings.append(Sentence(
+                    f"Nodule {n.nodule_id}: possibly new (low-confidence match{near_en}); compare with the prior "
+                    f"exam manually. Graded by size only.",
+                    f"結節 {n.nodule_id}：可能為新出現（配對信心低{near_zh}），請人工對照前次影像；僅依大小分級。",
+                    srcs))
             elif n.is_new:
                 findings.append(Sentence(
                     f"Nodule {n.nodule_id}: new since the prior exam ({n.days_since_prior:.0f} days ago).",

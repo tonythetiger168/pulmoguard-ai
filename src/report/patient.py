@@ -52,7 +52,7 @@ def template_text(rep: dict, lang: str) -> str:
     fu_en = fu_zh = ""
     if not rep.get("baseline", True):
         comp = [n for n in nods if n.get("comparable")]
-        new = sum(bool(n.get("is_new")) for n in comp)
+        new = sum(bool(n.get("is_new")) and n.get("new_confident") is not False for n in comp)
         grow = sum(1 for n in comp if not n.get("is_new") and n.get("prior_diameter_mm") is not None
                    and round(n["diameter_mm"] - n["prior_diameter_mm"], 1) > 1.5)
         fu_en = (f" Compared with your previous scan, {new} spot(s) are new and {grow} have grown."
