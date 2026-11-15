@@ -2,9 +2,11 @@
 nlst_longitudinal_risk.py — 用「本次 + 前次」掃描預測 1–6 年內確診肺癌（CPU 即可，輸入是已抽好的特徵）
 
 單位 = 一位病人的一次篩檢（exam 0/1/2）。標籤 event_{h}y 來自 cohort.csv（−1 = 追蹤不足，該年限排除）。
-比較三個模型（同一組病人層級 5-fold，同一位病人的所有檢查在同一 fold）：
+比較下列模型（同一組病人層級 5-fold，同一位病人的所有檢查在同一 fold）：
   single  ：只看本次掃描 —— 結節惡性度最大值（等於現在的 LUNA25 流程）
   growth  ：Lung-RADS 式規則 —— 本次惡性度最大值 + 是否有結節符合生長 / VDT < 400 天
+  clinical：HistGradientBoosting，只用年齡、性別、吸菸狀態、第幾次篩檢（檢查混淆）
+  current ：同上 + 本次掃描的結節特徵（不含任何前次比較）
   longit  ：HistGradientBoosting，特徵 = 本次前 3 顆結節（惡性度、大小、體積）+ 與前次比較（體積變化、VDT、
             是否新發、是否生長）+ 前次的惡性度最大值 + 年齡、性別、吸菸狀態
 指標：每個年限的 AUC（bootstrap 95% CI），以及 longit 對 single 的配對 AUC 差。
@@ -91,6 +93,10 @@ def paired_delta(y, p1, p0, n=1000, seed=0):
     return float(np.mean(d)), [float(np.percentile(d, 2.5)), float(np.percentile(d, 97.5))]
 
 
+CLINICAL = ["age", "gender", "cigsmok", "exam"]
+# 需要前次掃描才算得出來的特徵；拿掉它們 = 「只看本次掃描 + 臨床資料」的公平對照
+PRIOR_PREFIXES = ("any_growth", "any_fast_vdt", "max_inv_vdt", "n_new", "comparable", "volchg", "invvdt", "new",
+                  "grow", "prior_max_mal", "mal_change")
 FEATS_EXCLUDE = {"PatientID", "in_luna25"} | {f"event_{h}y" for h in HORIZONS}
 
 
@@ -111,6 +117,7 @@ def main() -> None:
     if not a.include_luna25 and "in_luna25" in df:
         df = df[~df.in_luna25.astype(str).str.lower().isin(["true", "1"])]
     feats = [c for c in df.columns if c not in FEATS_EXCLUDE]
+    current_feats = [c for c in feats if not any(c.startswith(k) for k in PRIOR_PREFIXES)]
     df.to_csv(out / "exam_features.csv", index=False)
 
     res, preds = {}, []
@@ -120,23 +127,32 @@ def main() -> None:
         if y.sum() < 10 or (1 - y).sum() < 10:
             res[f"{h}y"] = {"skipped": f"too few events ({int(y.sum())})"}
             continue
-        p_long = np.zeros(len(d))
-        for tr, te in GroupKFold(a.folds).split(d, y, d.PatientID):
-            clf = HistGradientBoostingClassifier(max_depth=3, learning_rate=0.05, max_iter=300,
-                                                 l2_regularization=1.0, random_state=0)
-            clf.fit(d.loc[tr, feats], y[tr])
-            p_long[te] = clf.predict_proba(d.loc[te, feats])[:, 1]
+        oof = {}
+        for name, fs in (("clinical", CLINICAL), ("current", current_feats), ("longit", feats)):
+            p = np.zeros(len(d))
+            for tr, te in GroupKFold(a.folds).split(d, y, d.PatientID):
+                clf = HistGradientBoostingClassifier(max_depth=3, learning_rate=0.05, max_iter=300,
+                                                     l2_regularization=1.0, random_state=0)
+                clf.fit(d.loc[tr, fs], y[tr])
+                p[te] = clf.predict_proba(d.loc[te, fs])[:, 1]
+            oof[name] = p
+        p_long, p_cur, p_clin = oof["longit"], oof["current"], oof["clinical"]
         p_single = d.max_mal.to_numpy()
         p_growth = p_single + d.any_growth.to_numpy() + d.any_fast_vdt.to_numpy()
         follow = d.exam.to_numpy() > 0
         r = {"n": int(len(d)), "events": int(y.sum())}
-        for name, p in (("single", p_single), ("growth", p_growth), ("longit", p_long)):
+        for name, p in (("single", p_single), ("growth", p_growth), ("clinical", p_clin),
+                        ("current", p_cur), ("longit", p_long)):
             r[name] = {"auc": float(roc_auc_score(y, p)), "ci": boot_ci(y, p)}
             if len(np.unique(y[follow])) == 2:  # 只看有前次可比的追蹤檢查（T1、T2）
                 r[name]["auc_followup_exams"] = float(roc_auc_score(y[follow], p[follow]))
         r["longit_minus_single"] = paired_delta(y, p_long, p_single)
+        r["longit_minus_current"] = paired_delta(y, p_long, p_cur)   # 只差在「前次比較」特徵
+        if follow.sum() and len(np.unique(y[follow])) == 2:
+            r["longit_minus_current_followup"] = paired_delta(y[follow], p_long[follow], p_cur[follow])
         res[f"{h}y"] = r
-        preds.append(d[["PatientID", "exam"]].assign(horizon=h, y=y, single=p_single, growth=p_growth, longit=p_long))
+        preds.append(d[["PatientID", "exam"]].assign(horizon=h, y=y, single=p_single, growth=p_growth,
+                                                      clinical=p_clin, current=p_cur, longit=p_long))
         print(h, json.dumps({k: (v["auc"] if isinstance(v, dict) and "auc" in v else v) for k, v in r.items()}), flush=True)
     if preds:
         pd.concat(preds).to_csv(out / "oof_predictions.csv", index=False)
