@@ -158,3 +158,16 @@ def test_radiologist_labels_and_exam_metrics():
     assert lab.loc[("b", 1)].r_grew and not lab.loc[("b", 2)].r_grew
     m = exam_metrics(pd.Series([0.9, 0.1, 0.8]), pd.Series([True, True, False]), 0.5)
     assert m["both"] == 1 and m["sens"] == 0.5 and m["ppv"] == 0.5
+
+
+def test_large_nodule_labels_and_safety_threshold():
+    from scripts.nlst_followup_refine import radiologist_max_diameter, safety_threshold
+
+    c = pd.DataFrame({"dicom_patient_id": ["a", "a", "a", "b"], "study_yr": [0, 0, 1, 0],
+                      "sct_ab_desc": ["51", "51", "64", "51"], "sct_long_dia": ["8", "22", "40", "5"]})
+    r = radiologist_max_diameter(c).set_index(["PatientID", "exam"]).r_max_d
+    assert r[("a", 0)] == 22 and r[("b", 0)] == 5 and ("a", 1) not in r.index  # 代碼 64 不算結節
+    score = pd.Series([0.9, 0.8, 0.3, 0.05, 0.6])
+    lab = pd.Series([True, True, True, True, False])
+    assert safety_threshold(score, lab, 0.75) == 0.3      # 4 顆真的大結節保留 3 顆
+    assert (score[lab] >= safety_threshold(score, lab, 1.0)).all()

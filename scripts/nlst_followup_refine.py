@@ -12,7 +12,10 @@ embeddings/*.npy，用來取 LUNA25 的 512 維特徵）。
        new_prob ：is_new 候選是真的新結節的機率（特徵：偵測分數、惡性度、大小、形狀、前次最近候選距離、特徵 PCA）
        grow_prob：有前次配對的結節真的長大的機率（特徵：體積與直徑變化、VDT、前次大小、配對距離、前後特徵差）
   3) 病人隨機對半分成 dev / test：dev 上 5-fold 選門檻（檢查層級 F1 最大），用全部 dev 訓練後只在 test 報告
-輸出：tracks_refined.csv（新增 rematched、new_prob、grow_prob、is_new_refined、growth_refined）、refine.json
+  4) 大結節過濾器：平均徑 ≥ 15 mm 的候選常是偵測器把大的正常構造當成結節。標籤 = 該次檢查醫師有沒有記錄
+     ≥ 10 mm 的非鈣化結節（nlst_ctab 代碼 51 的長徑），同樣多例學習、同樣 dev / test
+輸出：tracks_refined.csv（新增 rematched、new_prob、grow_prob、is_new_refined、growth_refined、growth_confident、
+      large_prob、large_real（< 15 mm 一律 True））、refine.json
 """
 from __future__ import annotations
 
@@ -146,6 +149,14 @@ def best_threshold(score: pd.Series, label: pd.Series) -> float:
     return float(grid[int(np.argmax(f1))])
 
 
+def safety_threshold(score: pd.Series, label: pd.Series, min_sens: float) -> float:
+    """最高的門檻，使 label 為真的檢查至少 min_sens 被保留（篩檢寧可多留，不要漏掉真的大結節）。"""
+    pos = np.sort(score[label.astype(bool)].to_numpy())
+    if not len(pos):
+        return 0.0
+    return float(pos[int(np.floor((1 - min_sens) * len(pos)))])
+
+
 def run_task(name, rows: pd.Index, X: pd.DataFrame, t: pd.DataFrame, labels: pd.DataFrame, lab: str,
              dev_pts: set, folds: int) -> tuple[pd.Series, dict]:
     """rows：參與的候選。回傳每顆候選在 test 病人上的機率（dev 病人用 OOF）與 test 指標。"""
@@ -185,12 +196,28 @@ def baseline(t: pd.DataFrame, exams: pd.DataFrame, labels: pd.DataFrame, col: st
     return exam_metrics(e.score[test], e[lab][test], 0.5)
 
 
+def radiologist_max_diameter(ctab: pd.DataFrame) -> pd.DataFrame:
+    """每次篩檢醫師記錄的最大非鈣化結節長徑（mm，代碼 51）；沒記錄 = 0。"""
+    a = ctab.copy()
+    a["PatientID"] = a.dicom_patient_id.astype(str)
+    a["exam"] = pd.to_numeric(a.study_yr, errors="coerce")
+    a["ld"] = pd.to_numeric(a.sct_long_dia, errors="coerce")
+    a = a[a.sct_ab_desc.astype(str).str.strip() == "51"]
+    return a.groupby(["PatientID", "exam"]).ld.max().rename("r_max_d").reset_index()
+
+
+LARGE_MM = 15.0
+LARGE_KEEP_SENS = 0.95  # 安全門檻：dev 上醫師記錄 ≥ 15 mm 的檢查至少保留 95%
+LARGE_TRUE_MM = 10.0   # 醫師記錄 ≥ 10 mm 才算「這次檢查真的有大結節」（我們量的平均徑和醫師的長徑有落差，放寬一點）
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--tracks", required=True)
     ap.add_argument("--run_dirs", nargs="+", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--ctabc", default=None)
+    ap.add_argument("--ctab", default=None)
     ap.add_argument("--rematch_mm", type=float, default=20.0)
     ap.add_argument("--min_cos", type=float, default=0.8)
     ap.add_argument("--seed", type=int, default=0)
@@ -241,6 +268,39 @@ def main() -> None:
     grow_p, grow_c = run_task("grow", grow_rows, grow, t, labels, "r_grew", dev_pts, 5)
     res["new_classifier"], thr_new = evaluate(new_c, exams, labels, "r_new", dev_pts)
     res["grow_classifier"], thr_grow = evaluate(grow_c, exams, labels, "r_grew", dev_pts)
+
+    # 3) 大結節（≥ 15 mm）過濾器：所有檢查（含 T0）。標籤 = 醫師這次有記錄 ≥ 10 mm 的非鈣化結節
+    ctab = pd.read_parquet(a.ctab or sorted(glob.glob(str(Path.home() / ".local/share/IDC/*/clinical_data/nlst_ctab")))[-1])
+    big_lab = radiologist_max_diameter(ctab)
+    big_lab["r_large"] = big_lab.r_max_d >= LARGE_TRUE_MM
+    big_rows = t.index[t.mean_d >= LARGE_MM]
+    big_X = base.drop(columns=["prior_nearest_mm"])
+    big_p, big_c = run_task("large", big_rows, big_X, t, big_lab[["PatientID", "exam", "r_large"]], "r_large", dev_pts, 5)
+    big_exams = t.loc[big_rows, ["PatientID", "exam"]].drop_duplicates()
+    res["large_classifier"], thr_big = evaluate(big_c, big_exams, big_lab[["PatientID", "exam", "r_large"]],
+                                                "r_large", dev_pts)
+    res["large_before"] = {"exams_with_candidate_ge15mm": int(len(big_exams)),
+                           "radiologist_ge10mm_share": round(float(big_exams.merge(big_lab, how="left")
+                                                                   .r_large.fillna(False).mean()), 3)}
+    # F1 門檻（上面）會漏掉約三成醫師也記錄 ≥ 15 mm 的大結節，不能拿來改報告。實際用「安全門檻」：
+    # dev 上醫師記錄 ≥ 15 mm 的檢查至少保留 LARGE_KEEP_SENS
+    s = big_c.groupby(["PatientID", "exam"]).prob.max().rename("score").reset_index()
+    s = big_exams.merge(s, how="left").merge(big_lab, how="left")
+    s["r15"] = s.r_max_d.fillna(0) >= LARGE_MM
+    s["r10"] = s.r_max_d.fillna(0) >= LARGE_TRUE_MM
+    dev = s.PatientID.isin(dev_pts)
+    thr_safe = safety_threshold(s.score[dev], s.r15[dev], LARGE_KEEP_SENS)
+    res["large_safe"] = {"threshold": thr_safe, "min_dev_sens_rad_ge15mm": LARGE_KEEP_SENS}
+    for name, m in (("dev", dev), ("test", ~dev)):
+        k = s.score[m] >= thr_safe
+        res["large_safe"][name] = {
+            "exams": int(m.sum()), "kept": int(k.sum()), "dropped": int((~k).sum()),
+            "dropped_no_radiologist_nodule": int((~k & s.r_max_d[m].isna()).sum()),
+            "sens_rad_ge15mm": round(float(k[s.r15[m]].mean()), 3), "sens_rad_ge10mm": round(float(k[s.r10[m]].mean()), 3),
+            "ppv_rad_ge10mm_kept": round(float(s.r10[m][k].mean()), 3),
+            "ppv_rad_ge10mm_before": round(float(s.r10[m].mean()), 3)}
+    t["large_prob"] = big_p.reindex(t.index)
+    t["large_real"] = t.mean_d.lt(LARGE_MM) | (t.large_prob.fillna(0) >= thr_safe)
 
     t["new_prob"] = new_p.reindex(t.index)
     t["grow_prob"] = grow_p.reindex(t.index)
