@@ -1,0 +1,23 @@
+{
+  "candidates_all": 32484,
+  "nodules_kept": 26363,
+  "patients": 2599,
+  "scans": 6881,
+  "registrations": 4962,
+  "registrations_ok": 4635,
+  "registration_metric_median": -0.9654808031967126,
+  "follow_up_nodules": 15694,
+  "matched_to_prior_pct": 59.787179813941634,
+  "match_dist_mm_median": 3.3158386972138367,
+  "lungrads_growth_nodules": 483,
+  "vdt_lt_400_nodules": 392,
+  "new_nodules": 6311,
+  "vs_radiologist_growth": {
+    "exams": 3937,
+    "radiologist_grew": 377,
+    "ours_grew": 426,
+    "both": 177,
+    "sensitivity": 0.46949602122015915,
+    "ppv": 0.4154929577464789
+  }
+}
