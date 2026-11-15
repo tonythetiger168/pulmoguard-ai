@@ -12,6 +12,7 @@
   "lungrads_growth_nodules": 483,
   "vdt_lt_400_nodules": 392,
   "new_nodules": 6311,
+  "new_nodules_confident": 2367,
   "vs_radiologist_growth": {
     "exams": 3937,
     "radiologist_grew": 377,
