@@ -28,6 +28,8 @@ class Nodule:
     is_new: bool | None = None  # 前次影像沒有對應結節
     new_confident: bool | None = None  # 追蹤管線的 is_new_confident；False = 可能是漏配，不套用新生規則
     prior_nearest_mm: float | None = None  # 對位後到前次任一候選的最近距離
+    rematched: bool | None = None  # 以 LUNA25 影像特徵重新配對到前次結節（tracks_refined.csv）
+    growth_confident: bool | None = None  # 直徑增大且體積 +30% 以上（僅顯示，不改變分級）
     prior_diameter_mm: float | None = None
     days_since_prior: float | None = None
     volume_change_pct: float | None = None

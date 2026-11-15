@@ -99,6 +99,21 @@ def build_report(study: Study, malignancy_review: float = 0.5) -> dict:
                     f"{n.days_since_prior:.0f} days ago, change {delta:+.1f} mm{vol_en}.",
                     f"結節 {n.nodule_id}：{n.days_since_prior:.0f} 天前平均直徑 {n.prior_diameter_mm:.1f} mm，"
                     f"變化 {delta:+.1f} mm{vol_zh}。", srcs))
+                if n.rematched:
+                    findings.append(Sentence(
+                        f"Nodule {n.nodule_id}: matched to the prior nodule by image appearance (not by position "
+                        f"alone); confirm the pairing.",
+                        f"結節 {n.nodule_id}：依影像特徵與前次結節配對（非僅依位置），請確認配對是否正確。",
+                        [f"{p}.rematched"]))
+                if is_growing(n) and n.growth_confident is not None:
+                    findings.append(Sentence(
+                        f"Nodule {n.nodule_id}: " + ("volume increase of 30% or more supports the growth."
+                                                     if n.growth_confident else
+                                                     "growth is by diameter only; volume increase is under 30%, "
+                                                     "so measurement noise is possible."),
+                        f"結節 {n.nodule_id}：" + ("體積增加 30% 以上，支持增大判定。" if n.growth_confident else
+                                                  "僅直徑達增大標準，體積增加未達 30%，可能是量測誤差。"),
+                        [f"{p}.growth_confident", f"{p}.volume_change_pct"]))
             if (n.comparable and not n.is_new and n.upstream_growth_flag is not None
                     and n.upstream_growth_flag != is_growing(n)):
                 findings.append(Sentence(

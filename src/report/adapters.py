@@ -91,12 +91,21 @@ def _f(v) -> float | None:
     return None if pd.isna(v) else float(v)
 
 
+def _new_conf(r) -> bool | None:
+    """新生結節的信心：優先用 tracks_refined.csv 的 is_new_refined，其次 is_new_confident，都沒有則 None。"""
+    for col in ("is_new_refined", "is_new_confident"):
+        if hasattr(r, col) and not pd.isna(getattr(r, col)):
+            return bool(getattr(r, col))
+    return None
+
+
 def load_tracks(path: str | Path, *, det_threshold: float = 0.5, top_k: int = 5) -> dict[str, Study]:
     """讀 NLST 序列影像追蹤結果（scripts/nlst_longitudinal_tracks.py 的 tracks.csv），每個 series 一個 Study。
 
     欄位：PatientID, SeriesInstanceUID, exam, nodule_id, x/y/z, long_d/short_d/mean_d, volume, prior_mean_d,
     prior_volume, days_since_prior, volume_change_pct, vdt_days, is_new, lungrads_growth, comparable,
-    det_prob, malignancy；選配 is_new_confident, prior_nearest_mm（沒有時所有 is_new 都視為確定新生）。
+    det_prob, malignancy；選配 is_new_refined / is_new_confident, prior_nearest_mm, rematched, growth_confident
+    （tracks_refined.csv）。沒有新生信心欄位時，所有 is_new 都視為確定新生。
     """
     t = pd.read_csv(path, dtype={"SeriesInstanceUID": str, "PatientID": str})
     studies: dict[str, Study] = {}
@@ -113,8 +122,10 @@ def load_tracks(path: str | Path, *, det_threshold: float = 0.5, top_k: int = 5)
                 volume_mm3=_f(r.volume),
                 comparable=bool(r.comparable) if followup else None,
                 is_new=bool(r.is_new) if followup and r.comparable else None,
-                new_confident=(bool(r.is_new_confident) if followup and r.comparable and r.is_new
-                               and hasattr(r, "is_new_confident") else None),
+                new_confident=_new_conf(r) if followup and r.comparable and r.is_new else None,
+                rematched=bool(r.rematched) if followup and hasattr(r, "rematched") else None,
+                growth_confident=(bool(r.growth_confident) if followup and r.comparable
+                                  and hasattr(r, "growth_confident") else None),
                 prior_nearest_mm=_f(getattr(r, "prior_nearest_mm", float("nan"))) if followup else None,
                 prior_diameter_mm=round(_f(r.prior_mean_d), 1) if followup and _f(r.prior_mean_d) else None,
                 days_since_prior=_f(r.days_since_prior) if followup else None,

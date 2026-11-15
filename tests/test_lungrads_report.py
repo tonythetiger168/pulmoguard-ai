@@ -193,3 +193,20 @@ def test_low_confidence_new_uses_size_rule_and_asks_manual_check():
     assert any("6.2 mm" in f["zh"] and "人工對照" in f["zh"] for f in rep["findings"])
     assert "新出現" not in patient_explanations(rep)["zh"]["text"]
     assert assess_nodule(fu(9.0, new=True, new_confident=True), baseline=False).category == "4B"
+
+
+def test_refined_tracks_columns(tmp_path):
+    import pandas as pd
+
+    from src.report.adapters import load_tracks
+    t = pd.read_csv("examples/lungrads/tracks_demo.csv")
+    t["is_new_refined"] = False
+    t["rematched"] = False
+    t["growth_confident"] = False
+    t.loc[t.nodule_id == 1, "growth_confident"] = True
+    t.loc[(t.exam == 1) & (t.nodule_id == 0), "rematched"] = True
+    t.to_csv(tmp_path / "r.csv", index=False)
+    s = load_tracks(tmp_path / "r.csv")["demo-T1"]
+    assert s.nodules[2].is_new and s.nodules[2].new_confident is False
+    en = to_markdown(build_report(s), "en")
+    assert "possibly new" in en and "image appearance" in en and "supports the growth" in en
