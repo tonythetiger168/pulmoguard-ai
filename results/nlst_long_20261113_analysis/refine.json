@@ -92,5 +92,54 @@
       "ppv": 0.515,
       "f1": 0.483
     }
+  },
+  "large_classifier": {
+    "threshold": 0.5644672760557738,
+    "dev": {
+      "exams": 414,
+      "rad": 170,
+      "ours": 166,
+      "both": 104,
+      "sens": 0.612,
+      "ppv": 0.627,
+      "f1": 0.619
+    },
+    "test": {
+      "exams": 441,
+      "rad": 179,
+      "ours": 173,
+      "both": 112,
+      "sens": 0.626,
+      "ppv": 0.647,
+      "f1": 0.636
+    }
+  },
+  "large_before": {
+    "exams_with_candidate_ge15mm": 855,
+    "radiologist_ge10mm_share": 0.408
+  },
+  "large_safe": {
+    "threshold": 0.16675718550872562,
+    "min_dev_sens_rad_ge15mm": 0.95,
+    "dev": {
+      "exams": 414,
+      "kept": 318,
+      "dropped": 96,
+      "dropped_no_radiologist_nodule": 44,
+      "sens_rad_ge15mm": 0.957,
+      "sens_rad_ge10mm": 0.924,
+      "ppv_rad_ge10mm_kept": 0.494,
+      "ppv_rad_ge10mm_before": 0.411
+    },
+    "test": {
+      "exams": 441,
+      "kept": 351,
+      "dropped": 90,
+      "dropped_no_radiologist_nodule": 49,
+      "sens_rad_ge15mm": 0.945,
+      "sens_rad_ge10mm": 0.922,
+      "ppv_rad_ge10mm_kept": 0.47,
+      "ppv_rad_ge10mm_before": 0.406
+    }
   }
 }
