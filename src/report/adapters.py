@@ -124,6 +124,8 @@ def load_tracks(path: str | Path, *, det_threshold: float = 0.5, top_k: int = 5)
                 is_new=bool(r.is_new) if followup and r.comparable else None,
                 new_confident=_new_conf(r) if followup and r.comparable and r.is_new else None,
                 rematched=bool(r.rematched) if followup and hasattr(r, "rematched") else None,
+                large_real=bool(r.large_real) if hasattr(r, "large_real") and not pd.isna(r.large_real) else None,
+                large_prob=_f(r.large_prob) if hasattr(r, "large_prob") else None,
                 growth_confident=(bool(r.growth_confident) if followup and r.comparable
                                   and hasattr(r, "growth_confident") else None),
                 prior_nearest_mm=_f(getattr(r, "prior_nearest_mm", float("nan"))) if followup else None,

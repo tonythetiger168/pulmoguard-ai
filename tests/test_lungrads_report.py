@@ -210,3 +210,16 @@ def test_refined_tracks_columns(tmp_path):
     assert s.nodules[2].is_new and s.nodules[2].new_confident is False
     en = to_markdown(build_report(s), "en")
     assert "possibly new" in en and "image appearance" in en and "supports the growth" in en
+
+
+def test_large_nodule_filter_excludes_size_only():
+    fp = nod(20.0, large_real=False, large_prob=0.1)
+    small = nod(7.0)
+    small.nodule_id = 2
+    rep = build_report(Study(study_id="s", nodules=[fp, small]))
+    assert rep["exam_category"] == "3" and rep["nodule_assessments"][0]["excluded"]
+    assert "20.0" not in patient_explanations(rep)["zh"]["text"]
+    assert any("可能誤報" in f["zh"] for f in rep["findings"])
+    # 增大事件仍然計入
+    grow = fu(20.0, 17.0, large_real=False)
+    assert build_report(Study(study_id="g", baseline=False, nodules=[grow]))["exam_category"] == "4B"

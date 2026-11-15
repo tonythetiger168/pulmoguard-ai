@@ -30,6 +30,8 @@ class Nodule:
     prior_nearest_mm: float | None = None  # 對位後到前次任一候選的最近距離
     rematched: bool | None = None  # 以 LUNA25 影像特徵重新配對到前次結節（tracks_refined.csv）
     growth_confident: bool | None = None  # 直徑增大且體積 +30% 以上（僅顯示，不改變分級）
+    large_real: bool | None = None  # ≥15 mm 候選的假陽性過濾器：False = 判為誤報，不參與依大小的分級
+    large_prob: float | None = None
     prior_diameter_mm: float | None = None
     days_since_prior: float | None = None
     volume_change_pct: float | None = None

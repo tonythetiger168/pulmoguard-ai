@@ -132,6 +132,14 @@ def build_report(study: Study, malignancy_review: float = 0.5) -> dict:
         findings.append(Sentence(f"Nodule {n.nodule_id}: Lung-RADS {a.category} ({a.rule}).",
                                  f"結節 {n.nodule_id}：Lung-RADS {a.category}（{a.rule}）。",
                                  [f"{p}.{a.measure_used}", f"{p}.nodule_type"]))
+        if a.excluded:
+            prob_en = f" (score {n.large_prob:.2f})" if n.large_prob is not None else ""
+            prob_zh = f"（分數 {n.large_prob:.2f}）" if n.large_prob is not None else ""
+            findings.append(Sentence(
+                f"Nodule {n.nodule_id}: flagged as a likely false positive by the large-nodule filter{prob_en}; "
+                f"not counted in the exam category. Radiologist to confirm.",
+                f"結節 {n.nodule_id}：大結節誤報過濾器判為可能誤報{prob_zh}，不計入整體分級，請放射科醫師確認。",
+                [f"{p}.large_real", f"{p}.large_prob"]))
         if n.malignancy_prob is not None:
             findings.append(Sentence(
                 f"Nodule {n.nodule_id}: AI malignancy risk score {n.malignancy_prob:.2f} (0-1, not a diagnosis).",
@@ -147,7 +155,8 @@ def build_report(study: Study, malignancy_review: float = 0.5) -> dict:
 
     mgmt = MANAGEMENT[exam_cat if exam_cat in MANAGEMENT else "2"]
     impression = Sentence(f"Lung-RADS {exam_cat}. {mgmt['en']}", f"Lung-RADS {exam_cat}。{mgmt['zh']}",
-                          ["exam_category"] + [f"nodules[{i}]" for i, a in enumerate(per) if a.category == exam_cat])
+                          ["exam_category"] + [f"nodules[{i}]" for i, a in enumerate(per)
+                                           if a.category == exam_cat and not a.excluded])
 
     if study.baseline:
         lim0 = Sentence("Baseline exam: growth and new-nodule rules need a prior exam and are not applied.",

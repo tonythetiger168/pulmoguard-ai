@@ -46,7 +46,8 @@ CAT_RE = re.compile(r"Lung-?RADS\s*(?:category\s*|第\s*)?([0-4][ABX]?)", re.IGN
 
 def template_text(rep: dict, lang: str) -> str:
     cat = rep["exam_category"]
-    nods = rep["inputs"]["nodules"]
+    excluded = {a["nodule_id"] for a in rep.get("nodule_assessments", []) if a.get("excluded")}
+    nods = [n for n in rep["inputs"]["nodules"] if n["nodule_id"] not in excluded]
     mgmt = rep["management"][lang]
     meaning = MEANING.get(cat, MEANING["2"])[0 if lang == "en" else 1]
     fu_en = fu_zh = ""

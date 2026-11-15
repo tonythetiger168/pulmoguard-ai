@@ -48,6 +48,7 @@ class NoduleAssessment:
     rule: str  # 觸發的規則（人類可讀，供追溯）
     measure_used: str  # 用了哪個欄位做判斷
     flag_4x_review: bool = False
+    excluded: bool = False  # 大結節誤報過濾器排除：不計入整體分級
 
 
 def _solid(n: Nodule) -> tuple[str, str, str]:
@@ -129,10 +130,26 @@ def assess_nodule(n: Nodule, malignancy_review: float = 0.5, baseline: bool = Tr
     return NoduleAssessment(n.nodule_id, cat, rule, used, flag)
 
 
+def _event_based(n: Nodule, baseline: bool) -> bool:
+    """分級是否來自新生（確定）或增大事件，而非單純大小。"""
+    if baseline or not n.comparable or n.nodule_type != "solid":
+        return False
+    if n.is_new:
+        return n.new_confident is not False
+    return is_growing(n)
+
+
 def max_category(cats: list[str]) -> str:
     return max(cats, key=CATEGORY_ORDER.index) if cats else "1"
 
 
 def assess_study(study: Study, malignancy_review: float = 0.5) -> tuple[str, list[NoduleAssessment]]:
-    per = [assess_nodule(n, malignancy_review, study.baseline) for n in study.nodules]
-    return max_category([a.category for a in per]), per
+    per = []
+    for n in study.nodules:
+        a = assess_nodule(n, malignancy_review, study.baseline)
+        if n.large_real is False and not _event_based(n, study.baseline):
+            a.excluded = True
+            a.flag_4x_review = False
+            a.rule += "; rejected by large-nodule false-positive filter, excluded from exam category"
+        per.append(a)
+    return max_category([a.category for a in per if not a.excluded]), per
