@@ -46,6 +46,30 @@ def chain_ok(t: pd.DataFrame, nod: pd.DataFrame, tf_keys: set) -> pd.Series:
     return pd.Series(ok, index=t.index)
 
 
+def add_new_confidence(t: pd.DataFrame, all_nod: pd.DataFrame, transforms: dict, min_det: float,
+                       near_mm: float = 20.0, conf_det: float = 0.8) -> pd.DataFrame:
+    """「新發」結節常是漏配或偵測器假陽性。對每顆 is_new，找前次掃描「所有」候選（含 det 低於門檻、分割失敗的）
+    經對位後的最近距離 prior_nearest_mm。is_new_confident = 可比較、det_prob ≥ conf_det、且前次 near_mm 內沒有任何候選。"""
+    t = t.copy()
+    t["prior_nearest_mm"] = np.nan
+    exams = all_nod.groupby("PatientID").exam.apply(lambda s: sorted(set(s)))
+    for i in t.index[t.is_new.astype(bool) & t.comparable.astype(bool)]:
+        r = t.loc[i]
+        ex = exams.get(r.PatientID, [])
+        if r.exam not in ex or ex.index(r.exam) == 0:
+            continue
+        pe = ex[ex.index(r.exam) - 1]
+        tf = transforms.get((r.PatientID, pe, int(r.exam)))
+        prev = all_nod[(all_nod.PatientID == r.PatientID) & (all_nod.exam == pe)]
+        if tf is None or prev.empty:
+            continue
+        pts = tf(prev[["x", "y", "z"]].to_numpy(float))
+        t.loc[i, "prior_nearest_mm"] = float(np.linalg.norm(pts - np.array([r.x, r.y, r.z], float), axis=1).min())
+    near = t.prior_nearest_mm.fillna(np.inf) <= near_mm
+    t["is_new_confident"] = t.is_new.astype(bool) & t.comparable.astype(bool) & (t.det_prob >= conf_det) & ~near
+    return t
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--run_dir", required=True)
@@ -62,15 +86,17 @@ def main() -> None:
     tf = pd.read_csv(run / "transforms.csv", dtype={"PatientID": str}) if (run / "transforms.csv").exists() \
         else pd.DataFrame(columns=["PatientID", "prior_exam", "exam", "metric"])
     n_all = len(nod)
+    all_nod = nod.copy()
     nod = nod[(nod.det_prob >= a.min_det) & (nod.seg_voxels > 0)].copy()
     nod["patient_id"] = nod.PatientID
     nod["exam_day"] = nod.exam_day.fillna(nod.exam * 365)
     transforms = make_transforms(tf)
     t = build_tracks(nod, transforms, max_dist_mm=a.max_dist_mm)
     t["comparable"] = chain_ok(t, nod, set(transforms))
+    t = add_new_confidence(t, all_nod, transforms, a.min_det)
     cols = ["PatientID", "SeriesInstanceUID", "exam", "exam_day", "nodule_id", "x", "y", "z", "long_d", "short_d",
             "mean_d", "volume", "prior_mean_d", "prior_volume", "days_since_prior", "volume_change_pct", "vdt_days",
-            "is_new", "lungrads_growth", "comparable", "match_dist_mm", "det_prob", "malignancy", "emb_row"]
+            "is_new", "is_new_confident", "prior_nearest_mm", "lungrads_growth", "comparable", "match_dist_mm", "det_prob", "malignancy", "emb_row"]
     t[[c for c in cols if c in t.columns]].to_csv(out / "tracks.csv", index=False)
 
     comp = t[t.comparable]
@@ -85,6 +111,7 @@ def main() -> None:
         "lungrads_growth_nodules": int(comp.lungrads_growth.sum()),
         "vdt_lt_400_nodules": int((comp.vdt_days < 400).sum()),
         "new_nodules": int(comp.is_new.sum()),
+        "new_nodules_confident": int(comp.is_new_confident.sum()),
     }
     # 與醫師「比前次長大」紀錄（病人 × 檢查層級）的一致性
     try:
