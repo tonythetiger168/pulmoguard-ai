@@ -81,6 +81,8 @@ python -m scripts.make_lungrads_report --detections examples/lungrads/detections
 - `--llm openai` 可接任何 OpenAI 相容服務（vLLM、llama.cpp、Ollama，或日後的 HeliosLM server）潤飾病人說明；
   若 LLM 新增數字、改分級或出現確診字眼，會自動回退到規則模板。
 - LIDC 分割仍在訓練，範例分割為 mock，報告會標註。
+- 追蹤檢查：`--tracks <tracks.csv>`（NLST 序列影像追蹤輸出，範例 `examples/lungrads/tracks_demo.csv`）會套用
+  實性結節的新生、增大（平均直徑 >1.5 mm）與穩定降級規則；無法對位的結節退回基線規則。
 
 ## 開發路線圖
 

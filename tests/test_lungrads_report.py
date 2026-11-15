@@ -131,3 +131,55 @@ def test_cli_on_examples(tmp_path):
     rep = json.loads((tmp_path / "demo-0001.json").read_text())
     assert rep["exam_category"] == "4B"
     assert (tmp_path / "demo-0002.zh.md").read_text().count("Lung-RADS 2") >= 1
+
+
+# ---------------- 追蹤檢查（非基線）----------------
+
+def fu(d, prior=None, days=365, new=False, comparable=True, **kw):
+    return nod(d, comparable=comparable, is_new=new, prior_diameter_mm=prior, days_since_prior=days, **kw)
+
+
+@pytest.mark.parametrize("d,cat", [(3.9, "2"), (4.0, "3"), (5.9, "3"), (6.0, "4A"), (7.9, "4A"), (8.0, "4B")])
+def test_followup_new_solid(d, cat):
+    assert assess_nodule(fu(d, new=True), baseline=False).category == cat
+
+
+@pytest.mark.parametrize("prior,d,cat", [(5.0, 6.6, "4A"), (6.0, 7.9, "4A"), (7.0, 8.6, "4B"),
+                                         (5.0, 6.5, "3")])  # +1.5 mm 不算增大（需 >1.5）
+def test_followup_growth(prior, d, cat):
+    assert assess_nodule(fu(d, prior, days=90), baseline=False).category == cat
+
+
+@pytest.mark.parametrize("d,days,cat", [(7.0, 365, "2"), (7.0, 100, "3"), (10.0, 90, "3"), (10.0, 365, "2"),
+                                        (10.0, 30, "4A"), (16.0, 365, "4B"), (4.0, 365, "2")])
+def test_followup_stable_stepped(d, days, cat):
+    assert assess_nodule(fu(d, d - 0.3, days=days), baseline=False).category == cat
+
+
+def test_followup_not_comparable_uses_baseline_rules():
+    a = assess_nodule(fu(9.0, comparable=False), baseline=False)
+    assert a.category == "4A" and "baseline rule applied" in a.rule
+
+
+def test_baseline_ignores_followup_fields():
+    assert assess_nodule(fu(9.0, 5.0), baseline=True).category == "4A"
+
+
+def test_tracks_example_end_to_end(tmp_path):
+    from src.report.adapters import load_tracks
+    st = load_tracks("examples/lungrads/tracks_demo.csv")
+    assert st["demo-T0"].baseline and not st["demo-T1"].baseline
+    rep = build_report(st["demo-T1"])
+    assert rep["exam_category"] == "4B"  # 9.4 -> 11.5 mm 增大且 >=8 mm
+    cats = sorted(a["category"] for a in rep["nodule_assessments"])
+    assert cats == ["2", "3", "4B"]  # 穩定 7 mm 一年 -> 2；新 4.8 mm -> 3
+    zh = to_markdown(rep, "zh")
+    assert "新出現" in zh and "9.4 mm" in zh and "體積倍增時間 402 天" in zh
+    p = patient_explanations(rep)
+    assert "1 顆是新出現" in p["zh"]["text"] and guard(p["zh"]["text"], rep, "zh") == []
+    assert guard(p["en"]["text"], rep, "en") == []
+
+
+def test_growth_flag_mismatch_is_reported():
+    s = Study(study_id="s", baseline=False, nodules=[fu(8.0, 6.0, upstream_growth_flag=False)])
+    assert any("disagrees" in f["en"] for f in build_report(s)["findings"])

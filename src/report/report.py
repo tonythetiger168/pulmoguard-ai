@@ -8,13 +8,14 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
 
-from .lungrads import MANAGEMENT, assess_study
+from .lungrads import MANAGEMENT, assess_study, is_growing
 from .schema import Study
 
 TYPE_LABEL = {"solid": ("solid", "實性"), "part_solid": ("part-solid", "部分實性"),
               "ground_glass": ("ground-glass", "毛玻璃")}
 SOURCE_LABEL = {"detector_box": ("detector bounding box", "偵測框估計"),
-                "segmentation": ("segmentation", "分割量測"), "manual": ("manual measurement", "人工量測")}
+                "segmentation": ("segmentation", "分割量測"),
+                "tracking": ("tracking pipeline", "追蹤管線量測"), "manual": ("manual measurement", "人工量測")}
 
 DISCLAIMER = {
     "en": "AI-generated draft for research use. Not a diagnosis. Must be reviewed and signed by a radiologist.",
@@ -53,9 +54,50 @@ def build_report(study: Study, malignancy_review: float = 0.5) -> dict:
             f"座標 {_fmt_xyz(n.center_mm)} mm，偵測信心 {n.det_prob:.2f}。",
             [f"{p}.nodule_type", f"{p}.type_source", f"{p}.diameter_mm", f"{p}.diameter_source",
              f"{p}.center_mm", f"{p}.det_prob"]))
+        if not study.baseline:
+            if not n.comparable:
+                findings.append(Sentence(
+                    f"Nodule {n.nodule_id}: no usable prior-exam registration; compared as baseline.",
+                    f"結節 {n.nodule_id}：無法與前次影像對位，以基線規則判讀。", [f"{p}.comparable"]))
+            elif n.is_new:
+                findings.append(Sentence(
+                    f"Nodule {n.nodule_id}: new since the prior exam ({n.days_since_prior:.0f} days ago).",
+                    f"結節 {n.nodule_id}：前次檢查（{n.days_since_prior:.0f} 天前）未見，為新出現。",
+                    [f"{p}.is_new", f"{p}.days_since_prior"]))
+                if n.diameter_mm >= 6:
+                    findings.append(Sentence(
+                        f"Nodule {n.nodule_id}: new nodule of {n.diameter_mm:.1f} mm; verify on the prior images, "
+                        f"because automatic matching can miss an existing nodule.",
+                        f"結節 {n.nodule_id}：新出現且達 {n.diameter_mm:.1f} mm，請對照前次影像確認，"
+                        f"自動配對可能漏配既有結節。", [f"{p}.is_new", f"{p}.diameter_mm"]))
+            elif n.prior_diameter_mm is not None:
+                delta = n.diameter_mm - n.prior_diameter_mm
+                vol_en = vol_zh = ""
+                srcs = [f"{p}.prior_diameter_mm", f"{p}.diameter_mm", f"{p}.days_since_prior"]
+                if n.volume_change_pct is not None:
+                    vol_en = f", volume change {n.volume_change_pct:+.0f}%"
+                    vol_zh = f"，體積變化 {n.volume_change_pct:+.0f}%"
+                    srcs.append(f"{p}.volume_change_pct")
+                if n.vdt_days is not None and n.vdt_days > 0 and delta > 0:
+                    vol_en += f", volume doubling time {n.vdt_days:.0f} days"
+                    vol_zh += f"，體積倍增時間 {n.vdt_days:.0f} 天"
+                    srcs.append(f"{p}.vdt_days")
+                findings.append(Sentence(
+                    f"Nodule {n.nodule_id}: prior mean diameter {n.prior_diameter_mm:.1f} mm "
+                    f"{n.days_since_prior:.0f} days ago, change {delta:+.1f} mm{vol_en}.",
+                    f"結節 {n.nodule_id}：{n.days_since_prior:.0f} 天前平均直徑 {n.prior_diameter_mm:.1f} mm，"
+                    f"變化 {delta:+.1f} mm{vol_zh}。", srcs))
+            if (n.comparable and not n.is_new and n.upstream_growth_flag is not None
+                    and n.upstream_growth_flag != is_growing(n)):
+                findings.append(Sentence(
+                    f"Nodule {n.nodule_id}: growth call disagrees with the tracking pipeline flag; check manually.",
+                    f"結節 {n.nodule_id}：增大判定與追蹤管線的旗標不一致，請人工確認。",
+                    [f"{p}.upstream_growth_flag", f"{p}.prior_diameter_mm"]))
         if n.volume_mm3 is not None:
-            findings.append(Sentence(f"Nodule {n.nodule_id}: segmented volume {n.volume_mm3:.0f} mm3.",
-                                     f"結節 {n.nodule_id}：分割體積 {n.volume_mm3:.0f} mm³。", [f"{p}.volume_mm3"]))
+            seg_vol = n.diameter_source == "segmentation"
+            findings.append(Sentence(
+                f"Nodule {n.nodule_id}: {'segmented ' if seg_vol else ''}volume {n.volume_mm3:.0f} mm3.",
+                f"結節 {n.nodule_id}：{'分割' if seg_vol else ''}體積 {n.volume_mm3:.0f} mm³。", [f"{p}.volume_mm3"]))
         if n.nodule_type == "part_solid" and n.solid_component_mm is not None:
             findings.append(Sentence(f"Nodule {n.nodule_id}: solid component {n.solid_component_mm:.1f} mm.",
                                      f"結節 {n.nodule_id}：實性成分 {n.solid_component_mm:.1f} mm。",
@@ -80,9 +122,16 @@ def build_report(study: Study, malignancy_review: float = 0.5) -> dict:
     impression = Sentence(f"Lung-RADS {exam_cat}. {mgmt['en']}", f"Lung-RADS {exam_cat}。{mgmt['zh']}",
                           ["exam_category"] + [f"nodules[{i}]" for i, a in enumerate(per) if a.category == exam_cat])
 
+    if study.baseline:
+        lim0 = Sentence("Baseline exam: growth and new-nodule rules need a prior exam and are not applied.",
+                        "基線檢查：增大與新生結節規則需要前次影像，未套用。", ["baseline"])
+    else:
+        lim0 = Sentence("Follow-up rules are applied to solid nodules only; nodule matching across exams is "
+                        "automatic and new nodules may be detector false positives.",
+                        "追蹤規則只套用於實性結節；跨次檢查的結節配對為自動完成，新出現的結節可能是偵測器誤報。",
+                        ["baseline", "nodules[*].is_new"])
     limitations = [
-        Sentence("Baseline rules only; growth and new-nodule rules need a prior exam and are not applied.",
-                 "僅套用基線規則；增大與新生結節規則需要前次影像，尚未套用。", ["baseline"]),
+        lim0,
         Sentence("Perifissural/juxtapleural benign features, airway and cystic lesions, and S findings "
                  "are not assessed.", "未評估肺裂旁/胸膜旁良性特徵、氣道與囊性病灶，以及 S 修飾碼的其他發現。", []),
     ]
@@ -96,6 +145,7 @@ def build_report(study: Study, malignancy_review: float = 0.5) -> dict:
 
     return {
         "study_id": study.study_id,
+        "baseline": study.baseline,
         "exam_category": exam_cat,
         "management": {"en": mgmt["en"], "zh": mgmt["zh"], "followup_months": mgmt["months"]},
         "nodule_assessments": [asdict(a) for a in per],

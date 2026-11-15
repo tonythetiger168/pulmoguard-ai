@@ -49,13 +49,24 @@ def template_text(rep: dict, lang: str) -> str:
     nods = rep["inputs"]["nodules"]
     mgmt = rep["management"][lang]
     meaning = MEANING.get(cat, MEANING["2"])[0 if lang == "en" else 1]
+    fu_en = fu_zh = ""
+    if not rep.get("baseline", True):
+        comp = [n for n in nods if n.get("comparable")]
+        new = sum(bool(n.get("is_new")) for n in comp)
+        grow = sum(1 for n in comp if not n.get("is_new") and n.get("prior_diameter_mm") is not None
+                   and round(n["diameter_mm"] - n["prior_diameter_mm"], 1) > 1.5)
+        fu_en = (f" Compared with your previous scan, {new} spot(s) are new and {grow} have grown."
+                 if new or grow else " Compared with your previous scan, the spots that could be compared "
+                 "have not grown.")
+        fu_zh = (f"和上一次檢查相比，有 {new} 顆是新出現的、{grow} 顆有變大。" if new or grow
+                 else "和上一次檢查相比，可比對的結節沒有變大。")
     if lang == "en":
         if not nods:
             body = "This low-dose CT scan did not find any lung nodules that needed attention."
         else:
             biggest = max(n["diameter_mm"] for n in nods)
             body = (f"This low-dose CT scan found {len(nods)} small spot(s) in the lungs (nodules); "
-                    f"the largest is about {biggest:.1f} mm.")
+                    f"the largest is about {biggest:.1f} mm.{fu_en}")
         return (f"{body} Using the international Lung-RADS system, this scan is Lung-RADS {cat}, which means "
                 f"{meaning}. Recommended next step: {mgmt} The AI scores are only a reference for your doctor; "
                 f"please discuss these results with your doctor.")
@@ -63,7 +74,7 @@ def template_text(rep: dict, lang: str) -> str:
         body = "這次低劑量電腦斷層沒有發現需要注意的肺結節。"
     else:
         biggest = max(n["diameter_mm"] for n in nods)
-        body = f"這次低劑量電腦斷層在肺部發現 {len(nods)} 顆小結節，最大的約 {biggest:.1f} mm。"
+        body = f"這次低劑量電腦斷層在肺部發現 {len(nods)} 顆小結節，最大的約 {biggest:.1f} mm。{fu_zh}"
     return (f"{body}依照國際通用的 Lung-RADS 分級，這次屬於 Lung-RADS {cat}，意思是{meaning}。"
             f"建議下一步：{mgmt}AI 分數只是提供醫師參考，請和您的醫師討論這份結果。")
 

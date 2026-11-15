@@ -23,6 +23,14 @@ class Nodule:
     type_source: str = "assumed"  # "assumed" | "model" | "manual"
     solid_component_mm: float | None = None  # part-solid 才需要
     lobe: str | None = None  # 目前管線未提供，保留欄位
+    # --- 追蹤檢查（非基線）才有的欄位，來自 scripts/nlst_longitudinal_tracks.py 的 tracks.csv ---
+    comparable: bool | None = None  # False = 沒有可用的前次影像對位，改用基線規則
+    is_new: bool | None = None  # 前次影像沒有對應結節
+    prior_diameter_mm: float | None = None
+    days_since_prior: float | None = None
+    volume_change_pct: float | None = None
+    vdt_days: float | None = None  # 體積倍增時間
+    upstream_growth_flag: bool | None = None  # 追蹤管線自己算的 lungrads_growth，用來交叉核對
 
     def __post_init__(self) -> None:
         if self.nodule_type not in NODULE_TYPES:
@@ -42,7 +50,8 @@ class Study:
     nodules: list[Nodule] = field(default_factory=list)
     det_threshold: float = 0.5
     models: ModelInfo = field(default_factory=ModelInfo)
-    baseline: bool = True  # 目前只支援基線篩檢（無前次影像比較）
+    baseline: bool = True  # True = 基線篩檢；False = 追蹤檢查，有前次影像可比較
+    exam_index: int | None = None  # 0 = T0，1 = T1 ...
 
     def to_dict(self) -> dict:
         return asdict(self)

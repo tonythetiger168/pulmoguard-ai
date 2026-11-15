@@ -22,12 +22,15 @@ from pathlib import Path
 import pandas as pd
 
 from src.report import build_report, openai_compatible, patient_explanations, to_markdown
-from src.report.adapters import build_study, load_detector_json
+from src.report.adapters import build_study, load_detector_json, load_tracks
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--detections", required=True, help="MONAI 偵測器結果 JSON")
+    src = ap.add_mutually_exclusive_group(required=True)
+    src.add_argument("--detections", help="MONAI 偵測器結果 JSON（基線）")
+    src.add_argument("--tracks", help="NLST 序列影像 tracks.csv（含前次比較，可產生追蹤檢查報告）")
+    ap.add_argument("--series", nargs="*", help="只輸出這些 SeriesInstanceUID（搭配 --tracks）")
     ap.add_argument("--malignancy", help="LUNA25 candidate_scores.csv")
     ap.add_argument("--seg", help="分割結果 JSON（可為 mock）")
     ap.add_argument("--out", default="runs/reports")
@@ -37,24 +40,34 @@ def main() -> None:
     ap.add_argument("--llm", choices=["none", "openai"], default="none")
     a = ap.parse_args()
 
-    dets = load_detector_json(a.detections)
-    mal = pd.read_csv(a.malignancy, dtype={"seriesuid": str}) if a.malignancy else None
-    seg_all = json.loads(Path(a.seg).read_text()) if a.seg else None
     llm = openai_compatible() if a.llm == "openai" else None
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
+    if a.tracks:
+        studies = load_tracks(a.tracks, det_threshold=a.det_threshold, top_k=a.top_k)
+        for uid in a.series or list(studies):
+            write(studies[uid], out, a.malignancy_review, llm)
+        return
+    dets = load_detector_json(a.detections)
+    mal = pd.read_csv(a.malignancy, dtype={"seriesuid": str}) if a.malignancy else None
+    seg_all = json.loads(Path(a.seg).read_text()) if a.seg else None
     for uid, d in dets.items():
         # 分割 JSON：單一病例 {"seriesuid": uid, "lesions": [...]} 或多病例 {"<uid>": {"lesions": [...]}}
         seg = None
         if seg_all:
             seg = seg_all if seg_all.get("seriesuid") == uid else seg_all.get(uid)
         study = build_study(uid, d, det_threshold=a.det_threshold, top_k=a.top_k, malignancy=mal, seg=seg)
-        rep = build_report(study, a.malignancy_review)
-        rep["patient"] = patient_explanations(rep, llm)
-        (out / f"{uid}.json").write_text(json.dumps(rep, ensure_ascii=False, indent=1))
-        for lang in ("zh", "en"):
-            (out / f"{uid}.{lang}.md").write_text(to_markdown(rep, lang))
-        print(f"{uid}: Lung-RADS {rep['exam_category']} ({len(study.nodules)} nodules) -> {out}/{uid}.*")
+        write(study, out, a.malignancy_review, llm)
+
+
+def write(study, out: Path, malignancy_review: float, llm) -> None:
+    uid = study.study_id
+    rep = build_report(study, malignancy_review)
+    rep["patient"] = patient_explanations(rep, llm)
+    (out / f"{uid}.json").write_text(json.dumps(rep, ensure_ascii=False, indent=1))
+    for lang in ("zh", "en"):
+        (out / f"{uid}.{lang}.md").write_text(to_markdown(rep, lang))
+    print(f"{uid}: Lung-RADS {rep['exam_category']} ({len(study.nodules)} nodules) -> {out}/{uid}.*")
 
 
 if __name__ == "__main__":
