@@ -1,0 +1,96 @@
+{
+  "exams_comparable": 3937,
+  "test_patients": 1300,
+  "before": {
+    "new": {
+      "exams": 1970,
+      "rad": 156,
+      "ours": 1188,
+      "both": 128,
+      "sens": 0.821,
+      "ppv": 0.108,
+      "f1": 0.19
+    },
+    "new_confident": {
+      "exams": 1970,
+      "rad": 156,
+      "ours": 612,
+      "both": 108,
+      "sens": 0.692,
+      "ppv": 0.176,
+      "f1": 0.281
+    },
+    "grew": {
+      "exams": 1970,
+      "rad": 189,
+      "ours": 219,
+      "both": 96,
+      "sens": 0.508,
+      "ppv": 0.438,
+      "f1": 0.471
+    }
+  },
+  "rematched": 785,
+  "after_rematch": {
+    "new": {
+      "exams": 1970,
+      "rad": 156,
+      "ours": 1111,
+      "both": 125,
+      "sens": 0.801,
+      "ppv": 0.113,
+      "f1": 0.197
+    },
+    "grew": {
+      "exams": 1970,
+      "rad": 189,
+      "ours": 243,
+      "both": 99,
+      "sens": 0.524,
+      "ppv": 0.407,
+      "f1": 0.458
+    }
+  },
+  "new_classifier": {
+    "threshold": 0.7042213118843949,
+    "dev": {
+      "exams": 1967,
+      "rad": 161,
+      "ours": 117,
+      "both": 50,
+      "sens": 0.311,
+      "ppv": 0.427,
+      "f1": 0.36
+    },
+    "test": {
+      "exams": 1970,
+      "rad": 156,
+      "ours": 115,
+      "both": 50,
+      "sens": 0.321,
+      "ppv": 0.435,
+      "f1": 0.369
+    }
+  },
+  "grow_classifier": {
+    "threshold": 0.7504157169997623,
+    "dev": {
+      "exams": 1967,
+      "rad": 188,
+      "ours": 149,
+      "both": 88,
+      "sens": 0.468,
+      "ppv": 0.591,
+      "f1": 0.522
+    },
+    "test": {
+      "exams": 1970,
+      "rad": 189,
+      "ours": 167,
+      "both": 86,
+      "sens": 0.455,
+      "ppv": 0.515,
+      "f1": 0.483
+    }
+  }
+}
