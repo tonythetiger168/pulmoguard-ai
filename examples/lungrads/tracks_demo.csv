@@ -1,0 +1,6 @@
+PatientID,SeriesInstanceUID,exam,exam_day,nodule_id,x,y,z,long_d,short_d,mean_d,volume,prior_mean_d,prior_volume,days_since_prior,volume_change_pct,vdt_days,is_new,lungrads_growth,comparable,match_dist_mm,det_prob,malignancy
+demo,demo-T0,0,0,0,-60.0,40.0,-120.0,7.6,6.4,7.0,180,,,,,,False,False,False,,0.95,0.20
+demo,demo-T0,0,0,1,30.0,55.0,-160.0,10.2,8.6,9.4,420,,,,,,False,False,False,,0.90,0.35
+demo,demo-T1,1,365,0,-60.5,40.3,-120.4,7.8,6.4,7.1,186,7.0,180,365,3.3,,False,False,True,0.7,0.96,0.18
+demo,demo-T1,1,365,1,30.2,55.1,-160.3,12.6,10.4,11.5,790,9.4,420,365,88.1,402,False,True,True,0.5,0.93,0.61
+demo,demo-T1,1,365,2,80.0,-10.0,-75.0,5.2,4.4,4.8,58,,,365,,,True,False,True,,0.81,0.06
