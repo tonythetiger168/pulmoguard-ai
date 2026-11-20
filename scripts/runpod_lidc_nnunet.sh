@@ -8,6 +8,9 @@
 # 用法（pod 內，repo 根目錄）：
 #   bash scripts/runpod_lidc_nnunet.sh
 #   LIMIT=20 EPOCHS_TRAINER=nnUNetTrainer_5epochs bash scripts/runpod_lidc_nnunet.sh   # 小量試跑
+#   PLANNER=nnUNetPlannerResEncM EPOCHS_TRAINER=nnUNetTrainer_250epochs bash scripts/runpod_lidc_nnunet.sh
+#       # Residual Encoder U-Net（M，約 9–11 GB VRAM）；同一個 fold 0 切分，可與預設 nnU-Net 直接比較
+#   SAVE_ROI=1（預設）：裁好的 ROI 資料集打包上傳 GitHub Release，下次分割實驗不必再下載轉檔約 11 小時
 # 需要環境變數 GH_TOKEN（fine-grained PAT，本 repo Contents: Read and write）
 set -euo pipefail
 export PIP_DEFAULT_TIMEOUT=120 PIP_RETRIES=10   # 2026-11-03：PyPI 讀取逾時讓整個 run 在第 1 分鐘就結束
@@ -20,6 +23,12 @@ MODE=${MODE:-roi}
 if [ "$MODE" = "roi" ]; then DS=Dataset503_LIDCNoduleROI; DSID=503; else DS=$FULL; DSID=501; fi
 export nnUNet_raw=$WS/nnunet/raw nnUNet_preprocessed=$WS/nnunet/preprocessed nnUNet_results=$WS/nnunet/results
 TRAINER=${EPOCHS_TRAINER:-nnUNetTrainer}
+PLANNER=${PLANNER:-}
+case "$PLANNER" in
+  "") PLANS_ID=nnUNetPlans ;;
+  nnUNetPlannerResEnc[MLX]) PLANS_ID=nnUNetResEncUNet${PLANNER#nnUNetPlannerResEnc}Plans ;;
+  *) echo "unknown PLANNER $PLANNER"; exit 1 ;;
+esac
 FOLD=${FOLD:-0}
 STAMP=$(date +%Y%m%d_%H%M)
 OUT_DIR=results/lidc_nnunet_$STAMP
@@ -29,7 +38,7 @@ exec > >(tee -a "$LOG") 2>&1
 t0=$(date +%s)
 REPO=${RESULTS_REPO:-tonythetiger168/pulmoguard-ai}
 REMOTE=${RESULTS_REMOTE:-https://github.com/$REPO.git}
-FOLD_DIR=$nnUNet_results/$DS/${TRAINER}__nnUNetPlans__3d_fullres/fold_$FOLD
+FOLD_DIR=$nnUNet_results/$DS/${TRAINER}__${PLANS_ID}__3d_fullres/fold_$FOLD
 
 # 容器內 nproc 會回報整台主機的核心數 → 依 cgroup 配額與記憶體決定 worker 數
 cpus() {
@@ -70,7 +79,7 @@ collect() {  # 只收小檔
   local d=$1; mkdir -p "$d"
   cp "$nnUNet_raw/$DS/dataset.json" "$nnUNet_raw/$DS/splits_final.json" "$d/" 2>/dev/null || true
   cp "$nnUNet_raw/$FULL/conversion_log.json" "$nnUNet_raw/$DS/rois.json" "$d/" 2>/dev/null || true
-  cp "$nnUNet_preprocessed/$DS/nnUNetPlans.json" "$nnUNet_preprocessed/$DS/dataset_fingerprint.json" "$d/" 2>/dev/null || true
+  cp "$nnUNet_preprocessed/$DS/$PLANS_ID.json" "$nnUNet_preprocessed/$DS/dataset_fingerprint.json" "$d/" 2>/dev/null || true
   if [ -d "$FOLD_DIR" ]; then
     mkdir -p "$d/fold_$FOLD"
     cp "$FOLD_DIR"/training_log_*.txt "$FOLD_DIR"/progress.png "$FOLD_DIR"/debug.json "$d/fold_$FOLD/" 2>/dev/null || true
@@ -101,15 +110,35 @@ upload_weights() {  # 權重 > 100 MB 不能進 git → GitHub Release 附件（
   local tag="lidc-nnunet-$STAMP" rel id
   rel=$(curl -sS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
     "https://api.github.com/repos/$REPO/releases" \
-    -d "{\"tag_name\":\"$tag\",\"target_commitish\":\"pilot-results\",\"name\":\"LIDC nnU-Net fold $FOLD weights ($STAMP)\",\"body\":\"nnU-Net v2 3d_fullres $TRAINER fold $FOLD. Metrics: pilot-results/$OUT_DIR\",\"prerelease\":true}")
+    -d "{\"tag_name\":\"$tag\",\"target_commitish\":\"pilot-results\",\"name\":\"LIDC nnU-Net $PLANS_ID fold $FOLD weights ($STAMP)\",\"body\":\"nnU-Net v2 3d_fullres $PLANS_ID $TRAINER fold $FOLD. Metrics: pilot-results/$OUT_DIR\",\"prerelease\":true}")
   id=$(printf '%s' "$rel" | python3 -c "import json,sys;print(json.load(sys.stdin).get('id',''))")
   [ -n "$id" ] || { echo "release create failed: $(printf '%s' "$rel" | head -c 300)"; return 0; }
-  for f in "$ck" "$nnUNet_preprocessed/$DS/nnUNetPlans.json" "$nnUNet_raw/$DS/dataset.json"; do
+  for f in "$ck" "$nnUNet_preprocessed/$DS/$PLANS_ID.json" "$nnUNet_raw/$DS/dataset.json"; do
     curl -sS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Content-Type: application/octet-stream" \
       --data-binary @"$f" "https://uploads.github.com/repos/$REPO/releases/$id/assets?name=$(basename "$f")" \
       -o /dev/null -w "uploaded $(basename "$f"): HTTP %{http_code}\n" || true
   done
   echo "weights: https://github.com/$REPO/releases/tag/$tag"
+}
+
+save_roi_dataset() {  # ROI 資料集（nnU-Net raw 格式）打包 → Release 附件（單檔上限 2 GB，超過就切片）
+  [ "${SAVE_ROI:-1}" = "1" ] && [ "$MODE" = "roi" ] && [ -n "${GH_TOKEN:-}" ] || return 0
+  local tgz=$WS/${DS}.tar.gz tag="lidc-roi-data-$STAMP" rel id
+  tar -C "$nnUNet_raw" -czf "$tgz" "$DS" || return 1
+  echo "ROI dataset archive: $(du -h "$tgz" | cut -f1)"
+  split -b 1900m -d "$tgz" "$tgz.part"
+  rel=$(curl -sS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+    "https://api.github.com/repos/$REPO/releases" \
+    -d "{\"tag_name\":\"$tag\",\"target_commitish\":\"pilot-results\",\"name\":\"LIDC-IDRI nodule ROI dataset $DS ($STAMP)\",\"body\":\"nnU-Net raw dataset of 64 mm nodule-centred ROIs from LIDC-IDRI (pylidc consensus masks, scripts/lidc_crops.py). Restore: cat ${DS}.tar.gz.part* > ${DS}.tar.gz && tar -xzf ${DS}.tar.gz -C \$nnUNet_raw. Source data: LIDC-IDRI (TCIA/IDC), CC BY 3.0; cite Armato et al. 2011.\",\"prerelease\":true}")
+  id=$(printf '%s' "$rel" | python3 -c "import json,sys;print(json.load(sys.stdin).get('id',''))")
+  [ -n "$id" ] || { echo "ROI release create failed: $(printf '%s' "$rel" | head -c 300)"; return 1; }
+  for f in "$tgz".part*; do
+    curl -sS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Content-Type: application/octet-stream" \
+      -T "$f" "https://uploads.github.com/repos/$REPO/releases/$id/assets?name=$(basename "$f")" \
+      -o /dev/null -w "uploaded $(basename "$f"): HTTP %{http_code}\n" || true   # -T 串流上傳；--data-binary @ 會整檔讀進記憶體（1.1 GB 時 OOM）
+  done
+  rm -f "$tgz" "$tgz".part*
+  echo "ROI dataset: https://github.com/$REPO/releases/tag/$tag"
 }
 
 progress_loop() {  # 每 3 小時把進度推上 GitHub，cloud session 才看得到（*.proxy.runpod.net 連不到）
@@ -136,6 +165,7 @@ finish() {
   local rc=$?
   [ -n "${PROG_PID:-}" ] && kill "$PROG_PID" 2>/dev/null || true
   [ -n "${DOG_PID:-}" ] && kill "$DOG_PID" 2>/dev/null || true
+  if [ -n "${ROI_PID:-}" ]; then wait "$ROI_PID" 2>/dev/null || true; cat "$WS/runs/save_roi.log" 2>/dev/null || true; fi
   echo "exit code $rc; elapsed: $(( ($(date +%s) - t0) / 60 )) min. log: $LOG"
   upload_weights || true
   local d; d=$(mktemp -d); collect "$d"
@@ -171,10 +201,10 @@ if [ ! -f "$nnUNet_raw/$FULL/dataset.json" ]; then
       python -m scripts.lidc_crops --src "$nnUNet_raw/$SM" --out "$nnUNet_raw/${SM}ROI" --workers 2
       rm -rf "$nnUNet_raw/$SM"; mv "$nnUNet_raw/${SM}ROI" "$nnUNet_raw/$SM"
     fi
-    nnUNetv2_plan_and_preprocess -d 502 -c 3d_fullres -np 2 --verify_dataset_integrity
+    nnUNetv2_plan_and_preprocess -d 502 -c 3d_fullres -np 2 --verify_dataset_integrity ${PLANNER:+-pl $PLANNER}
     cp "$nnUNet_raw/$SM/splits_final.json" "$nnUNet_preprocessed/$SM/"
-    nnUNetv2_train 502 3d_fullres 0 -tr nnUNetTrainer_1epoch
-    python -m scripts.lesion_metrics --pred "$nnUNet_results/$SM/nnUNetTrainer_1epoch__nnUNetPlans__3d_fullres/fold_0/validation" \
+    nnUNetv2_train 502 3d_fullres 0 -tr nnUNetTrainer_1epoch -p "$PLANS_ID"
+    python -m scripts.lesion_metrics --pred "$nnUNet_results/$SM/nnUNetTrainer_1epoch__${PLANS_ID}__3d_fullres/fold_0/validation" \
       --gt "$nnUNet_raw/$SM/labelsTr" --out "$WS/runs/smoke_lesion_metrics.json"
     rm -rf "$WS/smoke_dicom" "$nnUNet_raw/$SM" "$nnUNet_preprocessed/$SM" "$nnUNet_results/$SM"
     echo "smoke test ok"
@@ -194,9 +224,11 @@ if [ "$MODE" = "roi" ] && [ ! -f "$nnUNet_raw/$DS/dataset.json" ]; then
   python -m scripts.lidc_crops --src "$nnUNet_raw/$FULL" --out "$nnUNet_raw/$DS" --workers "$NP"
 fi
 
-echo "== 3/4 nnU-Net plan + preprocess (3d_fullres) =="
-if [ ! -f "$nnUNet_preprocessed/$DS/nnUNetPlans.json" ] || [ ! -d "$nnUNet_preprocessed/$DS/nnUNetPlans_3d_fullres" ]; then
-  nnUNetv2_plan_and_preprocess -d "$DSID" -c 3d_fullres -np "$NP" --verify_dataset_integrity
+save_roi_dataset > "$WS/runs/save_roi.log" 2>&1 & ROI_PID=$!   # 背景上傳，不拖慢訓練
+
+echo "== 3/4 nnU-Net plan + preprocess (3d_fullres, $PLANS_ID) =="
+if [ ! -f "$nnUNet_preprocessed/$DS/$PLANS_ID.json" ] || [ ! -d "$nnUNet_preprocessed/$DS/${PLANS_ID}_3d_fullres" ]; then
+  nnUNetv2_plan_and_preprocess -d "$DSID" -c 3d_fullres -np "$NP" --verify_dataset_integrity ${PLANNER:+-pl $PLANNER}
 fi
 cp "$nnUNet_raw/$DS/splits_final.json" "$nnUNet_preprocessed/$DS/splits_final.json"   # 病人層級切分
 df -h "$WS" | tail -1
@@ -205,7 +237,7 @@ echo "== 4/4 train fold $FOLD ($TRAINER) =="
 progress_loop & PROG_PID=$!
 dice_watchdog & DOG_PID=$!
 CONT=""; [ -f "$FOLD_DIR/checkpoint_latest.pth" ] && CONT="--c"
-nnUNetv2_train "$DSID" 3d_fullres "$FOLD" -tr "$TRAINER" $CONT
+nnUNetv2_train "$DSID" 3d_fullres "$FOLD" -tr "$TRAINER" -p "$PLANS_ID" $CONT
 
 echo "== lesion-level metrics on fold $FOLD validation =="
 python -m scripts.lesion_metrics --pred "$FOLD_DIR/validation" --gt "$nnUNet_raw/$DS/labelsTr" \
