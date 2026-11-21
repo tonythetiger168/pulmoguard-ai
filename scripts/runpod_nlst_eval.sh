@@ -148,6 +148,25 @@ for a in json.load(sys.stdin).get('assets',[]):
   [ "$(ls "$RUNS"/fold*/best.pt 2>/dev/null | wc -l)" -ge 5 ]
 }
 
+RUNS2=$WS/runs/luna25_model2
+fetch_weights2() {  # LUNA25_WEIGHTS2=<luna25-weights 分支上的資料夾>，例如 luna25-20261103_1724（MedicalNet-18）
+  [ -n "${LUNA25_WEIGHTS2:-}" ] || return 0
+  local api="https://api.github.com/repos/$REPO/contents/$LUNA25_WEIGHTS2?ref=luna25-weights"
+  curl -sS -H "Authorization: Bearer $GH_TOKEN" "$api" | python -c "
+import json,sys
+for a in json.load(sys.stdin):
+    if a['name'].endswith('_fp16.pt'): print(a['path'], a['name'])" | while read -r path name; do
+    k=$(echo "$name" | grep -oE 'fold[0-9]+'); mkdir -p "$RUNS2/$k"
+    curl -sS -fL --http1.1 --retry 5 --retry-all-errors -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github.raw" \
+      -o "$RUNS2/$k/best.pt" "https://api.github.com/repos/$REPO/contents/$path?ref=luna25-weights"
+    echo "weights2 $name -> $RUNS2/$k/best.pt ($(du -h "$RUNS2/$k/best.pt" | cut -f1))"
+  done
+  [ "$(ls "$RUNS2"/fold*/best.pt 2>/dev/null | wc -l)" -ge 5 ] || { echo "WEIGHTS2 FETCH FAILED"; return 1; }
+  python -c "
+import sys; from scripts.nlst_validate import load_models; load_models(sys.argv[1], sys.argv[2])" "$RUNS2" "${ARCH2:-medicalnet18}"
+}
+fetch_weights2
+
 echo "== 1/4 LUNA25 data + NLST cohort =="
 random_weights() {  # 只給冒煙測試用：隨機初始化的 5 個 fold 模型，驗證整條管線能跑通（分數無意義）
   python - "$RUNS" <<'PY'
@@ -192,4 +211,5 @@ rm -rf "$L25/nodule_blocks" 2>/dev/null || true
 
 echo "== 3/4 detector + malignancy on NLST =="
 python -m scripts.nlst_validate --cohort "$NRUN/cohort.csv" --mhd_dir "$MHD" --luna25_runs "$RUNS" \
+  ${LUNA25_WEIGHTS2:+--luna25_runs2 "$RUNS2" --arch2 "${ARCH2:-medicalnet18}"} \
   --bundle_dir "$WS/models/bundles" --out "$NRUN"

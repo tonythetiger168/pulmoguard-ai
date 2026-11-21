@@ -51,17 +51,21 @@ def metrics(y, p) -> dict:
             "ap": float(average_precision_score(y, p)), "n": int(len(y)), "n_pos": int(np.sum(y))}
 
 
-def load_models(runs_dir: str) -> list[torch.nn.Module]:
+def load_models(runs_dir: str, arch: str = "resnet18") -> list[torch.nn.Module]:
     paths = sorted(glob.glob(f"{runs_dir}/fold*/best.pt"))
     if not paths:
         raise FileNotFoundError(f"no fold*/best.pt under {runs_dir}")
     models = []
     for p in paths:
-        m = resnet18(spatial_dims=3, n_input_channels=1, num_classes=1)
+        if arch == "resnet18":
+            m = resnet18(spatial_dims=3, n_input_channels=1, num_classes=1)
+        else:   # MedicalNet 骨幹 + 線性頭（與 train_luna25.build_model 相同結構，權重從檔案載入，不下載預訓練）
+            from scripts.train_luna25 import build_model
+            m = build_model(arch, pretrained=False).cpu()
         sd = torch.load(p, map_location="cpu")
         m.load_state_dict({k: v.float() for k, v in sd.items()})
         models.append(m.to(DEVICE).eval())
-    print(f"loaded {len(models)} LUNA25 fold models", flush=True)
+    print(f"loaded {len(models)} LUNA25 {arch} fold models", flush=True)
     return models
 
 
@@ -76,8 +80,13 @@ def extract_block(arr_zyx: np.ndarray, center_zyx) -> np.ndarray:
     return out
 
 
+FLIPS = [(), (2,), (3,), (4,), (2, 3), (2, 4), (3, 4), (2, 3, 4)]   # 與 train_luna25 的 8 向 TTA 相同
+
+
 @torch.no_grad()
-def score_candidates(models, mhd: Path, cands: pd.DataFrame) -> np.ndarray:
+def score_candidates(models, mhd: Path, cands: pd.DataFrame, models2=None, tta2: bool = True):
+    """回傳第一組模型（ResNet-18，無 TTA，與原本 0.876 的設定相同）的平均機率；
+    給 models2 時另外回傳第二組模型（可加 8 向翻轉 TTA）的平均機率"""
     import SimpleITK as sitk
     img = sitk.ReadImage(str(mhd))
     arr = sitk.GetArrayFromImage(img)
@@ -89,7 +98,18 @@ def score_candidates(models, mhd: Path, cands: pd.DataFrame) -> np.ndarray:
         patches.append(hu_scale(resample_patch(block, sp_zyx, 64, 50.0)))
     x = torch.from_numpy(np.stack(patches)[:, None]).float().to(DEVICE)
     probs = [torch.sigmoid(m(x).squeeze(1).float()).cpu().numpy() for m in models]
-    return np.mean(probs, axis=0)
+    p1 = np.mean(probs, axis=0)
+    if models2 is None:
+        return p1
+    probs2 = [torch.sigmoid(m(torch.flip(x, f) if f else x).squeeze(1).float()).cpu().numpy()
+              for m in models2 for f in (FLIPS if tta2 else FLIPS[:1])]
+    return p1, np.mean(probs2, axis=0)
+
+
+def rank01(x) -> np.ndarray:
+    from scipy.stats import rankdata
+    x = np.asarray(x, dtype=float)
+    return rankdata(x) / len(x)
 
 
 CHUNK = 40
@@ -139,6 +159,9 @@ def main() -> None:
     ap.add_argument("--cohort", required=True)
     ap.add_argument("--mhd_dir", required=True)
     ap.add_argument("--luna25_runs", required=True)
+    ap.add_argument("--luna25_runs2", default=None, help="第二組 fold 權重（例如 MedicalNet-18），與第一組做集成")
+    ap.add_argument("--arch2", default="medicalnet18")
+    ap.add_argument("--no_tta2", action="store_true")
     ap.add_argument("--bundle_dir", default="models/bundles")
     ap.add_argument("--out", required=True)
     ap.add_argument("--skip_detection", action="store_true")
@@ -169,16 +192,29 @@ def main() -> None:
     print(f"{len(dets)} detections on {dets.seriesuid.nunique()} scans", flush=True)
 
     models = load_models(a.luna25_runs)
+    models2 = load_models(a.luna25_runs2, a.arch2) if a.luna25_runs2 else None
     rows, cand_rows = [], []
     for r in cohort.itertuples():
         d = dets[(dets.seriesuid == r.SeriesInstanceUID) & (dets.probability >= DET_MIN)]
         d = d.sort_values("probability", ascending=False).head(TOP_K)
-        mal = score_candidates(models, mhd_dir / f"{r.SeriesInstanceUID}.mhd", d) if len(d) else np.array([])
-        for (_, dr), m in zip(d.iterrows(), mal):
-            cand_rows.append({**dr.to_dict(), "PatientID": r.PatientID, "malignancy": float(m)})
+        mal2 = np.array([])
+        if not len(d):
+            mal = np.array([])
+        elif models2 is None:
+            mal = score_candidates(models, mhd_dir / f"{r.SeriesInstanceUID}.mhd", d)
+        else:
+            mal, mal2 = score_candidates(models, mhd_dir / f"{r.SeriesInstanceUID}.mhd", d, models2, not a.no_tta2)
+        for i, ((_, dr), m) in enumerate(zip(d.iterrows(), mal)):
+            row = {**dr.to_dict(), "PatientID": r.PatientID, "malignancy": float(m)}
+            if len(mal2):
+                row["malignancy2"] = float(mal2[i])
+            cand_rows.append(row)
         rows.append({"PatientID": r.PatientID, "SeriesInstanceUID": r.SeriesInstanceUID, "label": int(r.label),
                      "n_candidates": len(d), "max_det": float(d.probability.max()) if len(d) else 0.0,
-                     "max_malignancy": float(mal.max()) if len(mal) else 0.0})
+                     "max_malignancy": float(mal.max()) if len(mal) else 0.0,
+                     **({"max_malignancy2": float(mal2.max()) if len(mal2) else 0.0,
+                         "max_mean_malignancy": float(((mal + mal2) / 2).max()) if len(mal2) else 0.0}
+                        if models2 is not None else {})})
     pt = pd.DataFrame(rows)
     pt.to_csv(out / "patient_scores.csv", index=False)
     pd.DataFrame(cand_rows).to_csv(out / "candidate_scores.csv", index=False)
@@ -194,6 +230,24 @@ def main() -> None:
         "detector_failed_scans": len(failed),
         "positives_without_candidates": int(((pt.n_candidates == 0) & (pt.label == 1)).sum()),
     }
+    if models2 is not None:
+        y = pt.label.to_numpy()
+        rank_ens = (rank01(pt.max_malignancy) + rank01(pt.max_malignancy2)) / 2
+        pt["ensemble_rank"] = rank_ens
+        pt.to_csv(out / "patient_scores.csv", index=False)
+        rng = np.random.default_rng(0)
+        base, diffs = pt.max_malignancy.to_numpy(), []
+        for _ in range(2000):
+            i = rng.integers(0, len(y), len(y))
+            if len(np.unique(y[i])) == 2:
+                diffs.append(roc_auc_score(y[i], rank_ens[i]) - roc_auc_score(y[i], base[i]))
+        summary.update({
+            "malignancy_model2": {"arch": a.arch2, "tta": not a.no_tta2, **metrics(y, pt.max_malignancy2)},
+            "ensemble_rank_average": metrics(y, rank_ens),
+            "ensemble_mean_probability": metrics(y, pt.max_mean_malignancy),
+            "ensemble_gain_vs_model1": float(np.median(diffs)),
+            "ensemble_gain_vs_model1_95ci": [float(np.percentile(diffs, 2.5)), float(np.percentile(diffs, 97.5))],
+        })
     json.dump(summary, open(out / "summary.json", "w"), indent=2)
     print(json.dumps(summary, indent=2))
 
