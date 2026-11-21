@@ -1,0 +1,65 @@
+{
+  "task": "NLST T0 LDCT -> lung cancer diagnosed within 365 days (patient level)",
+  "cohort_note": "NLST patients not in LUNA25; same trial and scanners, so internal-external rather than external",
+  "pipeline": "MONAI lung_nodule_ct_detection -> top 5 candidates with det >= 0.3 -> LUNA25 ResNet-18 5-fold ensemble -> patient score = max malignancy",
+  "malignancy_model": {
+    "auc": 0.8755260466441996,
+    "auc_95ci": [
+      0.8359329553003485,
+      0.9124688032571348
+    ],
+    "ap": 0.7821920979888748,
+    "n": 564,
+    "n_pos": 141
+  },
+  "detector_only": {
+    "auc": 0.7688077393826602,
+    "auc_95ci": [
+      0.7260315027118979,
+      0.8098014374595646
+    ],
+    "ap": 0.48570363105189024,
+    "n": 564,
+    "n_pos": 141
+  },
+  "scans_without_candidates": 42,
+  "detector_failed_scans": 0,
+  "positives_without_candidates": 2,
+  "malignancy_model2": {
+    "arch": "medicalnet18",
+    "tta": true,
+    "auc": 0.8673607967406067,
+    "auc_95ci": [
+      0.8250537340590044,
+      0.9054351974244079
+    ],
+    "ap": 0.790667405643545,
+    "n": 564,
+    "n_pos": 141
+  },
+  "ensemble_rank_average": {
+    "auc": 0.8767332293814865,
+    "auc_95ci": [
+      0.8370050825162176,
+      0.9138108767097016
+    ],
+    "ap": 0.8077403108629547,
+    "n": 564,
+    "n_pos": 141
+  },
+  "ensemble_mean_probability": {
+    "auc": 0.8755260466441996,
+    "auc_95ci": [
+      0.8340192481269971,
+      0.9134183694683181
+    ],
+    "ap": 0.8137233940795198,
+    "n": 564,
+    "n_pos": 141
+  },
+  "ensemble_gain_vs_model1": 0.0011503970237102257,
+  "ensemble_gain_vs_model1_95ci": [
+    -0.006646930399637277,
+    0.00899207514897192
+  ]
+}

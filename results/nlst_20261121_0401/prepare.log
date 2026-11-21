@@ -1,0 +1,873 @@
+564 series in cohort, 564 to prepare
+2026-11-21 04:04:30,975 - Disk size needed: 3.22 GB
+2026-11-21 04:04:30,975 - Disk size available: 210.19 GB
+2026-11-21 04:04:35,410 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-21 04:04:44,919 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_u9aab8a4/b00000
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:278.756
+
+[40/564] prepared, 0 errors
+2026-11-21 04:04:58,672 - Disk size needed: 3.02 GB
+2026-11-21 04:04:58,673 - Disk size available: 208.64 GB
+2026-11-21 04:05:03,213 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-21 04:05:14,218 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_u9aab8a4/b00040
+[80/564] prepared, 0 errors
+2026-11-21 04:05:28,440 - Disk size needed: 3.36 GB
+2026-11-21 04:05:28,440 - Disk size available: 207.03 GB
+2026-11-21 04:05:32,759 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-21 04:05:43,801 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_u9aab8a4/b00080
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:1.18852
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:333.555
+
+[120/564] prepared, 0 errors
+2026-11-21 04:05:58,284 - Disk size needed: 3.12 GB
+2026-11-21 04:05:58,284 - Disk size available: 205.37 GB
+2026-11-21 04:06:02,451 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-21 04:06:11,956 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_u9aab8a4/b00120
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:319.741
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:146.27
+
+[160/564] prepared, 0 errors
+2026-11-21 04:06:25,572 - Disk size needed: 3.16 GB
+2026-11-21 04:06:25,572 - Disk size available: 203.88 GB
+2026-11-21 04:06:29,725 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-21 04:06:40,731 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_u9aab8a4/b00160
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:17.069
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:277.007
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:323.755
+
+[200/564] prepared, 0 errors
+2026-11-21 04:06:55,309 - Disk size needed: 3.1 GB
+2026-11-21 04:06:55,309 - Disk size available: 202.24 GB
+2026-11-21 04:06:59,399 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-21 04:07:09,405 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_u9aab8a4/b00200
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:15.8182
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:2.56818
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:1.03206
+
+[240/564] prepared, 0 errors
+2026-11-21 04:07:23,339 - Disk size needed: 3.12 GB
+2026-11-21 04:07:23,339 - Disk size available: 200.69 GB
+2026-11-21 04:07:27,475 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-21 04:07:36,980 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_u9aab8a4/b00240
+[280/564] prepared, 0 errors
+2026-11-21 04:07:51,640 - Disk size needed: 3.15 GB
+2026-11-21 04:07:51,640 - Disk size available: 199.02 GB
+2026-11-21 04:07:55,751 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-21 04:08:04,755 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_u9aab8a4/b00280
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:1.98667
+
+[320/564] prepared, 0 errors
+2026-11-21 04:08:19,368 - Disk size needed: 3.54 GB
+2026-11-21 04:08:19,369 - Disk size available: 197.37 GB
+2026-11-21 04:08:23,522 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-21 04:08:33,027 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_u9aab8a4/b00320
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:86.7149
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:327.453
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:0.00100575
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:187.932
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:1.49254
+
+[360/564] prepared, 0 errors
+2026-11-21 04:08:48,766 - Disk size needed: 4.74 GB
+2026-11-21 04:08:48,766 - Disk size available: 195.67 GB
+2026-11-21 04:08:52,700 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-21 04:09:04,705 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_u9aab8a4/b00360
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:0.001
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:0.0010049
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:35.7447
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:0.001
+
+[400/564] prepared, 0 errors
+2026-11-21 04:09:21,034 - Disk size needed: 4.69 GB
+2026-11-21 04:09:21,034 - Disk size available: 193.99 GB
+2026-11-21 04:09:24,944 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-21 04:09:36,950 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_u9aab8a4/b00400
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:0.001
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:0.0010049
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:1.49342
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:178.597
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:159.278
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:161.011
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:1.49261
+
+[440/564] prepared, 0 errors
+2026-11-21 04:09:54,870 - Disk size needed: 4.81 GB
+2026-11-21 04:09:54,870 - Disk size available: 192.33 GB
+2026-11-21 04:09:58,756 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-21 04:10:11,261 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_u9aab8a4/b00440
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:166.579
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:192.717
+
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+Unsupported JPEG data precision 12
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:178.272
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:1.49254
+
+[480/564] prepared, 0 errors
+2026-11-21 04:10:29,190 - Disk size needed: 4.94 GB
+2026-11-21 04:10:29,191 - Disk size available: 190.56 GB
+2026-11-21 04:10:32,925 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-21 04:10:45,431 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_u9aab8a4/b00480
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:1.55968
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:0.00100575
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:0.00100515
+
+[520/564] prepared, 0 errors
+2026-11-21 04:11:03,082 - Disk size needed: 4.86 GB
+2026-11-21 04:11:03,082 - Disk size available: 188.8 GB
+2026-11-21 04:11:06,847 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-21 04:11:19,352 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_u9aab8a4/b00520
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:0.00100599
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:316.996
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:187.965
+
+WARNING: In /tmp/SimpleITK-build/ITK-prefix/include/ITK-5.4/itkImageSeriesReader.hxx, line 502
+ImageSeriesReader (0x2ecbc180): Non uniform sampling or missing slices detected,  maximum nonuniformity:0.001
+
+[560/564] prepared, 0 errors
+2026-11-21 04:11:36,852 - Disk size needed: 531.65 MB
+2026-11-21 04:11:36,853 - Disk size available: 187.2 GB
+2026-11-21 04:11:40,416 - Not using s5cmd sync as the destination folder is empty or sync or progress bar is not requested
+2026-11-21 04:11:43,420 - Successfully downloaded files to /workspace/data/nlst/nlst_dcm_u9aab8a4/b00560
+[564/564] prepared, 0 errors
