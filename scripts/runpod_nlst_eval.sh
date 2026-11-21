@@ -157,7 +157,7 @@ import json,sys
 for a in json.load(sys.stdin):
     if a['name'].endswith('_fp16.pt'): print(a['path'], a['name'])" | while read -r path name; do
     k=$(echo "$name" | grep -oE 'fold[0-9]+'); mkdir -p "$RUNS2/$k"
-    curl -sS -fL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github.raw" \
+    curl -sS -fL --http1.1 --retry 5 --retry-all-errors -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github.raw" \
       -o "$RUNS2/$k/best.pt" "https://api.github.com/repos/$REPO/contents/$path?ref=luna25-weights"
     echo "weights2 $name -> $RUNS2/$k/best.pt ($(du -h "$RUNS2/$k/best.pt" | cut -f1))"
   done
